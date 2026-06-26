@@ -21,11 +21,11 @@ const Footer = () => {
         <div>
           <div className="font-script italic text-[#3a3a3a] text-[18px] mb-4">Studio</div>
           <ul className="space-y-2 text-[#4a4742] text-[13px] tracking-[0.12em] uppercase">
-            <li><a href="#home" className="hover:text-[#a08f7d] transition-colors">Home</a></li>
-            <li><a href="#portfolio" className="hover:text-[#a08f7d] transition-colors">Portfolio</a></li>
-            <li><a href="#destination" className="hover:text-[#a08f7d] transition-colors">Destination Weddings</a></li>
-            <li><a href="#blog" className="hover:text-[#a08f7d] transition-colors">Blog</a></li>
-            <li><a href="#inquire" className="hover:text-[#a08f7d] transition-colors">Inquire</a></li>
+            <li><a href="/" className="hover:text-[#a08f7d] transition-colors">Home</a></li>
+            <li><a href="/services" className="hover:text-[#a08f7d] transition-colors">Services</a></li>
+            <li><a href="/#portfolio" className="hover:text-[#a08f7d] transition-colors">Portfolio</a></li>
+            <li><a href="/#blog" className="hover:text-[#a08f7d] transition-colors">Blog</a></li>
+            <li><a href="/#inquire" className="hover:text-[#a08f7d] transition-colors">Inquire</a></li>
           </ul>
         </div>
 
