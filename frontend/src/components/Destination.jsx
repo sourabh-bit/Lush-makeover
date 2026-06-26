@@ -17,8 +17,8 @@ const Destination = () => {
             Now booking select destination weddings across India, Bali, Europe and beyond
           </div>
           <div className="mt-8 flex flex-col gap-3 w-[220px]">
-            <button className="btn-outline-thin">Book With Us</button>
-            <button className="btn-outline-thin">Destination Weddings</button>
+            <a href="/inquire" className="btn-outline-thin">Book With Us</a>
+            <a href="/services" className="btn-outline-thin">Destination Weddings</a>
           </div>
         </div>
         <div className="img-zoom h-[260px] md:h-auto">

@@ -120,7 +120,7 @@ const PortfolioPage = () => {
             with us
           </div>
           <a
-            href="/#inquire"
+            href="/inquire"
             className="inline-flex items-center gap-3 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-7 py-3 mt-8 text-[11px] tracking-[0.3em] uppercase font-display"
           >
             <span>Enquire Now</span>
@@ -174,7 +174,7 @@ const PortfolioPage = () => {
                 wedding day. Captured in {lightbox.year}.
               </p>
               <a
-                href="/#inquire"
+                href="/inquire"
                 className="inline-flex items-center gap-2 mt-6 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-5 py-2.5 text-[10px] tracking-[0.3em] uppercase font-display w-fit"
               >
                 <span>Book Similar</span>

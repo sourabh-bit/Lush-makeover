@@ -29,9 +29,9 @@ const Hero = () => {
               </p>
 
               <div className="mt-7 flex flex-col gap-3 max-w-[210px]">
-                <button className="btn-outline-thin">View My Portfolio</button>
-                <button className="btn-outline-thin">Learn More</button>
-                <button className="btn-outline-thin">Inquire</button>
+                <a href="/portfolio" className="btn-outline-thin">View My Portfolio</a>
+                <a href="/about" className="btn-outline-thin">Learn More</a>
+                <a href="/inquire" className="btn-outline-thin">Inquire</a>
               </div>
             </div>
           </div>

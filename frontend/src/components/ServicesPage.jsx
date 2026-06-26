@@ -120,7 +120,7 @@ const ServicesPage = () => {
                     </div>
 
                     <a
-                      href="/#inquire"
+                      href="/inquire"
                       className="group inline-flex items-center gap-3 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-[#f7f4ef] transition-colors duration-500 px-7 py-3 text-[11px] tracking-[0.32em] uppercase font-display"
                     >
                       <span>Enquire Now</span>
@@ -154,7 +154,7 @@ const ServicesPage = () => {
             sisters and the bridesmaids.
           </p>
           <a
-            href="/#inquire"
+            href="/inquire"
             className="inline-flex items-center gap-3 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-[#f7f4ef] transition-colors duration-500 px-8 py-3 mt-9 text-[11px] tracking-[0.32em] uppercase font-display"
           >
             <span>Begin Your Enquiry</span>

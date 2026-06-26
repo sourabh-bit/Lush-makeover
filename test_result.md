@@ -102,58 +102,58 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the redesigned Portfolio page at /portfolio. User reported previous layout was messy with images of different sizes that collided, took too much vertical space, did not match color theme (background should be white), banner was too large, and featured story section took too much space."
+user_problem_statement: "Test the Lush Makeovers bridal site after a typography & button-wiring polish pass. User complained that: (1) Body text was thin/blurry/hard to read across the whole site. (2) Many buttons did nothing or pointed to dead hash anchors instead of real pages."
 
 frontend:
-  - task: "Portfolio Page - Background & Color Theme"
+  - task: "Global Typography Readability"
     implemented: true
     working: true
-    file: "frontend/src/components/PortfolioPage.jsx"
+    file: "frontend/src/index.css"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: true
           agent: "testing"
-          comment: "✓ Main portfolio area background is WHITE (#ffffff). Header uses cream theme rgb(247, 244, 239). Text colors are correct with dark grey #2a2a2a. Typography consistent with site (Italiana display + Cormorant Garamond italic)."
+          comment: "✓ Body font-weight is 400 (not 300) - text appears medium-weight and crisp. Body color is #2a2a2a (darker for better contrast). .font-serif-body class has font-weight 400 and color #3a3a3a. text-rendering: optimizeLegibility is applied. Body paragraphs on Home (Elevated section), About page, Services page, and Footer all feel medium-weight and readable, not light/wispy. User complaint about thin/blurry text is RESOLVED."
 
-  - task: "Portfolio Page - Compact Banner"
+  - task: "Navigation Routing - All Nav Links"
     implemented: true
     working: true
-    file: "frontend/src/components/PortfolioPage.jsx"
+    file: "frontend/src/components/Header.jsx, frontend/src/mock.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: true
           agent: "testing"
-          comment: "✓ Banner is compact at 334px (well within 350-450px target, down from previous 900px). Title 'PORTFOLIO' is 34px (not the previous 110px). Subtitle 'a collection of love stories' is visible. Divider with champagne dot (#b8a17a) is visible. Filter pills (All, Bridal, Reception, Engagement, Details) are inside banner area. 'Browse by The Collection' heading REMOVED. Stats row (1000+/200+/12+) REMOVED. Featured Story section with Aishwarya REMOVED."
+          comment: "✓ All navigation links work correctly as SPA navigation (no 404s, no full reloads): HOME → /, SERVICES → /services, PORTFOLIO → /portfolio, ABOUT → /about, ACADEMY → /academy, CONTACT ME → /contact, INQUIRE → /inquire. Brand 'LUSH MAKEOVERS' link returns to /. Navigation order is correct: HOME · SERVICES · PORTFOLIO · ABOUT · ACADEMY · CONTACT ME · INQUIRE. Blog link is NOT present (correctly removed). Minor note: Nav links display in title case ('Home') instead of uppercase ('HOME'), but this is cosmetic only and does not affect functionality."
 
-  - task: "Portfolio Page - Uniform Grid Layout"
+  - task: "Button Wiring - Home Page Hero & Destination"
     implemented: true
     working: true
-    file: "frontend/src/components/PortfolioPage.jsx"
+    file: "frontend/src/components/Hero.jsx, frontend/src/components/Destination.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: true
           agent: "testing"
-          comment: "✓ Grid is UNIFORM with all 12 tiles having same 3:4 aspect ratio (aspect-[3/4]). Desktop: 3 columns. Tablet: 3 columns at 768px. Mobile: 2 columns at 390px. Clean gap spacing (gap-4 md:gap-6) prevents overlap. All 12 portfolio images visible with 'All' filter. Hover state reveals darkening gradient + bride name (italic script) + category + location. No masonry/mixed sizes - completely uniform pattern."
+          comment: "✓ Home Hero buttons: 'VIEW MY PORTFOLIO' → /portfolio, 'LEARN MORE' → /about, 'INQUIRE' → /inquire. All 3 buttons navigate successfully. Destination section: 'BOOK WITH US' → /inquire, 'DESTINATION WEDDINGS' → /services. Both buttons navigate successfully. No dead hash anchors."
 
-  - task: "Portfolio Page - Filter Functionality"
+  - task: "Button Wiring - Services Page"
     implemented: true
     working: true
-    file: "frontend/src/components/PortfolioPage.jsx"
+    file: "frontend/src/components/ServicesPage.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: true
           agent: "testing"
-          comment: "✓ Filter functionality works correctly. Clicking 'Bridal' reduces grid to 5 bridal items. Clicking 'All' shows all 12 images again. Active filter has dark background (#2a2a2a) with white text. Inactive filters have transparent background with tan border. Filter state management working properly."
+          comment: "✓ Found 4 enquiry buttons on Services page. All 'ENQUIRE NOW' buttons (3 service rows) and 'BEGIN YOUR ENQUIRY' (Bespoke section) correctly navigate to /inquire. Tested navigation - all work correctly."
 
-  - task: "Portfolio Page - Lightbox Modal"
+  - task: "Button Wiring - Portfolio Page"
     implemented: true
     working: true
     file: "frontend/src/components/PortfolioPage.jsx"
@@ -163,48 +163,96 @@ frontend:
     status_history:
         - working: true
           agent: "testing"
-          comment: "✓ Clicking a tile opens lightbox modal with full image and details. Close button (X) is visible and functional. Clicking outside modal or X button closes it properly. Modal displays bride name, category, location, year, and 'Book Similar' CTA."
+          comment: "✓ Bottom 'ENQUIRE NOW' CTA → /inquire. Lightbox modal opens when clicking portfolio item. Lightbox 'BOOK SIMILAR' button → /inquire. Both CTAs work correctly."
 
-  - task: "Portfolio Page - Bottom CTA Section"
+  - task: "Button Wiring - About Page"
     implemented: true
     working: true
-    file: "frontend/src/components/PortfolioPage.jsx"
+    file: "frontend/src/components/AboutPage.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: true
           agent: "testing"
-          comment: "✓ Minimal 'BRIDAL STORY / with us' section exists at bottom. 'Enquire Now' button is visible with proper styling and correct href (/#inquire). Section has clean border-top separator."
+          comment: "✓ 'BEGIN YOUR STORY' button → /inquire. 'REACH OUT' CTA at bottom → /contact. Both buttons navigate correctly."
 
-  - task: "Portfolio Page - Responsive Design"
+  - task: "Button Wiring - Academy Page"
     implemented: true
     working: true
-    file: "frontend/src/components/PortfolioPage.jsx"
+    file: "frontend/src/components/AcademyPage.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: true
           agent: "testing"
-          comment: "✓ Responsive design works perfectly. Desktop (1440x900): 3-column grid, clean layout. Tablet (768x1024): 3-column grid, no horizontal scrolling. Mobile (390x844): 2-column grid, banner remains compact (336px), filters wrap nicely, no horizontal scrolling. All viewports tested with screenshots - layout is clean and tidy at all sizes."
+          comment: "✓ Found 3 course 'ENQUIRE' buttons, all go to #register (in-page scroll to form). Found 9 batch 'RESERVE' buttons (4 batches + 5 mobile duplicates), all go to #register. Masterclass 'RESERVE A SEAT' → #register. Form submission tested: filled name, phone, email, selected course, submitted successfully. Thank-you message 'Thank you — we'll be in touch within 24 hours' displayed correctly."
 
-  - task: "Portfolio Page - Navigation"
+  - task: "Button Wiring - Contact Page"
     implemented: true
     working: true
-    file: "frontend/src/components/PortfolioPage.jsx"
+    file: "frontend/src/components/ContactPage.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: true
           agent: "testing"
-          comment: "✓ Navigation has 'Portfolio' link (href='/portfolio'). 'Press' link does NOT exist (correctly removed). Brand link to '/' exists for returning home. Navigation is correct."
+          comment: "✓ Channel cards: Phone → tel:+919000000000, WhatsApp → https://wa.me/919000000000, Email → mailto:hello@lushmakeovers.in, Instagram → https://instagram.com/lushmakeovers. All 4 channel cards have correct href attributes. Contact form submission tested: filled name, email, message, submitted successfully. Thank-you message 'Thank you — we will write back within 24 hours' displayed correctly."
+
+  - task: "Button Wiring - Inquire Page Multi-Step Form"
+    implemented: true
+    working: true
+    file: "frontend/src/components/InquirePage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✓ Multi-step form works perfectly. Step 1: Filled Name (Kavya Menon), Partner (Raj Kumar), Phone (+91 9988776655), Email (kavya.menon@example.com). 'CONTINUE' button enabled after filling required fields (name + phone). Step 2: Selected occasion 'Bridal — Wedding Day'. 'CONTINUE' button enabled after selecting occasion. Step 3: Reached final notes screen with budget/hear-about dropdowns and message textarea. 'SUBMIT ENQUIRY' button clicked. Thank-you screen displayed: 'THANK YOU for writing to us' with 'RETURN HOME' → / and 'VIEW PORTFOLIO' → /portfolio buttons. Complete flow tested and working."
+
+  - task: "Button Wiring - Footer Links"
+    implemented: true
+    working: true
+    file: "frontend/src/components/Footer.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✓ Footer Studio links: Home → /, Services → /services, Portfolio → /portfolio, About → /about, Academy → /academy, Inquire → /inquire. All 6 links have correct href attributes. Blog link is NOT in footer (correctly removed)."
+
+  - task: "Responsive Design - Desktop & Mobile"
+    implemented: true
+    working: true
+    file: "frontend/src/components/Header.jsx, all page components"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✓ Desktop (1440x900): No horizontal overflow, everything fits cleanly. Mobile (390x844): No horizontal overflow. Mobile menu hamburger visible and functional. Mobile menu opens with correct nav links in correct order (Home, Services, Portfolio, About, Academy, Contact Me, Inquire). Clicking nav link closes menu and navigates correctly (tested Services link). Screenshots captured for both viewports."
+
+  - task: "No Regressions - Background, Fonts, Envelope Intro"
+    implemented: true
+    working: true
+    file: "frontend/src/index.css, frontend/src/components/Header.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✓ Page background is white (#ffffff). Found 1 section with accent background #fafaf6 (as expected for accent strip sections). Header brand uses Italiana display font. Envelope intro animation would appear on first visit (test bypassed it with sessionStorage). No cream/beige #f7f4ef as primary page background. All regression checks passed."
 
 metadata:
   created_by: "testing_agent"
-  version: "1.0"
-  test_sequence: 1
+  version: "1.1"
+  test_sequence: 2
   run_ui: true
 
 test_plan:
@@ -215,4 +263,4 @@ test_plan:
 
 agent_communication:
     - agent: "testing"
-      message: "Completed comprehensive testing of redesigned Portfolio page at /portfolio. All user-reported issues have been FIXED: (1) Images are now uniform 3:4 aspect ratio with no collision, (2) Vertical space reduced - banner is 334px vs previous 900px, (3) Background is white #ffffff matching color theme, (4) Banner is compact, (5) Featured story section removed. Tested at desktop (1440x900), tablet (768x1024), and mobile (390x844) viewports. All functionality working: filters, lightbox modal, navigation, responsive design. No console errors or network errors. Screenshots captured for all viewports. Portfolio page redesign is COMPLETE and WORKING."
+      message: "Completed comprehensive testing of typography & button-wiring polish pass across entire Lush Makeovers site. BOTH user complaints have been RESOLVED: (1) Body text is now medium-weight (font-weight 400) and readable, not thin/blurry - verified on Home, About, Services, Footer. (2) ALL buttons work correctly and navigate to proper pages - no dead hash anchors found. Tested: Global typography (body font-weight 400, color #2a2a2a, .font-serif-body correct, text-rendering optimizeLegibility). Navigation routing (all 7 nav links work, brand link works, Blog removed). Button wiring on ALL pages: Home (3 hero + 2 destination buttons), Services (4 enquiry buttons), Portfolio (2 CTAs), About (2 CTAs), Academy (15+ buttons + form), Contact (4 channel cards + form), Inquire (multi-step form with 3 steps), Footer (6 links). Responsive design (1440px and 390px mobile - no overflow, mobile menu works). No regressions (white background, #fafaf6 accents, Italiana brand font). No console errors. All tests PASS. Typography & button-wiring polish is COMPLETE and WORKING."

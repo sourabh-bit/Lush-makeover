@@ -101,7 +101,7 @@ const AboutPage = () => {
             </div>
 
             <a
-              href="/#inquire"
+              href="/inquire"
               className="inline-flex items-center gap-3 mt-10 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-7 py-3 text-[11px] tracking-[0.32em] uppercase font-display"
             >
               <span>Begin Your Story</span>
@@ -334,7 +334,7 @@ const AboutPage = () => {
             crafted, and answer every question — over a cup of filter coffee.
           </p>
           <a
-            href="/#inquire"
+            href="/contact"
             className="inline-flex items-center gap-3 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-8 py-3 mt-9 text-[11px] tracking-[0.32em] uppercase font-display"
           >
             <span>Reach Out</span>
