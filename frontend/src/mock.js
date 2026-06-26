@@ -17,8 +17,8 @@ export const navLinks = [
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'About', href: '/about' },
   { label: 'Academy', href: '/academy' },
-  { label: 'Contact Me', href: '/#contact' },
-  { label: 'Inquire', href: '/#inquire' },
+  { label: 'Contact Me', href: '/contact' },
+  { label: 'Inquire', href: '/inquire' },
 ];
 
 export const heroImage = 'https://images.pexels.com/photos/35536264/pexels-photo-35536264.jpeg';
@@ -555,3 +555,107 @@ export const aboutTeam = [
     image: 'https://images.unsplash.com/photo-1610047614301-13c63f00c032',
   },
 ];
+
+
+// ----------------------- CONTACT PAGE -----------------------
+export const contactInfo = {
+  eyebrow: 'WRITE TO US',
+  title: 'Contact',
+  subtitle: 'we would love to hear from you',
+  greeting:
+    'Whether you are planning a wedding, exploring the academy, or simply have a quiet question — please reach out. We respond personally to every message within 24 hours.',
+  studioImage: 'https://images.pexels.com/photos/3997989/pexels-photo-3997989.jpeg',
+  channels: [
+    {
+      key: 'phone',
+      label: 'By Phone',
+      value: '+91 90000 00000',
+      hint: 'Mon – Sat · 10am to 7pm IST',
+      href: 'tel:+919000000000',
+    },
+    {
+      key: 'whatsapp',
+      label: 'On WhatsApp',
+      value: '+91 90000 00000',
+      hint: 'Fastest replies for bridal enquiries',
+      href: 'https://wa.me/919000000000',
+    },
+    {
+      key: 'email',
+      label: 'By Email',
+      value: 'hello@lushmakeovers.in',
+      hint: 'Reply within 24 hours',
+      href: 'mailto:hello@lushmakeovers.in',
+    },
+    {
+      key: 'instagram',
+      label: 'On Instagram',
+      value: '@lushmakeovers',
+      hint: 'Behind the scenes, daily',
+      href: 'https://instagram.com/lushmakeovers',
+    },
+  ],
+  studio: {
+    line1: 'Lush Makeovers Studio',
+    line2: '3rd Floor, Park Avenue,',
+    line3: 'M.G. Road, Vijayawada — 520010',
+    state: 'Andhra Pradesh, India',
+  },
+  hours: [
+    { day: 'Monday — Friday', time: '10:00 am – 7:00 pm' },
+    { day: 'Saturday', time: '09:00 am – 8:00 pm' },
+    { day: 'Sunday', time: 'By appointment only' },
+  ],
+  faqs: [
+    {
+      q: 'How far in advance should I book?',
+      a: 'For wedding dates, we recommend booking 4 to 8 months in advance. Trial appointments can usually be scheduled within 2 to 3 weeks.',
+    },
+    {
+      q: 'Do you travel for destination weddings?',
+      a: 'Yes, we travel across India and to international destinations. Travel and accommodation are billed separately and discussed transparently during enquiry.',
+    },
+    {
+      q: 'Can the studio accommodate the bride\u2019s family?',
+      a: 'Absolutely. Our studio can comfortably host the bride and up to six family members or bridesmaids for a single morning.',
+    },
+    {
+      q: 'Do you offer Academy walk-ins?',
+      a: 'Academy visits are strictly by appointment. Please write to us with your preferred date and we will block a private studio walkthrough.',
+    },
+  ],
+};
+
+// ----------------------- INQUIRE PAGE -----------------------
+export const inquireConfig = {
+  eyebrow: 'BEGIN AN ENQUIRY',
+  title: 'Inquire',
+  subtitle: 'a private invitation to plan your day',
+  intro:
+    'Share a few details about your celebration. Our admissions team will respond within 24 hours with availability, a tailored quote and an invitation to a private studio visit.',
+  heroImage: 'https://images.pexels.com/photos/9596225/pexels-photo-9596225.jpeg',
+  occasions: [
+    'Bridal — Wedding Day',
+    'Bridal — Engagement',
+    'Bridal — Reception',
+    'Family / Bridesmaids',
+    'Pre-Bridal Trial',
+    'Academy Enquiry',
+    'Masterclass',
+    'Something else',
+  ],
+  hearAbout: [
+    'Instagram',
+    'A friend',
+    'Wedding planner',
+    'Google search',
+    'Featured press',
+    'Other',
+  ],
+  promises: [
+    'A personal response within 24 hours',
+    'A tailored quote — no template pricing',
+    'A private studio visit, no obligation',
+    'Your details treated with absolute discretion',
+  ],
+};

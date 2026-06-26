@@ -17,6 +17,8 @@ import ServicesPage from './components/ServicesPage';
 import PortfolioPage from './components/PortfolioPage';
 import AcademyPage from './components/AcademyPage';
 import AboutPage from './components/AboutPage';
+import ContactPage from './components/ContactPage';
+import InquirePage from './components/InquirePage';
 
 const Home = () => (
   <div className="bg-white min-h-screen">
@@ -67,6 +69,22 @@ const AboutRoute = () => (
   </div>
 );
 
+const ContactRoute = () => (
+  <div className="bg-white min-h-screen">
+    <Header />
+    <ContactPage />
+    <Footer />
+  </div>
+);
+
+const InquireRoute = () => (
+  <div className="bg-white min-h-screen">
+    <Header />
+    <InquirePage />
+    <Footer />
+  </div>
+);
+
 function App() {
   return (
     <div className="App">
@@ -77,6 +95,8 @@ function App() {
           <Route path="/portfolio" element={<PortfolioRoute />} />
           <Route path="/about" element={<AboutRoute />} />
           <Route path="/academy" element={<AcademyRoute />} />
+          <Route path="/contact" element={<ContactRoute />} />
+          <Route path="/inquire" element={<InquireRoute />} />
         </Routes>
       </BrowserRouter>
     </div>
