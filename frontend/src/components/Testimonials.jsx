@@ -16,7 +16,7 @@ const Testimonials = () => {
           alt="Background"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#f1ece2]/85" />
+        <div className="absolute inset-0 bg-[#fafaf6]/92" />
 
         <div className="absolute inset-0 flex items-center justify-center px-10 md:px-24">
           <div className="max-w-[640px] text-center">

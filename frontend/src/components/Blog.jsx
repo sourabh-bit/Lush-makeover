@@ -3,7 +3,7 @@ import { blogPosts } from '../mock';
 
 const Blog = () => {
   return (
-    <section id="blog" className="w-full bg-[#f7f4ef] pb-24">
+    <section id="blog" className="w-full bg-white pb-24">
       <div className="max-w-[1180px] mx-auto px-4 md:px-8 text-center">
         <div className="font-script italic text-[#3a3a3a] text-[18px] md:text-[20px]">from</div>
         <div className="font-display text-[#3a3a3a] text-[22px] md:text-[26px] tracking-[0.4em] mt-1">

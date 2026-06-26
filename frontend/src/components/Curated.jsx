@@ -3,7 +3,7 @@ import { curatedImage, curatedPoints } from '../mock';
 
 const Curated = () => {
   return (
-    <section className="w-full bg-[#f7f4ef] py-20 md:py-28">
+    <section className="w-full bg-white py-20 md:py-28">
       <div className="max-w-[1180px] mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
           <div className="md:pr-4">

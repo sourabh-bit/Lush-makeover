@@ -3,7 +3,7 @@ import { heroImage } from '../mock';
 
 const Hero = () => {
   return (
-    <section id="home" className="w-full bg-[#f7f4ef] pt-2">
+    <section id="home" className="w-full bg-white pt-2">
       <div className="max-w-[1300px] mx-auto px-4 md:px-8">
         <div className="relative w-full h-[480px] md:h-[640px] lg:h-[720px] overflow-hidden">
           <img

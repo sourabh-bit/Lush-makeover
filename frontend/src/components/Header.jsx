@@ -27,7 +27,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full bg-[#f7f4ef] pt-6 pb-3 relative z-30">
+    <header className="w-full bg-white pt-6 pb-3 relative z-30">
       {/* Top row: account & cart icons */}
       <div className="absolute top-6 right-6 hidden md:flex items-center gap-6 text-[#6b6760]">
         <button className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase hover:text-[#3a3a3a] transition-colors">
@@ -79,7 +79,7 @@ const Header = () => {
 
       {/* Mobile nav */}
       {open && (
-        <nav className="md:hidden flex flex-col items-center gap-4 mt-6 pb-5 border-b border-[#e3dcd1] bg-[#f7f4ef]">
+        <nav className="md:hidden flex flex-col items-center gap-4 mt-6 pb-5 border-b border-[#e3dcd1] bg-white">
           {navLinks.map((link) => renderLink(link))}
         </nav>
       )}

@@ -16,9 +16,10 @@ import Blog from './components/Blog';
 import Footer from './components/Footer';
 import ServicesPage from './components/ServicesPage';
 import PortfolioPage from './components/PortfolioPage';
+import AcademyPage from './components/AcademyPage';
 
 const Home = () => (
-  <div className="bg-[#f7f4ef] min-h-screen">
+  <div className="bg-white min-h-screen">
     <EnvelopeIntro />
     <Header />
     <Hero />
@@ -36,7 +37,7 @@ const Home = () => (
 );
 
 const Services = () => (
-  <div className="bg-[#f7f4ef] min-h-screen">
+  <div className="bg-white min-h-screen">
     <Header />
     <ServicesPage />
     <Footer />
@@ -44,9 +45,17 @@ const Services = () => (
 );
 
 const PortfolioRoute = () => (
-  <div className="bg-[#f7f4ef] min-h-screen">
+  <div className="bg-white min-h-screen">
     <Header />
     <PortfolioPage />
+    <Footer />
+  </div>
+);
+
+const AcademyRoute = () => (
+  <div className="bg-white min-h-screen">
+    <Header />
+    <AcademyPage />
     <Footer />
   </div>
 );
@@ -59,6 +68,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/portfolio" element={<PortfolioRoute />} />
+          <Route path="/academy" element={<AcademyRoute />} />
         </Routes>
       </BrowserRouter>
     </div>

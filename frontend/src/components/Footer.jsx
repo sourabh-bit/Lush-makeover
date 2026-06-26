@@ -4,7 +4,7 @@ import { Instagram, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#efe8dc] py-14">
+    <footer className="w-full bg-[#fafaf6] py-14 border-t border-[#ece6da]">
       <div className="max-w-[1180px] mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
           <div className="font-display text-[#3a3a3a] text-[20px] tracking-[0.35em]">
@@ -23,7 +23,8 @@ const Footer = () => {
           <ul className="space-y-2 text-[#4a4742] text-[13px] tracking-[0.12em] uppercase">
             <li><a href="/" className="hover:text-[#a08f7d] transition-colors">Home</a></li>
             <li><a href="/services" className="hover:text-[#a08f7d] transition-colors">Services</a></li>
-            <li><a href="/#portfolio" className="hover:text-[#a08f7d] transition-colors">Portfolio</a></li>
+            <li><a href="/portfolio" className="hover:text-[#a08f7d] transition-colors">Portfolio</a></li>
+            <li><a href="/academy" className="hover:text-[#a08f7d] transition-colors">Academy</a></li>
             <li><a href="/#blog" className="hover:text-[#a08f7d] transition-colors">Blog</a></li>
             <li><a href="/#inquire" className="hover:text-[#a08f7d] transition-colors">Inquire</a></li>
           </ul>

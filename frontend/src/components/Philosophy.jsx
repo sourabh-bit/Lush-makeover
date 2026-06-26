@@ -12,7 +12,7 @@ const Philosophy = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="bg-[#f7f4ef] flex items-center justify-center px-8 py-16 md:py-0">
+        <div className="bg-white flex items-center justify-center px-8 py-16 md:py-0">
           <div className="max-w-[420px]">
             <h3 className="font-display text-[#3a3a3a] text-[34px] md:text-[44px] tracking-[0.22em]">
               MY

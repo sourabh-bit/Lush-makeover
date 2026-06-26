@@ -12,7 +12,7 @@ const Destination = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="bg-[#efe8dc] flex flex-col justify-center items-center px-8 py-14 text-center">
+        <div className="bg-[#fafaf6] flex flex-col justify-center items-center px-8 py-14 text-center">
           <div className="font-script italic text-[#3a3a3a] text-[24px] md:text-[30px] leading-snug max-w-[320px]">
             Now booking select destination weddings across India, Bali, Europe and beyond
           </div>

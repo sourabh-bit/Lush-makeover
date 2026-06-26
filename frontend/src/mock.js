@@ -15,6 +15,7 @@ export const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Academy', href: '/academy' },
   { label: 'Contact Me', href: '/#contact' },
   { label: 'Blog', href: '/#blog' },
   { label: 'Inquire', href: '/#inquire' },
@@ -317,3 +318,146 @@ export const portfolioFeatured = {
   excerpt:
     'A South Indian bride in silk and gold — soft kohl, dewy skin and a calm, unhurried morning. Photographed in the temple courtyard at first light.',
 };
+
+
+// ----------------------- ACADEMY PAGE -----------------------
+export const academyBanner = {
+  eyebrow: 'LUSH MAKEOVERS ACADEMY',
+  title: 'The Academy',
+  subtitle: 'where artistry is taught with care',
+  quote:
+    'Train under South India\'s most-booked bridal studio — small batches, hands-on practice, and a career-long mentorship.',
+  image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9',
+};
+
+export const academyStats = [
+  { v: '200+', l: 'Artists Trained' },
+  { v: '12+', l: 'Years of Teaching' },
+  { v: '4.9', l: 'Student Rating' },
+  { v: '92%', l: 'Career Placement' },
+];
+
+export const academyCourses = [
+  {
+    id: 'beginner',
+    level: '01',
+    name: 'Beginner Foundation',
+    duration: '4 Weeks',
+    sessions: '20 Sessions',
+    fee: '₹45,000',
+    tagline: 'For aspiring artists starting their journey.',
+    description:
+      'Build a strong foundation in skin science, hygiene, base application, eye makeup, contouring and party looks. Perfect for absolute beginners.',
+    modules: [
+      'Skin theory, prep & hygiene',
+      'Base, foundation & contour mastery',
+      'Eye makeup fundamentals',
+      'Day, party & soft-glam looks',
+      'Brush handling & product knowledge',
+    ],
+  },
+  {
+    id: 'advanced',
+    level: '02',
+    name: 'Advanced Bridal',
+    duration: '6 Weeks',
+    sessions: '30 Sessions',
+    fee: '₹85,000',
+    tagline: 'For those ready to take on real brides.',
+    description:
+      'Master HD & airbrush bridal makeup, South Indian temple looks, North Indian glam, hair styling and saree draping with live model practice every week.',
+    modules: [
+      'HD & airbrush bridal makeup',
+      'South Indian temple & traditional looks',
+      'North Indian bridal glam',
+      'Hair styling & accessory placement',
+      'Saree draping (4 styles)',
+      'Client consultation & timeline planning',
+    ],
+  },
+  {
+    id: 'professional',
+    level: '03',
+    name: 'Professional Mastery',
+    duration: '12 Weeks',
+    sessions: '60 Sessions + Internship',
+    fee: '₹1,80,000',
+    tagline: 'A complete career programme with studio mentorship.',
+    description:
+      'Our flagship programme. Includes everything in Advanced Bridal plus business mentorship, portfolio building, social media training and a 4-week mentored internship inside Lush Makeovers studio.',
+    modules: [
+      'Full Beginner + Advanced syllabus',
+      'Business & pricing fundamentals',
+      'Portfolio & photo-shoot workshop',
+      'Instagram & content strategy',
+      '4-week mentored studio internship',
+      'Career placement & alumni network',
+    ],
+  },
+];
+
+export const academyBatches = [
+  {
+    course: 'Beginner Foundation',
+    start: '15 August 2025',
+    seats: '8 of 12',
+    mode: 'In-Studio · Vijayawada',
+  },
+  {
+    course: 'Advanced Bridal',
+    start: '02 September 2025',
+    seats: '5 of 10',
+    mode: 'In-Studio · Vijayawada',
+  },
+  {
+    course: 'Professional Mastery',
+    start: '01 October 2025',
+    seats: '3 of 8',
+    mode: 'In-Studio · Vijayawada',
+  },
+  {
+    course: 'Weekend Masterclass — Airbrush',
+    start: '23 August 2025',
+    seats: '6 of 15',
+    mode: 'In-Studio · Vijayawada',
+  },
+];
+
+export const academyMasterclass = {
+  title: 'Airbrush Masterclass',
+  date: '23 August 2025',
+  duration: 'One-day · 6 hours',
+  fee: '₹12,000',
+  description:
+    'A one-day intensive with our lead artist on airbrush bridal makeup — from machine setup and product mixing to live demonstration and hands-on practice on a real model.',
+  highlights: [
+    'Demonstration on a live model',
+    'Take-home airbrush starter kit',
+    'Recorded session access for 30 days',
+    'Certificate of completion',
+  ],
+};
+
+export const academyStudents = [
+  {
+    quote:
+      'I joined as a complete beginner. By the time I finished the Advanced Bridal course, I had three paid bookings of my own and a clear path forward.',
+    name: 'Harika R.',
+    role: 'Beginner → Advanced · Class of 2024',
+    avatar: 'https://images.unsplash.com/photo-1610047614301-13c63f00c032',
+  },
+  {
+    quote:
+      'The mentorship inside the studio is what changed everything for me. I learnt how to handle real brides, real timelines and real pressure — calmly.',
+    name: 'Sushma K.',
+    role: 'Professional Mastery · Class of 2023',
+    avatar: 'https://images.pexels.com/photos/30809480/pexels-photo-30809480.jpeg',
+  },
+  {
+    quote:
+      'Small batches mean every student gets personal attention. That is the difference here — and the reason my work has the Lush Makeovers signature.',
+    name: 'Pravallika M.',
+    role: 'Advanced Bridal · Class of 2024',
+    avatar: 'https://images.pexels.com/photos/9596225/pexels-photo-9596225.jpeg',
+  },
+];

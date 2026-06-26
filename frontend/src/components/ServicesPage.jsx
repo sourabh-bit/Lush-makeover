@@ -4,7 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 const ServicesPage = () => {
   return (
-    <main className="w-full bg-[#f7f4ef]">
+    <main className="w-full bg-white">
       {/* ---------------- BANNER ---------------- */}
       <section className="relative w-full h-[520px] md:h-[620px] overflow-hidden">
         <img
@@ -13,7 +13,7 @@ const ServicesPage = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         {/* warm cream overlay so text is legible and palette matches site */}
-        <div className="absolute inset-0 bg-[#f7f4ef]/72" />
+        <div className="absolute inset-0 bg-white/72" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#f7f4ef]/40 via-transparent to-[#f7f4ef]/80" />
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">

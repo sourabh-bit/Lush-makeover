@@ -4,7 +4,7 @@ import { Instagram as IgIcon } from 'lucide-react';
 
 const Instagram = () => {
   return (
-    <section className="w-full bg-[#f7f4ef] py-20 md:py-24">
+    <section className="w-full bg-white py-20 md:py-24">
       <div className="max-w-[1080px] mx-auto px-4 md:px-8 text-center">
         <div className="font-script italic text-[#3a3a3a] text-[26px] md:text-[30px]">
           Need More Inspo?
