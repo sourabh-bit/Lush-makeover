@@ -15,9 +15,9 @@ export const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Portfolio', href: '/portfolio' },
+  { label: 'About', href: '/about' },
   { label: 'Academy', href: '/academy' },
   { label: 'Contact Me', href: '/#contact' },
-  { label: 'Blog', href: '/#blog' },
   { label: 'Inquire', href: '/#inquire' },
 ];
 
@@ -459,5 +459,99 @@ export const academyStudents = [
     name: 'Pravallika M.',
     role: 'Advanced Bridal · Class of 2024',
     avatar: 'https://images.pexels.com/photos/9596225/pexels-photo-9596225.jpeg',
+  },
+];
+
+
+// ----------------------- ABOUT PAGE -----------------------
+export const aboutFounder = {
+  name: 'Sri',
+  fullName: 'Sri Lakshmi',
+  role: 'Founder & Lead Artist',
+  portrait: 'https://images.pexels.com/photos/7580837/pexels-photo-7580837.jpeg',
+  workingShot: 'https://images.pexels.com/photos/37710473/pexels-photo-37710473.jpeg',
+  signaturePhoto: 'https://images.pexels.com/photos/35538643/pexels-photo-35538643.jpeg',
+  greeting: 'I am Sri.',
+  intro:
+    'A bridal makeup artist, a teacher and the founder of Lush Makeovers — a quiet, decade-long pursuit of refined, soulful beauty.',
+};
+
+export const aboutStory = [
+  {
+    title: 'The beginning',
+    body:
+      'I picked up my first brush as a teenager in Vijayawada — drawn to the calm precision of the craft long before I understood it as a career. What began as a curiosity quickly became a discipline: hours of practice, weekends spent shadowing senior artists, and a deep conviction that beauty done with care could feel almost sacred.',
+  },
+  {
+    title: 'A formal training',
+    body:
+      'In 2014, I travelled to the United Kingdom to complete a Professional Makeup Artistry Diploma at the London College of Makeup. Those months changed me — Western technique, editorial discipline and a respect for the science of skin became the bedrock of everything I do today, woven gently into the South Indian artistry I had grown up with.',
+  },
+  {
+    title: 'Building Lush Makeovers',
+    body:
+      'I opened the doors of Lush Makeovers in Vijayawada in 2016. One small room, one chair, one promise — that every bride who walked in would leave feeling unmistakably herself. A decade and over a thousand brides later, that promise remains the heart of the studio.',
+  },
+  {
+    title: 'Teaching the next generation',
+    body:
+      'In 2019 I founded the Lush Makeovers Academy. Small batches, generous mentorship and an open-door studio for our alumni. To date we have trained over two hundred artists — many of whom now lead bridal teams of their own across Andhra Pradesh, Telangana and beyond.',
+  },
+];
+
+export const aboutMilestones = [
+  { year: '2014', label: 'London College of Makeup' },
+  { year: '2016', label: 'Lush Makeovers Studio Opens' },
+  { year: '2019', label: 'Academy Founded' },
+  { year: '2022', label: 'Featured · WeddingSutra' },
+  { year: '2024', label: '1000+ Brides · 200+ Artists Trained' },
+];
+
+export const aboutCredentials = [
+  {
+    icon: 'award',
+    title: 'London College of Makeup',
+    sub: 'Professional Makeup Artistry Diploma · 2014',
+  },
+  {
+    icon: 'star',
+    title: '10+ Years of Bridal Artistry',
+    sub: 'Across South India and destination weddings',
+  },
+  {
+    icon: 'users',
+    title: '200+ Artists Trained',
+    sub: 'Through Lush Makeovers Academy',
+  },
+  {
+    icon: 'sparkles',
+    title: '1000+ Brides Beautified',
+    sub: 'HD · Airbrush · Traditional South Indian',
+  },
+];
+
+export const aboutPullQuote =
+  'Bridal beauty is not a transaction. It is a quiet, generous act of love — and I would be honoured to spend that morning with you.';
+
+export const aboutTeam = [
+  {
+    name: 'Sri Lakshmi',
+    role: 'Founder · Lead Artist',
+    image: 'https://images.pexels.com/photos/7580837/pexels-photo-7580837.jpeg',
+  },
+  {
+    name: 'Harika R.',
+    role: 'Senior Bridal Artist',
+    image: 'https://images.pexels.com/photos/30809480/pexels-photo-30809480.jpeg',
+  },
+  {
+    name: 'Pravallika M.',
+    role: 'Hair & Drapery Lead',
+    image: 'https://images.pexels.com/photos/9596225/pexels-photo-9596225.jpeg',
+  },
+  {
+    name: 'Sushma K.',
+    role: 'Academy Mentor',
+    image: 'https://images.unsplash.com/photo-1610047614301-13c63f00c032',
   },
 ];

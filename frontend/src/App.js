@@ -12,11 +12,11 @@ import Curated from './components/Curated';
 import Testimonials from './components/Testimonials';
 import Portfolio from './components/Portfolio';
 import Instagram from './components/Instagram';
-import Blog from './components/Blog';
 import Footer from './components/Footer';
 import ServicesPage from './components/ServicesPage';
 import PortfolioPage from './components/PortfolioPage';
 import AcademyPage from './components/AcademyPage';
+import AboutPage from './components/AboutPage';
 
 const Home = () => (
   <div className="bg-white min-h-screen">
@@ -31,7 +31,6 @@ const Home = () => (
     <Testimonials />
     <Portfolio />
     <Instagram />
-    <Blog />
     <Footer />
   </div>
 );
@@ -60,6 +59,14 @@ const AcademyRoute = () => (
   </div>
 );
 
+const AboutRoute = () => (
+  <div className="bg-white min-h-screen">
+    <Header />
+    <AboutPage />
+    <Footer />
+  </div>
+);
+
 function App() {
   return (
     <div className="App">
@@ -68,6 +75,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/portfolio" element={<PortfolioRoute />} />
+          <Route path="/about" element={<AboutRoute />} />
           <Route path="/academy" element={<AcademyRoute />} />
         </Routes>
       </BrowserRouter>
