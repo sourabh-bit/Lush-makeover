@@ -14,8 +14,7 @@ export const brandInfo = {
 export const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
-  { label: 'Press', href: '/#press' },
-  { label: 'Portfolio', href: '/#portfolio' },
+  { label: 'Portfolio', href: '/portfolio' },
   { label: 'Contact Me', href: '/#contact' },
   { label: 'Blog', href: '/#blog' },
   { label: 'Inquire', href: '/#inquire' },
@@ -39,10 +38,10 @@ export const curatedImage = 'https://images.pexels.com/photos/27140154/pexels-ph
 export const testimonialBgImage = 'https://images.pexels.com/photos/37710473/pexels-photo-37710473.jpeg';
 
 export const portfolioImages = [
-  'https://images.pexels.com/photos/17001511/pexels-photo-17001511.jpeg',
-  'https://images.pexels.com/photos/17154861/pexels-photo-17154861.jpeg',
-  'https://images.pexels.com/photos/34955448/pexels-photo-34955448.jpeg',
-  'https://images.pexels.com/photos/35865066/pexels-photo-35865066.jpeg',
+  'https://images.unsplash.com/photo-1600685890506-593fdf55949b',
+  'https://images.unsplash.com/photo-1610173827043-9db50e0d8ef9',
+  'https://images.pexels.com/photos/30809480/pexels-photo-30809480.jpeg',
+  'https://images.pexels.com/photos/9596225/pexels-photo-9596225.jpeg',
 ];
 
 export const founderAccordions = [
@@ -168,3 +167,153 @@ export const servicesList = [
       'https://images.pexels.com/photos/17001511/pexels-photo-17001511.jpeg',
   },
 ];
+
+
+// ----------------------- PORTFOLIO PAGE -----------------------
+export const portfolioBanner = {
+  eyebrow: 'THE GALLERY',
+  title: 'Portfolio',
+  subtitle: 'a collection of love stories',
+  quote:
+    'Every bride a quiet study in light, jewellery and timeless artistry.',
+};
+
+export const portfolioCategories = [
+  { id: 'all', label: 'All' },
+  { id: 'bridal', label: 'Bridal' },
+  { id: 'reception', label: 'Reception' },
+  { id: 'engagement', label: 'Engagement' },
+  { id: 'detail', label: 'Details' },
+];
+
+export const portfolioWorks = [
+  {
+    id: 1,
+    image: 'https://images.unsplash.com/photo-1600685890506-593fdf55949b',
+    title: 'Aishwarya',
+    location: 'Vijayawada',
+    category: 'bridal',
+    catLabel: 'Traditional Bridal',
+    span: 'tall',
+    year: '2024',
+  },
+  {
+    id: 2,
+    image: 'https://images.unsplash.com/photo-1610173827043-9db50e0d8ef9',
+    title: 'Sanjana',
+    location: 'Hyderabad',
+    category: 'bridal',
+    catLabel: 'South Indian Bridal',
+    span: 'square',
+    year: '2024',
+  },
+  {
+    id: 3,
+    image: 'https://images.unsplash.com/photo-1684868268327-7e5590bcfbd6',
+    title: 'Detail Study',
+    location: 'Studio',
+    category: 'detail',
+    catLabel: 'Makeup Detail',
+    span: 'square',
+    year: '2024',
+  },
+  {
+    id: 4,
+    image: 'https://images.pexels.com/photos/30809480/pexels-photo-30809480.jpeg',
+    title: 'Meghana',
+    location: 'Vijayawada',
+    category: 'bridal',
+    catLabel: 'Traditional Bridal',
+    span: 'wide',
+    year: '2023',
+  },
+  {
+    id: 5,
+    image: 'https://images.pexels.com/photos/9596225/pexels-photo-9596225.jpeg',
+    title: 'Heirloom',
+    location: 'Studio',
+    category: 'detail',
+    catLabel: 'Jewellery Story',
+    span: 'tall',
+    year: '2024',
+  },
+  {
+    id: 6,
+    image: 'https://images.unsplash.com/flagged/photo-1551854716-8b811be39e7e',
+    title: 'Lavanya',
+    location: 'Guntur',
+    category: 'reception',
+    catLabel: 'Reception Glam',
+    span: 'square',
+    year: '2024',
+  },
+  {
+    id: 7,
+    image: 'https://images.unsplash.com/photo-1684868265714-fd2300637c23',
+    title: 'Hema',
+    location: 'Vijayawada',
+    category: 'engagement',
+    catLabel: 'Engagement',
+    span: 'tall',
+    year: '2024',
+  },
+  {
+    id: 8,
+    image: 'https://images.unsplash.com/photo-1610047614301-13c63f00c032',
+    title: 'Pranavi',
+    location: 'Krishna District',
+    category: 'bridal',
+    catLabel: 'South Indian Bridal',
+    span: 'square',
+    year: '2023',
+  },
+  {
+    id: 9,
+    image: 'https://images.pexels.com/photos/3460676/pexels-photo-3460676.jpeg',
+    title: 'Sravya',
+    location: 'Hyderabad',
+    category: 'bridal',
+    catLabel: 'Modern Bridal',
+    span: 'wide',
+    year: '2024',
+  },
+  {
+    id: 10,
+    image: 'https://images.pexels.com/photos/32315685/pexels-photo-32315685.jpeg',
+    title: 'Anvitha',
+    location: 'Vijayawada',
+    category: 'reception',
+    catLabel: 'Reception Glam',
+    span: 'square',
+    year: '2024',
+  },
+  {
+    id: 11,
+    image: 'https://images.unsplash.com/photo-1630526720753-aa4e71acf67d',
+    title: 'Keerthi',
+    location: 'Tirupati',
+    category: 'engagement',
+    catLabel: 'Engagement',
+    span: 'tall',
+    year: '2023',
+  },
+  {
+    id: 12,
+    image: 'https://images.pexels.com/photos/34955448/pexels-photo-34955448.jpeg',
+    title: 'Soft Glow',
+    location: 'Studio',
+    category: 'detail',
+    catLabel: 'Beauty Detail',
+    span: 'square',
+    year: '2024',
+  },
+];
+
+export const portfolioFeatured = {
+  image: 'https://images.unsplash.com/photo-1600685890506-593fdf55949b',
+  eyebrow: 'FEATURED STORY',
+  title: 'Aishwarya',
+  subtitle: 'a temple wedding in Vijayawada',
+  excerpt:
+    'A South Indian bride in silk and gold — soft kohl, dewy skin and a calm, unhurried morning. Photographed in the temple courtyard at first light.',
+};

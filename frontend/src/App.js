@@ -15,6 +15,7 @@ import Instagram from './components/Instagram';
 import Blog from './components/Blog';
 import Footer from './components/Footer';
 import ServicesPage from './components/ServicesPage';
+import PortfolioPage from './components/PortfolioPage';
 
 const Home = () => (
   <div className="bg-[#f7f4ef] min-h-screen">
@@ -42,6 +43,14 @@ const Services = () => (
   </div>
 );
 
+const PortfolioRoute = () => (
+  <div className="bg-[#f7f4ef] min-h-screen">
+    <Header />
+    <PortfolioPage />
+    <Footer />
+  </div>
+);
+
 function App() {
   return (
     <div className="App">
@@ -49,6 +58,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/portfolio" element={<PortfolioRoute />} />
         </Routes>
       </BrowserRouter>
     </div>
