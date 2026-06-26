@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import EnvelopeIntro from './components/EnvelopeIntro';
@@ -13,15 +13,33 @@ import Testimonials from './components/Testimonials';
 import Portfolio from './components/Portfolio';
 import Instagram from './components/Instagram';
 import Footer from './components/Footer';
-import ServicesPage from './components/ServicesPage';
-import PortfolioPage from './components/PortfolioPage';
-import AcademyPage from './components/AcademyPage';
-import AboutPage from './components/AboutPage';
-import ContactPage from './components/ContactPage';
-import InquirePage from './components/InquirePage';
+
+const ServicesPage = lazy(() => import('./components/ServicesPage'));
+const PortfolioPage = lazy(() => import('./components/PortfolioPage'));
+const AcademyPage = lazy(() => import('./components/AcademyPage'));
+const AboutPage = lazy(() => import('./components/AboutPage'));
+const ContactPage = lazy(() => import('./components/ContactPage'));
+const InquirePage = lazy(() => import('./components/InquirePage'));
+
+const RouteShell = ({ children }) => (
+  <div className="bg-white min-h-screen">{children}</div>
+);
+
+const RouteFallback = () => (
+  <div className="min-h-[60vh] flex items-center justify-center px-6 py-20 bg-white">
+    <div className="text-center">
+      <div className="font-display text-[#6b6760] text-[11px] tracking-[0.45em] uppercase">
+        Loading
+      </div>
+      <div className="mt-3 font-script italic text-[#2a2a2a] text-[26px]">
+        one moment please
+      </div>
+    </div>
+  </div>
+);
 
 const Home = () => (
-  <div className="bg-white min-h-screen">
+  <RouteShell>
     <EnvelopeIntro />
     <Header />
     <Hero />
@@ -34,55 +52,67 @@ const Home = () => (
     <Portfolio />
     <Instagram />
     <Footer />
-  </div>
+  </RouteShell>
 );
 
 const Services = () => (
-  <div className="bg-white min-h-screen">
+  <RouteShell>
     <Header />
-    <ServicesPage />
+    <Suspense fallback={<RouteFallback />}>
+      <ServicesPage />
+    </Suspense>
     <Footer />
-  </div>
+  </RouteShell>
 );
 
 const PortfolioRoute = () => (
-  <div className="bg-white min-h-screen">
+  <RouteShell>
     <Header />
-    <PortfolioPage />
+    <Suspense fallback={<RouteFallback />}>
+      <PortfolioPage />
+    </Suspense>
     <Footer />
-  </div>
+  </RouteShell>
 );
 
 const AcademyRoute = () => (
-  <div className="bg-white min-h-screen">
+  <RouteShell>
     <Header />
-    <AcademyPage />
+    <Suspense fallback={<RouteFallback />}>
+      <AcademyPage />
+    </Suspense>
     <Footer />
-  </div>
+  </RouteShell>
 );
 
 const AboutRoute = () => (
-  <div className="bg-white min-h-screen">
+  <RouteShell>
     <Header />
-    <AboutPage />
+    <Suspense fallback={<RouteFallback />}>
+      <AboutPage />
+    </Suspense>
     <Footer />
-  </div>
+  </RouteShell>
 );
 
 const ContactRoute = () => (
-  <div className="bg-white min-h-screen">
+  <RouteShell>
     <Header />
-    <ContactPage />
+    <Suspense fallback={<RouteFallback />}>
+      <ContactPage />
+    </Suspense>
     <Footer />
-  </div>
+  </RouteShell>
 );
 
 const InquireRoute = () => (
-  <div className="bg-white min-h-screen">
+  <RouteShell>
     <Header />
-    <InquirePage />
+    <Suspense fallback={<RouteFallback />}>
+      <InquirePage />
+    </Suspense>
     <Footer />
-  </div>
+  </RouteShell>
 );
 
 function App() {

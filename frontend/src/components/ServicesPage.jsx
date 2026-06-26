@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 import { servicesBanner, servicesList } from '../mock';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -7,7 +8,7 @@ const ServicesPage = () => {
     <main className="w-full bg-white">
       {/* ---------------- BANNER ---------------- */}
       <section className="relative w-full h-[520px] md:h-[620px] overflow-hidden">
-        <img
+        <OptimizedImage
           src={servicesBanner.image}
           alt="Makeup artistry tools"
           className="absolute inset-0 w-full h-full object-cover"
@@ -52,7 +53,7 @@ const ServicesPage = () => {
           for every moment
         </div>
         <p className="mt-7 text-[#4a4742] text-[15px] md:text-[16px] font-serif-body leading-[1.9] max-w-[680px] mx-auto">
-          Each Lush Makeovers appointment is hand-crafted around you — your
+          Each Lush Makeovers appointment is hand-crafted around you ? your
           features, your colours, your venue and your story. Choose from our
           three signature experiences below, or write to us for a fully
           bespoke beauty package.
@@ -61,20 +62,20 @@ const ServicesPage = () => {
 
       {/* ---------------- SERVICES LIST ---------------- */}
       <section className="max-w-[1180px] mx-auto px-4 md:px-8 pb-24 md:pb-32">
-        <div className="space-y-20 md:space-y-28">
+        <div className="space-y-0">
           {servicesList.map((service, i) => {
             const isReversed = i % 2 === 1;
             return (
               <article
                 key={service.id}
                 id={service.id}
-                className={`grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-14 items-center ${
+                className={`grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center py-16 md:py-24 border-b border-[#ece6da] ${
                   isReversed ? 'md:[&>*:first-child]:order-2' : ''
                 }`}
               >
                 {/* Image side */}
                 <div className="md:col-span-5 img-zoom">
-                  <img
+                  <OptimizedImage
                     src={service.image}
                     alt={service.name}
                     className="w-full h-[380px] md:h-[460px] object-cover"
@@ -149,7 +150,7 @@ const ServicesPage = () => {
             your own
           </div>
           <p className="mt-6 text-[#4a4742] font-serif-body leading-[1.85] text-[15px] md:text-[16px]">
-            Multi-day weddings, destination celebrations, mehendi to muhurtam —
+            Multi-day weddings, destination celebrations, mehendi to muhurtam ?
             we craft full beauty experiences for the bride, her mother, her
             sisters and the bridesmaids.
           </p>

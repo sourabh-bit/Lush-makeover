@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import OptimizedImage from './OptimizedImage';
 import {
   academyBanner,
   academyStats,
@@ -51,7 +52,7 @@ const AcademyPage = () => {
       {/* ---------------- BANNER ---------------- */}
       <section className="relative w-full overflow-hidden border-b border-[#ece6da]">
         <div className="relative h-[420px] md:h-[480px]">
-          <img
+          <OptimizedImage
             src={academyBanner.image}
             alt="Lush Makeovers Academy"
             className="absolute inset-0 w-full h-full object-cover"
@@ -98,7 +99,7 @@ const AcademyPage = () => {
       {/* ---------------- ABOUT ---------------- */}
       <section className="max-w-[1180px] mx-auto px-6 md:px-8 py-20 md:py-28 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
         <div className="md:col-span-5">
-          <img
+          <OptimizedImage
             src="https://images.pexels.com/photos/34955448/pexels-photo-34955448.jpeg"
             alt="Academy classroom"
             className="w-full h-[420px] md:h-[520px] object-cover"
@@ -115,7 +116,7 @@ const AcademyPage = () => {
             taught with care
           </div>
           <p className="mt-7 text-[#4a4742] text-[15px] md:text-[16px] font-serif-body leading-[1.9] max-w-[560px]">
-            Lush Makeovers Academy was founded out of one simple belief — that
+            Lush Makeovers Academy was founded out of one simple belief ? that
             every great makeup artist deserves a calm, classical training
             ground. Our small-batch courses are taught by our senior studio
             artists, and every student receives one-to-one attention from day
@@ -123,7 +124,7 @@ const AcademyPage = () => {
           </p>
           <ul className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-[560px]">
             {[
-              'Maximum 8–12 students per batch',
+              'Maximum 8?12 students per batch',
               'Hands-on practice every session',
               'Live models in advanced modules',
               'Lifetime alumni mentorship',
@@ -317,7 +318,7 @@ const AcademyPage = () => {
       <section className="w-full bg-[#fafaf6] border-y border-[#ece6da]">
         <div className="max-w-[1180px] mx-auto px-6 md:px-8 py-20 md:py-28 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center">
           <div className="md:col-span-5">
-            <img
+            <OptimizedImage
               src="https://images.unsplash.com/photo-1596462502278-27bfdc403348"
               alt="Masterclass"
               className="w-full h-[380px] md:h-[460px] object-cover"
@@ -386,7 +387,7 @@ const AcademyPage = () => {
         <div className="mt-14 max-w-[760px] mx-auto relative">
           <div className="border border-[#ece6da] bg-white p-8 md:p-12">
             <div className="flex flex-col items-center">
-              <img
+              <OptimizedImage
                 src={student.avatar}
                 alt={student.name}
                 className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover ring-1 ring-[#ece6da]"
@@ -454,7 +455,7 @@ const AcademyPage = () => {
             <ul className="mt-7 space-y-3 text-[#4a4742] text-[14px] font-serif-body">
               <li className="flex items-center gap-3">
                 <Calendar size={14} strokeWidth={1.25} className="text-[#b8a17a]" />
-                Studio visits available Tue – Sat, 11am – 6pm
+                Studio visits available Tue ? Sat, 11am ? 6pm
               </li>
               <li className="flex items-center gap-3">
                 <Users size={14} strokeWidth={1.25} className="text-[#b8a17a]" />
@@ -538,7 +539,7 @@ const AcademyPage = () => {
               <div className="sm:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-3">
                 {submitted ? (
                   <div className="font-script italic text-[#2a7a3a] text-[16px]">
-                    Thank you — we&apos;ll be in touch within 24 hours.
+                    Thank you ? we&apos;ll be in touch within 24 hours.
                   </div>
                 ) : (
                   <div className="text-[#6b6760] text-[12px] italic font-serif-body">

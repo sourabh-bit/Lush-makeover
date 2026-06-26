@@ -1,5 +1,5 @@
 /* =============================================================
-   LUSH MAKEOVERS — Envelope Intro
+   LUSH MAKEOVERS  Envelope Intro
    Refined editorial styling matched to main site palette
    ============================================================= */
 
@@ -104,7 +104,7 @@
     0 20px 35px rgba(80, 60, 30, 0.18);
 }
 
-/* envelope body — refined ivory + champagne */
+/* envelope body  refined ivory + champagne */
 .env-body {
   position: absolute;
   left: 0; right: 0; bottom: 0;
@@ -143,7 +143,7 @@
   color: rgba(80, 60, 30, 0.55);
 }
 
-/* envelope flap — refined ivory triangle */
+/* envelope flap  refined ivory triangle */
 .env-flap {
   position: absolute;
   top: 0; left: 0;
@@ -171,7 +171,7 @@
       rgba(80, 60, 30, 0.18) 89%, transparent 90%);
 }
 
-/* wax seal — refined champagne / muted rose */
+/* wax seal  refined champagne / muted rose */
 .env-seal {
   position: absolute;
   top: 56%;
@@ -255,7 +255,7 @@
   overflow: hidden;
 }
 
-/* paper bevel — inner double border */
+/* paper bevel  inner double border */
 .card-bevel {
   position: absolute;
   inset: 16px;

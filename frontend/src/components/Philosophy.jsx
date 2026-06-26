@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 import { philosophyImage } from '../mock';
 
 const Philosophy = () => {
@@ -6,7 +7,7 @@ const Philosophy = () => {
     <section className="w-full">
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="img-zoom h-[420px] md:h-[640px]">
-          <img
+          <OptimizedImage
             src={philosophyImage}
             alt="Bride in elegant gown"
             className="w-full h-full object-cover"
@@ -26,7 +27,7 @@ const Philosophy = () => {
                 My goal is to enhance your natural features so you can feel like the very
                 best version of yourself on your wedding day. When I hand you the mirror
                 you want, you&apos;ll say,&nbsp;
-                <span className="font-script italic">“Oh, there she is!”</span>
+                <span className="font-script italic">Oh, there she is!</span>
               </p>
             </div>
           </div>

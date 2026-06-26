@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import OptimizedImage from './OptimizedImage';
 import { inquireConfig, servicesList } from '../mock';
 import {
   ArrowUpRight,
@@ -53,7 +54,7 @@ const InquirePage = () => {
       {/* ---------------- BANNER ---------------- */}
       <section className="relative w-full overflow-hidden border-b border-[#ece6da]">
         <div className="relative h-[360px] md:h-[440px]">
-          <img
+          <OptimizedImage
             src={inquireConfig.heroImage}
             alt="Inquire"
             className="absolute inset-0 w-full h-full object-cover"
@@ -84,7 +85,7 @@ const InquirePage = () => {
 
       {/* ---------------- BODY ---------------- */}
       <section className="max-w-[1180px] mx-auto px-6 md:px-8 py-16 md:py-20 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14">
-        {/* LEFT — promises & service summary */}
+        {/* LEFT ? promises & service summary */}
         <aside className="md:col-span-4 space-y-10 md:sticky md:top-6 md:self-start">
           <div>
             <div className="font-display text-[#6b6760] text-[11px] tracking-[0.42em] mb-3">
@@ -135,7 +136,7 @@ const InquirePage = () => {
           </div>
         </aside>
 
-        {/* RIGHT — multi-step form */}
+        {/* RIGHT ? multi-step form */}
         <div className="md:col-span-8">
           {/* Step indicator */}
           <div className="flex items-center justify-between md:justify-start md:gap-4 mb-8">
@@ -190,7 +191,7 @@ const InquirePage = () => {
               </div>
               <p className="mt-5 text-[#4a4742] font-serif-body leading-[1.9] max-w-[440px] mx-auto">
                 Your enquiry has reached our admissions desk. A personal note
-                from us will arrive within 24 hours — often much sooner.
+                from us will arrive within 24 hours ? often much sooner.
               </p>
               <div className="flex items-center justify-center gap-3 mt-10">
                 <a
@@ -345,11 +346,11 @@ const InquirePage = () => {
                       onChange={onChange('budget')}
                       options={[
                         '',
-                        'Under ₹50,000',
-                        '₹50,000 – ₹1,00,000',
-                        '₹1,00,000 – ₹2,00,000',
-                        '₹2,00,000 – ₹5,00,000',
-                        '₹5,00,000 +',
+                        'Under ?50,000',
+                        '?50,000 ? ?1,00,000',
+                        '?1,00,000 ? ?2,00,000',
+                        '?2,00,000 ? ?5,00,000',
+                        '?5,00,000 +',
                       ]}
                     />
                     <SelectField
@@ -366,14 +367,14 @@ const InquirePage = () => {
                       rows="4"
                       value={form.message}
                       onChange={onChange('message')}
-                      placeholder="Share your vision, mood, references — anything that helps us prepare for our conversation."
+                      placeholder="Share your vision, mood, references ? anything that helps us prepare for our conversation."
                       className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 text-[15px] font-serif-body text-[#2a2a2a] focus:border-[#2a2a2a] focus:outline-none transition-colors resize-none placeholder:text-[#bcb3a4]"
                     />
                   </div>
 
                   <div className="flex items-center gap-2 text-[#6b6760] text-[12px] italic font-serif-body pt-2">
                     <Sparkles size={13} strokeWidth={1.25} className="text-[#b8a17a]" />
-                    Submitting takes a moment — we&apos;ll write back within 24 hours.
+                    Submitting takes a moment ? we&apos;ll write back within 24 hours.
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3 pt-2 sm:justify-between">

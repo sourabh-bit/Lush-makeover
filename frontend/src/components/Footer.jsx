@@ -36,14 +36,14 @@ const Footer = () => {
             <li className="flex items-center gap-2"><MapPin size={14} strokeWidth={1.25} /> Vijayawada, Andhra Pradesh</li>
             <li className="flex items-center gap-2"><Phone size={14} strokeWidth={1.25} /> +91 90000 00000</li>
             <li className="flex items-center gap-2"><Mail size={14} strokeWidth={1.25} /> hello@lushmakeovers.in</li>
-            <li className="flex items-center gap-2"><Instagram size={14} strokeWidth={1.25} /> {brandInfo.instagram}</li>
+            <li className="flex items-center gap-2"><Instagram size={14} strokeWidth={1.25} /> <a href={brandInfo.instagramUrl} target="_blank" rel="noreferrer" className="hover:text-[#a08f7d] transition-colors">{brandInfo.instagram}</a></li>
           </ul>
         </div>
       </div>
 
       <div className="max-w-[1180px] mx-auto px-6 md:px-8 mt-12 pt-6 border-t border-[#d9d2c6] flex flex-col md:flex-row items-center justify-between gap-3">
         <div className="text-[#6b6760] text-[12px] tracking-wider">
-          © {new Date().getFullYear()} Lush Makeovers. All rights reserved.
+           {new Date().getFullYear()} Lush Makeovers. All rights reserved.
         </div>
         <div className="text-[#6b6760] text-[12px] tracking-[0.2em] uppercase">
           Designed with love in Vijayawada

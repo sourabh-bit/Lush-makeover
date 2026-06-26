@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import OptimizedImage from './OptimizedImage';
 import {
   portfolioBanner,
   portfolioCategories,
@@ -37,7 +38,7 @@ const PortfolioPage = () => {
             <span className="block w-12 h-px bg-[#b8a17a]" />
           </div>
 
-          {/* Filters — placed right below title for compact layout */}
+          {/* Filters ? placed right below title for compact layout */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-2 md:gap-3">
             {portfolioCategories.map((cat) => {
               const isActive = active === cat.id;
@@ -68,11 +69,11 @@ const PortfolioPage = () => {
               onClick={() => setLightbox(w)}
               className="group relative overflow-hidden bg-[#f3ede2] aspect-[3/4] text-left focus:outline-none"
             >
-              <img
+              <OptimizedImage
                 src={w.image}
                 alt={w.title}
                 loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-[1100ms] group-hover:scale-[1.05]"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]"
               />
 
               {/* subtle bottom gradient */}
@@ -102,7 +103,7 @@ const PortfolioPage = () => {
         {/* empty state */}
         {works.length === 0 && (
           <div className="text-center py-20 text-[#6b6760] font-serif-body italic">
-            No works in this category yet — please check back soon.
+            No works in this category yet ? please check back soon.
           </div>
         )}
       </section>
@@ -148,7 +149,7 @@ const PortfolioPage = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="md:flex-1 h-[55vh] md:h-auto overflow-hidden">
-              <img
+              <OptimizedImage
                 src={lightbox.image}
                 alt={lightbox.title}
                 className="w-full h-full object-cover"
@@ -189,3 +190,5 @@ const PortfolioPage = () => {
 };
 
 export default PortfolioPage;
+
+

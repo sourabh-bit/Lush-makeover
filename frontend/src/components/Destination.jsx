@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 import { destinationImages } from '../mock';
 
 const Destination = () => {
@@ -6,7 +7,7 @@ const Destination = () => {
     <section id="destination" className="w-full">
       <div className="grid grid-cols-1 md:grid-cols-3 min-h-[340px] md:min-h-[440px]">
         <div className="img-zoom h-[260px] md:h-auto">
-          <img
+          <OptimizedImage
             src={destinationImages.left}
             alt="Destination beach bride"
             className="w-full h-full object-cover"
@@ -22,7 +23,7 @@ const Destination = () => {
           </div>
         </div>
         <div className="img-zoom h-[260px] md:h-auto">
-          <img
+          <OptimizedImage
             src={destinationImages.right}
             alt="Makeup artist with bride"
             className="w-full h-full object-cover"

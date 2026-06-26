@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 import { elevatedImage } from '../mock';
 
 const Elevated = () => {
@@ -8,7 +9,7 @@ const Elevated = () => {
         <div className="divider-line mb-16" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="img-zoom">
-            <img
+            <OptimizedImage
               src={elevatedImage}
               alt="Elegant bride seated"
               className="w-full h-[420px] md:h-[520px] object-cover"
@@ -30,7 +31,7 @@ const Elevated = () => {
               </p>
               <p className="mt-5">
                 Known for our individualised approach and signature
-                aesthetic — refined, elegant and effortless. Our airbrush
+                aesthetic  refined, elegant and effortless. Our airbrush
                 precision, calming presence and standout expertise make us the
                 artist of choice for brides seeking a high-end, luxury beauty
                 experience.

@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 import { blogPosts } from '../mock';
 
 const Blog = () => {
@@ -18,7 +19,7 @@ const Blog = () => {
               className="group block text-left"
             >
               <div className="img-zoom h-[300px] md:h-[360px]">
-                <img
+                <OptimizedImage
                   src={post.image}
                   alt={post.title}
                   className="w-full h-full object-cover"

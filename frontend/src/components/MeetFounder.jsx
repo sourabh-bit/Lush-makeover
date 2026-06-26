@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { meetFounderImage, founderAccordions } from '../mock';
+import OptimizedImage from './OptimizedImage';
+import { founderAccordions } from '../mock';
 import { ChevronDown } from 'lucide-react';
 
 const MeetFounder = () => {
@@ -49,8 +50,8 @@ const MeetFounder = () => {
           </div>
 
           <div className="img-zoom">
-            <img
-              src={meetFounderImage}
+            <OptimizedImage
+              src="/founder-photo.jpg"
               alt="Founder with bride"
               className="w-full h-[480px] md:h-[620px] object-cover"
             />
@@ -65,3 +66,4 @@ const MeetFounder = () => {
 };
 
 export default MeetFounder;
+

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import OptimizedImage from './OptimizedImage';
 import { contactInfo } from '../mock';
 import {
   Phone,
@@ -117,7 +118,7 @@ const ContactPage = () => {
           {/* Studio image */}
           <div className="md:col-span-6">
             <div className="relative overflow-hidden">
-              <img
+              <OptimizedImage
                 src={contactInfo.studioImage}
                 alt="Lush Makeovers studio"
                 className="w-full h-[420px] md:h-[520px] object-cover"
@@ -255,7 +256,7 @@ const ContactPage = () => {
             <div className="sm:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-3">
               {submitted ? (
                 <div className="font-script italic text-[#2a7a3a] text-[16px]">
-                  Thank you — we will write back within 24 hours.
+                  Thank you  we will write back within 24 hours.
                 </div>
               ) : (
                 <div className="text-[#6b6760] text-[12px] italic font-serif-body">

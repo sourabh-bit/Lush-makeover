@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 import { heroImage } from '../mock';
 
 const Hero = () => {
@@ -6,7 +7,7 @@ const Hero = () => {
     <section id="home" className="w-full bg-white pt-2">
       <div className="max-w-[1300px] mx-auto px-4 md:px-8">
         <div className="relative w-full h-[480px] md:h-[640px] lg:h-[720px] overflow-hidden">
-          <img
+          <OptimizedImage
             src={heroImage}
             alt="Bride with veil"
             className="w-full h-full object-cover object-center"

@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 import { curatedImage, curatedPoints } from '../mock';
 
 const Curated = () => {
@@ -36,7 +37,7 @@ const Curated = () => {
           </div>
 
           <div className="img-zoom">
-            <img
+            <OptimizedImage
               src={curatedImage}
               alt="Bride elegant pose"
               className="w-full h-[480px] md:h-[600px] object-cover"

@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 import {
   aboutFounder,
   aboutStory,
@@ -32,8 +33,8 @@ const AboutPage = () => {
           {/* Portrait column */}
           <div className="md:col-span-6 relative">
             <div className="relative overflow-hidden">
-              <img
-                src={aboutFounder.portrait}
+              <OptimizedImage
+                src="/founder-photo.jpg"
                 alt={aboutFounder.fullName}
                 className="w-full h-[520px] md:h-[660px] object-cover"
               />
@@ -156,7 +157,7 @@ const AboutPage = () => {
 
       {/* ---------------- PULL QUOTE / WORKING SHOT ---------------- */}
       <section className="relative w-full overflow-hidden border-y border-[#ece6da]">
-        <img
+        <OptimizedImage
           src={aboutFounder.workingShot}
           alt="Behind the scenes"
           className="absolute inset-0 w-full h-full object-cover"
@@ -298,11 +299,11 @@ const AboutPage = () => {
           {aboutTeam.map((m, i) => (
             <div key={i} className="text-center group">
               <div className="img-zoom aspect-[3/4] mb-4">
-                <img
+                <OptimizedImage
                   src={m.image}
                   alt={m.name}
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-[1100ms] group-hover:scale-[1.05]"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]"
                 />
               </div>
               <div className="font-display text-[#2a2a2a] text-[13px] md:text-[14px] tracking-[0.22em] uppercase">
@@ -331,7 +332,7 @@ const AboutPage = () => {
           <p className="mt-7 text-[#4a4742] text-[15px] md:text-[16px] font-serif-body leading-[1.85]">
             We open the studio for one bride at a time. Reach out and we will
             schedule a private visit, walk you through the looks we have
-            crafted, and answer every question — over a cup of filter coffee.
+            crafted, and answer every question over a cup of filter coffee.
           </p>
           <a
             href="/contact"
@@ -347,3 +348,8 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
+
+
+
+
+
