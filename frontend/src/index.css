@@ -2,36 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Italiana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
 
 body {
   margin: 0;
-  font-family: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
+  font-family: 'Manrope', 'Inter', 'Segoe UI', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  background-color: #ffffff;
-  color: #2a2a2a;
+  background-color: #fcfaf7;
+  color: #2f2a27;
   font-weight: 400;
-  letter-spacing: 0.005em;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
 }
 
 .font-display {
-  font-family: 'Italiana', 'Cormorant Garamond', serif;
-  letter-spacing: 0.25em;
+  font-family: 'Cormorant Garamond', 'Bodoni Moda', serif;
+  font-weight: 400;
+  letter-spacing: 0.08em;
   -webkit-font-smoothing: antialiased;
 }
 
 .font-script {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Cormorant Garamond', 'Bodoni Moda', serif;
   font-style: italic;
-  font-weight: 500;
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
+.App .font-display,
+.App .font-script {
+  color: #6d6057;
+}
+
+#home .font-display {
+  color: #6f5a3d;
+}
+
+#home .font-script {
+  color: #8a6a40;
+}
 .font-serif-body {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Manrope', 'Inter', 'Segoe UI', Arial, sans-serif;
   font-weight: 400;
-  color: #3a3a3a;
+  color: #605853;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+}
+
+.section-label {
+  font-family: 'Manrope', 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  color: #8a827c;
+}
+
+.editorial-headline {
+  font-family: 'Cormorant Garamond', 'Bodoni Moda', serif;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  color: #2f2a27;
+}
+
+.editorial-subhead {
+  font-family: 'Cormorant Garamond', 'Bodoni Moda', serif;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: #2f2a27;
+}
+
+.body-prose {
+  font-family: 'Manrope', 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: clamp(18px, 1.3vw, 20px);
+  font-weight: 400;
+  line-height: 1.9;
+  color: #605853;
+  max-width: 580px;
+}
+
+.section-shell {
+  padding-top: clamp(88px, 10vw, 176px);
+  padding-bottom: clamp(88px, 10vw, 176px);
+}
+
+.section-shell-top {
+  padding-top: clamp(88px, 10vw, 176px);
+}
+
+.section-shell-bottom {
+  padding-bottom: clamp(88px, 10vw, 176px);
 }
 
 code {
@@ -40,25 +106,25 @@ code {
 
 @layer base {
   :root {
-    --background: 36 30% 96%;
-    --foreground: 0 0% 23%;
-    --card: 36 30% 96%;
-    --card-foreground: 0 0% 23%;
-    --popover: 36 30% 96%;
-    --popover-foreground: 0 0% 23%;
-    --primary: 0 0% 23%;
-    --primary-foreground: 36 30% 96%;
-    --secondary: 36 20% 90%;
-    --secondary-foreground: 0 0% 23%;
-    --muted: 36 20% 92%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 36 20% 88%;
-    --accent-foreground: 0 0% 23%;
+    --background: 38 30% 98%;
+    --foreground: 21 11% 18%;
+    --card: 38 30% 96%;
+    --card-foreground: 21 11% 18%;
+    --popover: 38 30% 96%;
+    --popover-foreground: 21 11% 18%;
+    --primary: 21 11% 18%;
+    --primary-foreground: 38 30% 98%;
+    --secondary: 33 20% 93%;
+    --secondary-foreground: 21 11% 18%;
+    --muted: 33 20% 95%;
+    --muted-foreground: 22 8% 41%;
+    --accent: 33 24% 90%;
+    --accent-foreground: 21 11% 18%;
     --destructive: 0 60% 50%;
-    --destructive-foreground: 36 30% 96%;
-    --border: 30 15% 85%;
-    --input: 30 15% 85%;
-    --ring: 0 0% 23%;
+    --destructive-foreground: 38 30% 98%;
+    --border: 29 18% 83%;
+    --input: 29 18% 83%;
+    --ring: 21 11% 18%;
     --radius: 0.125rem;
   }
 }
@@ -86,3 +152,4 @@ code {
 .img-zoom:hover img {
   transform: scale(1.04);
 }
+

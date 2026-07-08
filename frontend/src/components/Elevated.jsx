@@ -3,9 +3,17 @@ import OptimizedImage from './OptimizedImage';
 import { elevatedImage } from '../mock';
 
 const Elevated = () => {
+  const bgImage = encodeURI('/ChatGPT Image Jul 8, 2026, 02_36_18 AM.png');
+
   return (
-    <section className="w-full bg-white py-20 md:py-28">
-      <div className="max-w-[1180px] mx-auto px-4 md:px-8">
+    <section className="w-full py-20 md:py-28 relative overflow-hidden bg-[#fcfaf7]">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-45"
+        style={{ backgroundImage: `url(${bgImage})` }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-[#fcfaf7]/78" aria-hidden="true" />
+      <div className="relative z-10 max-w-[1180px] mx-auto px-4 md:px-8">
         <div className="divider-line mb-16" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="img-zoom">

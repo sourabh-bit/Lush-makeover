@@ -6,12 +6,12 @@ import { User, ShoppingBag, Menu, X } from 'lucide-react';
 const Header = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const menuBg = encodeURI('/founder-photo.jpg');
 
   const renderLink = (link, extraClass = '') => {
     const isHash = link.href.includes('#');
     const cls = `text-[#3a3a3a] text-[11px] tracking-[0.22em] uppercase hover:text-[#a08f7d] transition-colors duration-300 whitespace-nowrap ${extraClass}`;
     if (isHash) {
-      // Hash links on home page; absolute root + hash to ensure navigation
       const target = link.href.startsWith('/') ? link.href : `/${link.href}`;
       return (
         <a key={link.label} href={target} className={cls} onClick={() => setOpen(false)}>
@@ -27,8 +27,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full bg-white pt-6 pb-3 relative z-30">
-      {/* Top row: account & cart icons */}
+    <header className="w-full bg-white pt-6 pb-3 relative z-40">
       <div className="absolute top-6 right-6 hidden md:flex items-center gap-6 text-[#6b6760]">
         <button className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase hover:text-[#3a3a3a] transition-colors">
           <User size={14} strokeWidth={1.25} />
@@ -39,16 +38,14 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile menu toggle */}
       <button
-        className="md:hidden absolute top-6 right-5 text-[#6b6760]"
+        className="md:hidden absolute top-4 right-4 text-[#6b6760] z-50"
         onClick={() => setOpen(!open)}
-        aria-label="Menu"
+        aria-label={open ? 'Close menu' : 'Open menu'}
       >
-        {open ? <X size={22} /> : <Menu size={22} />}
+        {open ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      {/* Brand name centered */}
       <Link to="/" className="flex flex-col items-center text-center px-4 group">
         <h1 className="font-display text-[#3a3a3a] text-[28px] md:text-[34px] tracking-[0.4em] font-normal">
           {brandInfo.name}
@@ -58,9 +55,8 @@ const Header = () => {
         </div>
       </Link>
 
-      {/* Subtitle */}
       {location.pathname === '/' && (
-        <div className="flex flex-col items-center text-center px-4">
+        <div className="hidden md:flex flex-col items-center text-center px-4">
           <div className="mt-5 font-script italic text-[#3a3a3a] text-[20px] md:text-[24px] leading-tight">
             Vijayawada &amp; Destination<br />
             <span>Bridal Hair and Makeup Artists</span>
@@ -72,19 +68,41 @@ const Header = () => {
         </div>
       )}
 
-      {/* Nav */}
       <nav className="hidden md:flex justify-center items-center gap-8 mt-7 pb-2 border-b border-[#e3dcd1]">
         {navLinks.map((link) => renderLink(link))}
       </nav>
 
-      {/* Mobile nav */}
       {open && (
-        <nav className="md:hidden flex flex-col items-center gap-4 mt-6 pb-5 border-b border-[#e3dcd1] bg-white">
-          {navLinks.map((link) => renderLink(link))}
-        </nav>
+        <div className="fixed inset-0 z-40 md:hidden" onClick={() => setOpen(false)}>
+          <div
+            className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+            style={{ backgroundImage: `url(${menuBg})` }}
+            aria-hidden="true"
+          />
+          <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/40 to-black/60" aria-hidden="true" />
+          <nav
+            className="relative flex min-h-full flex-col items-center justify-start pt-20 px-6 pb-12"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-10 text-center">
+              <div className="font-display text-[#fcfaf7] text-[24px] tracking-[0.36em] drop-shadow-[0_1px_1px_rgba(0,0,0,0.45)]">
+                {brandInfo.name}
+              </div>
+              <div className="mt-2 font-display text-[#f3e8de] text-[9px] tracking-[0.45em] uppercase drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]">
+                {brandInfo.tagline}
+              </div>
+            </div>
+            <div className="flex flex-col items-center gap-6 w-full max-w-[280px]">
+              {navLinks.map((link) => renderLink(link, 'text-[#fcfaf7] text-[13px] tracking-[0.38em] drop-shadow-[0_1px_1px_rgba(0,0,0,0.45)]'))}
+            </div>
+          </nav>
+        </div>
       )}
     </header>
   );
 };
 
 export default Header;
+
+
