@@ -8,31 +8,26 @@ const Curated = () => {
       <div className="max-w-[1180px] mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
           <div className="md:pr-4">
-            <div className="text-center">
-              <div className="font-script italic text-[#3a3a3a] text-[26px] md:text-[32px] leading-snug tracking-wide">
-                thoughtfully<br />
-                <span className="text-[30px] md:text-[38px]">curated beauty</span>
-              </div>
-            </div>
-            <p className="mt-8 text-center text-[#4a4742] text-[15px] md:text-[16px] font-serif-body">
-              Weddings are my sole passion and specialty.
-            </p>
-            <p className="mt-3 text-center text-[#6b6760] italic font-script text-[18px]">
-              &ldquo;What&apos;s it like to work with Lush Makeovers?&rdquo;
+            <div className="section-label text-center md:text-left mb-4 md:mb-5">Why brides trust us</div>
+            <p className="body-prose max-w-[540px] mx-auto md:mx-0 text-center md:text-left mb-10 md:mb-12">
+              At Lush Makeovers, the bridal morning is planned, calm, and beautifully on time.
             </p>
 
-            <ul className="mt-7 space-y-3 text-[#4a4742] text-[14px] md:text-[15px] font-serif-body leading-[1.8] list-disc pl-5">
+            <ul className="space-y-6 max-w-[560px] mx-auto md:mx-0">
               {curatedPoints.map((p, i) => (
-                <li key={i}>
-                  <span className="italic">{p.strong}</span>{p.rest}
+                <li key={i} className="border-l border-[#d9d0c8] pl-5 py-1">
+                  <div className="font-display text-[#2f2a27] text-[18px] md:text-[20px] tracking-[0.08em] uppercase leading-[1.2]">
+                    {p.strong}
+                  </div>
+                  <p className="mt-2 text-[#605853] text-[14px] md:text-[15px] leading-[1.85] font-serif-body max-w-[520px]">
+                    {p.rest.replace(/^ - /, '')}
+                  </p>
                 </li>
               ))}
             </ul>
 
-            <p className="mt-7 text-[#4a4742] text-[14px] md:text-[15px] leading-[1.85] font-serif-body">
-              As a bridal hair and makeup studio, we&apos;re just as invested in your wedding
-              day as you are. Your beauty experience is our top priority, and remains at
-              the heart of everything we do.
+            <p className="mt-8 text-[#4a4742] text-[14px] md:text-[15px] leading-[1.85] font-serif-body max-w-[520px]">
+              Every detail is designed around the bride, the timeline, and the photographs you will treasure for years.
             </p>
           </div>
 
@@ -53,3 +48,4 @@ const Curated = () => {
 };
 
 export default Curated;
+

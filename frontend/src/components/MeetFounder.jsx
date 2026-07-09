@@ -11,15 +11,15 @@ const MeetFounder = () => {
       <div className="max-w-[1180px] mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div className="md:pr-6">
-            <h3 className="font-display text-[#3a3a3a] text-[34px] md:text-[44px] tracking-[0.12em]">
+            <h3 className="font-display text-[#3a3a3a] text-[44px] md:text-[60px] tracking-[0.08em] leading-[0.95] max-w-[420px]">
               Meet <span className="font-script italic tracking-normal">Our Founder</span>
             </h3>
-            <p className="mt-5 text-[#4a4742] text-[15px] md:text-[16px] font-serif-body italic">
-              Thank you for being here. It&apos;s so wonderful to meet you.
+            <p className="mt-8 max-w-[520px] text-[#4a4742] text-[15px] md:text-[16px] font-serif-body italic leading-[1.9]">
+              Thank you for being here — if you&apos;re planning your bridal look, you&apos;re in the right hands.
             </p>
 
-            <div className="mt-10 border-t border-[#d9d2c6]">
-              {founderAccordions.map((item, idx) => {
+            <div className="mt-12 border-t border-[#d9d2c6]">
+              {founderAccordions.slice(1).map((item, idx) => {
                 const isOpen = openIdx === idx;
                 return (
                   <div key={item.title} className="border-b border-[#d9d2c6]">
@@ -66,4 +66,5 @@ const MeetFounder = () => {
 };
 
 export default MeetFounder;
+
 

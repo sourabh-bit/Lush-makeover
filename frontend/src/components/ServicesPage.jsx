@@ -58,13 +58,13 @@ const ServicesPage = () => {
           <div className="font-display text-[#6b6760] text-[11px] tracking-[0.45em] mb-4">
             THE OFFERINGS
           </div>
-          <h2 className="font-display text-[#2a2a2a] text-[30px] md:text-[40px] tracking-[0.18em]">
+          <h2 className="font-display text-[#2a2a2a] text-[36px] md:text-[52px] tracking-[0.14em] leading-[0.95]">
             A QUIET LUXURY
           </h2>
-          <div className="font-script italic text-[#3a3a3a] text-[26px] md:text-[32px] -mt-1">
+          <div className="font-script italic text-[#3a3a3a] text-[30px] md:text-[40px] leading-none mt-2">
             for every moment
           </div>
-          <p className="mt-7 text-[#4a4742] text-[15px] md:text-[16px] font-serif-body leading-[1.9] max-w-[680px] mx-auto">
+          <p className="mt-10 text-[#4a4742] text-[15px] md:text-[16px] font-serif-body leading-[1.9] max-w-[680px] mx-auto">
             Each Lush Makeovers appointment is hand-crafted around you ? your
             features, your colours, your venue and your story. Choose from our
             three signature experiences below, or write to us for a fully
@@ -155,10 +155,10 @@ const ServicesPage = () => {
             <div className="font-display text-[#6b6760] text-[11px] tracking-[0.45em] mb-3">
               BESPOKE
             </div>
-            <h3 className="font-display text-[#2a2a2a] text-[28px] md:text-[36px] tracking-[0.18em]">
+            <h3 className="font-display text-[#2a2a2a] text-[36px] md:text-[52px] tracking-[0.14em] leading-[0.95]">
               SOMETHING ENTIRELY
             </h3>
-            <div className="font-script italic text-[#3a3a3a] text-[28px] md:text-[34px] -mt-1">
+            <div className="font-script italic text-[#3a3a3a] text-[34px] md:text-[46px] leading-none mt-2">
               your own
             </div>
             <p className="mt-6 text-[#4a4742] font-serif-body leading-[1.85] text-[15px] md:text-[16px]">
@@ -181,4 +181,5 @@ const ServicesPage = () => {
 };
 
 export default ServicesPage;
+
 

@@ -23,15 +23,15 @@ const Elevated = () => {
               className="w-full h-[420px] md:h-[520px] object-cover"
             />
           </div>
-          <div className="text-center md:text-left md:pl-6">
-            <h3 className="font-display text-[#3a3a3a] text-[32px] md:text-[42px] tracking-[0.22em] leading-tight">
+          <div className="text-center md:text-left md:pl-6 md:pt-4">
+            <h3 className="font-display text-[#3a3a3a] text-[44px] md:text-[64px] tracking-[0.16em] leading-[0.95] max-w-[360px] mx-auto md:mx-0">
               ELEVATED &amp;
             </h3>
-            <div className="font-script italic text-[#3a3a3a] text-[38px] md:text-[48px] -mt-1">
+            <div className="font-script italic text-[#3a3a3a] text-[44px] md:text-[56px] leading-none mt-2 md:mt-3 max-w-[360px] mx-auto md:mx-0">
               refined
             </div>
 
-            <div className="mt-8 max-w-[440px] mx-auto md:mx-0 text-[#4a4742] text-[15px] md:text-[16px] leading-[1.9] font-serif-body">
+            <div className="mt-8 md:mt-10 max-w-[480px] mx-auto md:mx-0 text-[#4a4742] text-[15px] md:text-[16px] leading-[1.9] font-serif-body">
               <p>
                 Rooted in Vijayawada and serving brides across Andhra Pradesh,
                 Lush Makeovers specialises in timeless, natural bridal beauty
@@ -39,18 +39,11 @@ const Elevated = () => {
               </p>
               <p className="mt-5">
                 Known for our individualised approach and signature
-                aesthetic  refined, elegant and effortless. Our airbrush
+                aesthetic - refined, elegant and effortless. Our airbrush
                 precision, calming presence and standout expertise make us the
                 artist of choice for brides seeking a high-end, luxury beauty
                 experience.
               </p>
-            </div>
-
-            <div className="mt-10 text-[#6b6760] italic font-script text-[18px] md:text-[20px] text-center md:text-left">
-              Bridal Beauty Investment begins at &#8377;25,000<br />
-              <span className="text-[16px]">
-                Full-Service Destination Beauty Packages begin at &#8377;1,50,000
-              </span>
             </div>
           </div>
         </div>
@@ -60,3 +53,4 @@ const Elevated = () => {
 };
 
 export default Elevated;
+

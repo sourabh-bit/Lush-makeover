@@ -1,25 +1,47 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { X } from 'lucide-react';
 import './envelope.css';
 
 const EnvelopeIntro = () => {
+  const location = useLocation();
   const [show, setShow] = useState(false);
   const [phase, setPhase] = useState('enter');
   const [closing, setClosing] = useState(false);
   // phase: enter -> idle -> flapOpen -> cardOut -> envHide -> done
 
   useEffect(() => {
-    const seen = sessionStorage.getItem('lush_intro_seen');
-    if (!seen) {
-      setShow(true);
-      const t0 = setTimeout(() => setPhase('idle'), 800);
-      const t1 = setTimeout(() => setPhase('flapOpen'), 1700);
-      const t2 = setTimeout(() => setPhase('cardOut'), 2500);
-      const t3 = setTimeout(() => setPhase('envHide'), 4000);
-      const t4 = setTimeout(() => setPhase('done'), 4800);
-      return () => [t0, t1, t2, t3, t4].forEach(clearTimeout);
+    if (location.pathname !== '/') {
+      setShow(false);
+      setClosing(false);
+      setPhase('enter');
+      return;
     }
-  }, []);
+
+    const seen = sessionStorage.getItem('lush_intro_seen');
+    if (seen) {
+      setShow(false);
+      return;
+    }
+
+    setShow(true);
+    setClosing(false);
+    setPhase('enter');
+
+    const timers = [
+      setTimeout(() => setPhase('idle'), 800),
+      setTimeout(() => setPhase('flapOpen'), 1700),
+      setTimeout(() => setPhase('cardOut'), 2500),
+      setTimeout(() => setPhase('envHide'), 4000),
+      setTimeout(() => {
+        sessionStorage.setItem('lush_intro_seen', '1');
+        setPhase('done');
+        setShow(false);
+      }, 5400),
+    ];
+
+    return () => timers.forEach(clearTimeout);
+  }, [location.pathname]);
 
   const close = () => {
     sessionStorage.setItem('lush_intro_seen', '1');
@@ -27,7 +49,7 @@ const EnvelopeIntro = () => {
     setTimeout(() => setShow(false), 750);
   };
 
-  if (!show) return null;
+  if (!show || location.pathname !== '/') return null;
 
   const flapOpen =
     phase === 'flapOpen' ||

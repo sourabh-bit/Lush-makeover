@@ -1,6 +1,6 @@
 import React from 'react';
 import OptimizedImage from './OptimizedImage';
-import { philosophyImage } from '../mock';
+import { philosophyImage, homeHero } from '../mock';
 
 const Philosophy = () => {
   return (
@@ -14,21 +14,15 @@ const Philosophy = () => {
           />
         </div>
         <div className="bg-white flex items-center justify-center px-8 py-16 md:py-0">
-          <div className="max-w-[420px]">
-            <h3 className="font-display text-[#3a3a3a] text-[34px] md:text-[44px] tracking-[0.22em]">
+          <div className="max-w-[480px]">
+            <h3 className="font-display text-[#3a3a3a] text-[44px] md:text-[64px] tracking-[0.14em] leading-[0.95]">
               MY
             </h3>
-            <div className="font-script italic text-[#3a3a3a] text-[40px] md:text-[52px] -mt-1">
+            <div className="font-script italic text-[#3a3a3a] text-[48px] md:text-[68px] leading-none mt-2">
               philosophy
             </div>
-            <div className="mt-7 text-[#4a4742] text-[15px] md:text-[16px] leading-[1.9] font-serif-body">
-              <p>
-                Hair and makeup is so unique to each person&apos;s preferences and tastes.
-                My goal is to enhance your natural features so you can feel like the very
-                best version of yourself on your wedding day. When I hand you the mirror
-                you want, you&apos;ll say,&nbsp;
-                <span className="font-script italic">Oh, there she is!</span>
-              </p>
+            <div className="mt-10 text-[#4a4742] text-[15px] md:text-[16px] leading-[1.9] font-serif-body max-w-[560px]">
+              <p>{homeHero.philosophy}</p>
             </div>
           </div>
         </div>
@@ -38,3 +32,4 @@ const Philosophy = () => {
 };
 
 export default Philosophy;
+
