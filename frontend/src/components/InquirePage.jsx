@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import OptimizedImage from './OptimizedImage';
+import { pageTransition as pageVariants } from './motion';
 import { inquireConfig, servicesList } from '../mock';
+import { apiFetch } from '@/lib/api';
 import {
   ArrowUpRight,
   Check,
@@ -30,16 +33,45 @@ const initialForm = {
 const InquirePage = () => {
   const [form, setForm] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
   const [step, setStep] = useState(1);
 
   const onChange = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if (!form.fullName || !form.phone || !form.occasion) return;
-    const list = JSON.parse(localStorage.getItem('lush_inquiries') || '[]');
-    list.push({ ...form, at: new Date().toISOString() });
-    localStorage.setItem('lush_inquiries', JSON.stringify(list));
-    setSubmitted(true);
+    if (!form.fullName || !form.phone || !form.occasion || sending) return;
+    setSending(true);
+    setError('');
+    // Compose every answer into one readable enquiry for the studio.
+    const lines = [
+      `Enquiry: ${form.occasion}`,
+      form.partner && `Partner: ${form.partner}`,
+      form.weddingDate && `Date: ${form.weddingDate}`,
+      form.venue && `Venue: ${form.venue}`,
+      form.city && `City: ${form.city}`,
+      form.guests && `People needing makeup: ${form.guests}`,
+      form.budget && `Budget: ${form.budget}`,
+      form.hearAbout && `Heard about us via: ${form.hearAbout}`,
+      form.message && `Message: ${form.message}`,
+    ].filter(Boolean);
+    try {
+      await apiFetch('/api/contact', {
+        method: 'POST',
+        body: {
+          name: form.fullName,
+          phone: form.phone,
+          email: form.email || null,
+          message: lines.join('\n'),
+          category: 'wedding',
+        },
+      });
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong sending your enquiry. Please try again, or reach us on WhatsApp.");
+    } finally {
+      setSending(false);
+    }
   };
 
   // step bar items
@@ -50,7 +82,7 @@ const InquirePage = () => {
   ];
 
   return (
-    <main className="w-full bg-white">
+    <motion.main className="w-full bg-white" initial="hidden" animate="visible" variants={pageVariants}>
       {/* ---------------- BANNER ---------------- */}
       <section className="relative w-full overflow-hidden border-b border-[#ece6da]">
         <div className="relative h-[360px] md:h-[440px]">
@@ -59,7 +91,7 @@ const InquirePage = () => {
             alt="Inquire"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-white/76" />
+          <div className="absolute inset-0 bg-white/75" />
           <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/85" />
           <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
             <div className="font-display text-[#6b6760] text-[11px] tracking-[0.5em] mb-4">
@@ -85,7 +117,7 @@ const InquirePage = () => {
 
       {/* ---------------- BODY ---------------- */}
       <section className="max-w-[1180px] mx-auto px-6 md:px-8 py-16 md:py-20 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14">
-        {/* LEFT ? promises & service summary */}
+        {/* LEFT — promises & service summary */}
         <aside className="md:col-span-4 space-y-10 md:sticky md:top-6 md:self-start">
           <div>
             <div className="font-display text-[#6b6760] text-[11px] tracking-[0.42em] mb-3">
@@ -136,7 +168,7 @@ const InquirePage = () => {
           </div>
         </aside>
 
-        {/* RIGHT ? multi-step form */}
+        {/* RIGHT — multi-step form */}
         <div className="md:col-span-8">
           {/* Step indicator */}
           <div className="flex items-center justify-between md:justify-start md:gap-4 mb-8">
@@ -191,7 +223,7 @@ const InquirePage = () => {
               </div>
               <p className="mt-5 text-[#4a4742] font-serif-body leading-[1.9] max-w-[440px] mx-auto">
                 Your enquiry has reached our admissions desk. A personal note
-                from us will arrive within 24 hours ? often much sooner.
+                from us will arrive within 24 hours — often much sooner.
               </p>
               <div className="flex items-center justify-center gap-3 mt-10">
                 <a
@@ -346,11 +378,11 @@ const InquirePage = () => {
                       onChange={onChange('budget')}
                       options={[
                         '',
-                        'Under ?50,000',
-                        '?50,000 ? ?1,00,000',
-                        '?1,00,000 ? ?2,00,000',
-                        '?2,00,000 ? ?5,00,000',
-                        '?5,00,000 +',
+                        'Under ₹50,000',
+                        '₹50,000 – ₹1,00,000',
+                        '₹1,00,000 – ₹2,00,000',
+                        '₹2,00,000 – ₹5,00,000',
+                        '₹5,00,000 +',
                       ]}
                     />
                     <SelectField
@@ -367,15 +399,19 @@ const InquirePage = () => {
                       rows="4"
                       value={form.message}
                       onChange={onChange('message')}
-                      placeholder="Share your vision, mood, references ? anything that helps us prepare for our conversation."
+                      placeholder="Share your vision, mood, references — anything that helps us prepare for our conversation."
                       className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 text-[15px] font-serif-body text-[#2a2a2a] focus:border-[#2a2a2a] focus:outline-none transition-colors resize-none placeholder:text-[#bcb3a4]"
                     />
                   </div>
 
                   <div className="flex items-center gap-2 text-[#6b6760] text-[12px] italic font-serif-body pt-2">
                     <Sparkles size={13} strokeWidth={1.25} className="text-[#b8a17a]" />
-                    Submitting takes a moment ? we&apos;ll write back within 24 hours.
+                    We&apos;ll write back within 24 hours.
                   </div>
+
+                  {error && (
+                    <div className="text-[13px] leading-relaxed text-red-600 font-serif-body">{error}</div>
+                  )}
 
                   <div className="flex flex-col sm:flex-row gap-3 pt-2 sm:justify-between">
                     <button
@@ -387,9 +423,10 @@ const InquirePage = () => {
                     </button>
                     <button
                       type="submit"
-                      className="inline-flex items-center justify-center gap-2 border border-[#6b6760] bg-[#2a2a2a] text-white hover:bg-[#1a1a1a] transition-colors duration-500 px-8 py-3 text-[11px] tracking-[0.32em] uppercase font-display"
+                      disabled={sending}
+                      className="inline-flex items-center justify-center gap-2 border border-[#6b6760] bg-[#2a2a2a] text-white hover:bg-[#1a1a1a] transition-colors duration-500 px-8 py-3 text-[11px] tracking-[0.32em] uppercase font-display disabled:opacity-60"
                     >
-                      Submit Enquiry
+                      {sending ? 'Sending…' : 'Submit Enquiry'}
                       <ArrowUpRight size={13} strokeWidth={1.25} />
                     </button>
                   </div>
@@ -399,7 +436,7 @@ const InquirePage = () => {
           )}
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 };
 
@@ -478,3 +515,6 @@ const NavRow = ({ onBack, onNext, nextDisabled }) => (
 );
 
 export default InquirePage;
+
+
+

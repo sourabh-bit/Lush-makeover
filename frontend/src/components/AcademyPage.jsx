@@ -1,5 +1,18 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import OptimizedImage from './OptimizedImage';
+import { apiFetch } from '@/lib/api';
+import {
+  pageTransition as pageVariants,
+  heroStagger,
+  staggerContainer,
+  staggerItem,
+  blurItem,
+  curtainLeft,
+  curtainImage,
+  viewportOnce,
+  viewportSoon,
+} from './motion';
 import {
   academyBanner,
   academyStats,
@@ -7,6 +20,7 @@ import {
   academyBatches,
   academyMasterclass,
   academyStudents,
+  academyFaqs,
 } from '../mock';
 import {
   ArrowUpRight,
@@ -14,552 +28,320 @@ import {
   Users,
   Clock,
   Award,
-  ChevronLeft,
-  ChevronRight,
+  ChevronDown,
   Check,
+  Sparkles,
+  Camera,
+  BookOpen,
+  GraduationCap,
+  BadgeCheck,
+  Briefcase,
+  Scissors,
+  Star,
+  Diamond,
 } from 'lucide-react';
+const faqItems = academyFaqs;
+
+const batchCards = academyBatches.map((batch) => ({ title: batch.course, date: batch.start, seats: batch.seats, note: batch.mode }));
 
 const AcademyPage = () => {
   const [studentIdx, setStudentIdx] = useState(0);
-  const [form, setForm] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    course: '',
-    message: '',
-  });
+  const [form, setForm] = useState({ name: '', phone: '', course: '', batch: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
+  const [openCourse, setOpenCourse] = useState('masterclass');
+  const [openFaq, setOpenFaq] = useState(0);
 
-  const onChange = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-  const onSubmit = (e) => {
+  const onChange = (key) => (e) => setForm({ ...form, [key]: e.target.value });
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.phone) return;
-    // Save to localStorage as mock backend
-    const list = JSON.parse(localStorage.getItem('lush_academy_inquiries') || '[]');
-    list.push({ ...form, at: new Date().toISOString() });
-    localStorage.setItem('lush_academy_inquiries', JSON.stringify(list));
-    setSubmitted(true);
-    setForm({ name: '', phone: '', email: '', course: '', message: '' });
+    if (!form.name || !form.phone || sending) return;
+    setSending(true);
+    setError('');
+    const lines = [
+      form.course && `Course: ${form.course}`,
+      form.batch && `Preferred batch: ${form.batch}`,
+      form.message && `Message: ${form.message}`,
+    ].filter(Boolean);
+    try {
+      await apiFetch('/api/contact', {
+        method: 'POST',
+        body: {
+          name: form.name,
+          phone: form.phone,
+          message: lines.join('\n') || 'Consultation request',
+          category: 'academy',
+        },
+      });
+      setSubmitted(true);
+      setForm({ name: '', phone: '', course: '', batch: '', message: '' });
+    } catch {
+      setError('Something went wrong. Please try again, or reach us on WhatsApp.');
+    } finally {
+      setSending(false);
+    }
   };
 
-  const prev = () =>
-    setStudentIdx((studentIdx - 1 + academyStudents.length) % academyStudents.length);
+  const prev = () => setStudentIdx((studentIdx - 1 + academyStudents.length) % academyStudents.length);
   const next = () => setStudentIdx((studentIdx + 1) % academyStudents.length);
   const student = academyStudents[studentIdx];
+  const featuredCourse = academyCourses[0];
 
   return (
-    <main className="w-full bg-white">
-      {/* ---------------- BANNER ---------------- */}
-      <section className="relative w-full overflow-hidden border-b border-[#ece6da]">
-        <div className="relative h-[420px] md:h-[480px]">
-          <OptimizedImage
-            src={academyBanner.image}
-            alt="Lush Makeovers Academy"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-white/72" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/85" />
+    <motion.main className="w-full bg-white" initial="hidden" animate="visible" variants={pageVariants}>
+      <section className="relative overflow-hidden border-b border-[#ece6da]">
+        <div className="relative min-h-[520px] md:min-h-[680px]">
+          <motion.div className="absolute inset-0" initial={{ scale: 1.08, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}>
+            <OptimizedImage src={academyBanner.image} alt={academyBanner.title} className="absolute inset-0 h-full w-full object-cover" />
+          </motion.div>
+          <div className="absolute inset-0 bg-white/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/25 via-transparent to-white/90" />
 
-          <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-            <div className="font-display text-[#6b6760] text-[11px] tracking-[0.5em] mb-4">
-              {academyBanner.eyebrow}
-            </div>
-            <h1 className="font-display text-[#2a2a2a] text-[40px] md:text-[64px] tracking-[0.16em] leading-none">
-              THE ACADEMY
-            </h1>
-            <div className="font-script italic text-[#3a3a3a] text-[22px] md:text-[30px] mt-1">
-              {academyBanner.subtitle}
-            </div>
-            <div className="flex items-center justify-center gap-3 mt-7 opacity-80">
-              <span className="block w-12 h-px bg-[#b8a17a]" />
-              <span className="block w-1.5 h-1.5 rounded-full bg-[#b8a17a]" />
-              <span className="block w-12 h-px bg-[#b8a17a]" />
-            </div>
-            <p className="font-script italic text-[#3a3a3a] text-[16px] md:text-[19px] max-w-[640px] leading-relaxed mt-5">
-              &ldquo;{academyBanner.quote}&rdquo;
-            </p>
+          <div className="relative z-10 mx-auto flex h-full max-w-[1080px] flex-col justify-center px-6 py-24 md:px-8 md:py-28">
+            <motion.div className="max-w-[760px] text-center md:text-left" variants={heroStagger} initial="hidden" animate="visible">
+              <motion.div variants={staggerItem} className="font-display text-[11px] uppercase tracking-[0.5em] text-[#8b7f72] md:text-[12px]">{academyBanner.eyebrow}</motion.div>
+              <motion.h1 variants={blurItem} className="mt-4 font-display text-[40px] leading-none tracking-[0.18em] text-[#2a2a2a] sm:text-[56px] md:text-[74px]">{academyBanner.title}</motion.h1>
+              <motion.p variants={staggerItem} className="mt-5 max-w-[820px] font-serif-body text-[15px] leading-[1.9] text-[#4a4742] md:text-[17px]">{academyBanner.subtitle}</motion.p>
+              <motion.div variants={staggerItem} className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
+                <a href="#courses" className="inline-flex items-center gap-2 border border-[#6b6760] bg-white/70 px-6 py-3 font-display text-[11px] uppercase tracking-[0.3em] text-[#2a2a2a] transition-colors duration-500 hover:bg-[#2a2a2a] hover:text-white">Explore Courses <ArrowUpRight size={13} strokeWidth={1.25} /></a>
+                <a href="#consultation" className="inline-flex items-center gap-2 border border-[#d7cdb8] bg-[#fbfaf6] px-6 py-3 font-display text-[11px] uppercase tracking-[0.3em] text-[#2a2a2a] transition-colors duration-500 hover:bg-white">Book Consultation</a>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
 
-        {/* stats row */}
-        <div className="max-w-[1080px] mx-auto px-6 md:px-8 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {academyStats.map((s, i) => (
-            <div key={i} className="text-center md:border-r last:border-r-0 md:border-[#ece6da]">
-              <div className="font-script italic text-[#2a2a2a] text-[30px] md:text-[36px] leading-none">
-                {s.v}
-              </div>
-              <div className="font-display text-[#6b6760] text-[10px] md:text-[11px] tracking-[0.32em] mt-2 uppercase">
-                {s.l}
-              </div>
-            </div>
+        <motion.div className="mx-auto grid max-w-[1080px] grid-cols-2 gap-4 px-6 py-10 md:grid-cols-4 md:gap-8 md:px-8" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSoon}>
+          {academyStats.map((item) => (
+            <motion.div variants={staggerItem} key={item.l} className="text-center md:border-r md:border-[#ece6da] last:border-r-0">
+              <div className="font-script text-[28px] italic leading-none text-[#2a2a2a] md:text-[34px]">{item.v}</div>
+              <div className="mt-2 font-display text-[10px] uppercase tracking-[0.32em] text-[#6b6760] md:text-[11px]">{item.l}</div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
-      {/* ---------------- ABOUT ---------------- */}
-      <section className="max-w-[1180px] mx-auto px-6 md:px-8 py-20 md:py-28 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
-        <div className="md:col-span-5">
-          <OptimizedImage
-            src="https://images.pexels.com/photos/34955448/pexels-photo-34955448.jpeg"
-            alt="Academy classroom"
-            className="w-full h-[420px] md:h-[520px] object-cover"
-          />
-        </div>
-        <div className="md:col-span-7 md:pl-4">
-          <div className="font-display text-[#6b6760] text-[11px] tracking-[0.42em] mb-3">
-            ABOUT THE ACADEMY
-          </div>
-          <h2 className="font-display text-[#2a2a2a] text-[32px] md:text-[44px] tracking-[0.12em] leading-tight">
-            ARTISTRY
-          </h2>
-          <div className="font-script italic text-[#3a3a3a] text-[28px] md:text-[36px] -mt-1">
-            taught with care
-          </div>
-          <p className="mt-7 text-[#4a4742] text-[15px] md:text-[16px] font-serif-body leading-[1.9] max-w-[560px]">
-            Lush Makeovers Academy was founded out of one simple belief ? that
-            every great makeup artist deserves a calm, classical training
-            ground. Our small-batch courses are taught by our senior studio
-            artists, and every student receives one-to-one attention from day
-            one.
-          </p>
-          <ul className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-[560px]">
-            {[
-              'Maximum 8?12 students per batch',
-              'Hands-on practice every session',
-              'Live models in advanced modules',
-              'Lifetime alumni mentorship',
-              'Government-recognised certificate',
-              'Studio internship for top students',
-            ].map((p, i) => (
-              <li
-                key={i}
-                className="flex items-start gap-2 text-[#4a4742] text-[14px] md:text-[15px] font-serif-body"
-              >
-                <Check size={14} strokeWidth={1.5} className="mt-1 text-[#b8a17a] flex-shrink-0" />
-                <span>{p}</span>
-              </li>
+      <section className="mx-auto grid max-w-[1180px] grid-cols-1 gap-10 px-6 py-24 md:grid-cols-12 md:items-center md:gap-16 md:px-8 md:py-32">
+        <motion.div className="md:col-span-5" initial="hidden" whileInView="visible" viewport={viewportOnce}>
+          <motion.div className="overflow-hidden" variants={curtainLeft}>
+            <motion.div variants={curtainImage}>
+              <OptimizedImage src={featuredCourse.image || 'https://images.pexels.com/photos/37710473/pexels-photo-37710473.jpeg'} alt="Professional Bridal Masterclass" className="h-[420px] w-full object-cover md:h-[560px]" />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+        <motion.div className="md:col-span-7" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSoon}>
+          <motion.div variants={staggerItem} className="font-display text-[11px] uppercase tracking-[0.42em] text-[#6b6760]">Featured Masterclass</motion.div>
+          <motion.div variants={staggerItem} className="mt-4 flex items-end gap-4">
+            <div className="font-script text-[40px] italic leading-none text-[#2a2a2a] md:text-[60px]">01</div>
+            <div>
+              <h2 className="font-display text-[30px] uppercase tracking-[0.12em] text-[#2a2a2a] md:text-[46px] leading-tight">{academyMasterclass.title}</h2>
+              <div className="mt-1 font-script text-[20px] italic text-[#8a7656] md:text-[26px]">{academyMasterclass.duration}</div>
+            </div>
+          </motion.div>
+          <motion.p variants={staggerItem} className="mt-7 max-w-[700px] font-serif-body text-[15px] leading-[1.9] text-[#4a4742] md:text-[16px]">{academyMasterclass.description}</motion.p>
+          <motion.div variants={staggerItem} className="mt-8 flex flex-wrap gap-3">
+            <div className="rounded-full border border-[#ece6da] bg-[#fbfaf6] px-4 py-2 font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Duration: 5 Days</div>
+            <div className="rounded-full border border-[#ece6da] bg-[#fbfaf6] px-4 py-2 font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Price: ₹{academyMasterclass.fee}</div>
+            <div className="rounded-full border border-[#ece6da] bg-[#fbfaf6] px-4 py-2 font-display text-[10px] uppercase tracking-[0.3em] text-[#8a7656]">Early-bird ₹{academyMasterclass.earlyBird}</div>
+          </motion.div>
+          <motion.div variants={staggerContainer} className="mt-8 grid gap-3 sm:grid-cols-2">
+            {academyMasterclass.highlights.slice(0, 6).map((item) => (
+              <motion.div variants={staggerItem} key={item} className="flex items-start gap-3 rounded-sm border border-[#ece6da] bg-[#fbfaf6] p-4">
+                <Check size={15} strokeWidth={1.75} className="mt-1 flex-shrink-0 text-[#b8a17a]" />
+                <span className="font-serif-body text-[14px] leading-[1.7] text-[#4a4742]">{item}</span>
+              </motion.div>
             ))}
-          </ul>
-        </div>
+          </motion.div>
+          <motion.div variants={staggerItem} className="mt-8 flex flex-wrap gap-3">
+            <a href="#consultation" className="inline-flex items-center gap-2 border border-[#6b6760] px-6 py-2.5 font-display text-[11px] uppercase tracking-[0.3em] text-[#2a2a2a] transition-colors duration-500 hover:bg-[#2a2a2a] hover:text-white">Book Consultation</a>
+            <a href="#batches" className="inline-flex items-center gap-2 border border-[#d7cdb8] px-6 py-2.5 font-display text-[11px] uppercase tracking-[0.3em] text-[#2a2a2a] transition-colors duration-500 hover:bg-[#fbfaf6]">View Batches</a>
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* ---------------- COURSES ---------------- */}
-      <section className="w-full bg-[#fafaf6] border-y border-[#ece6da]">
-        <div className="max-w-[1180px] mx-auto px-6 md:px-8 py-20 md:py-28">
-          <div className="text-center mb-14">
-            <div className="font-display text-[#6b6760] text-[11px] tracking-[0.42em] mb-3">
-              CURRICULUM
-            </div>
-            <h2 className="font-display text-[#2a2a2a] text-[30px] md:text-[40px] tracking-[0.16em]">
-              COURSE OFFERINGS
-            </h2>
-            <div className="font-script italic text-[#3a3a3a] text-[24px] md:text-[28px] -mt-1">
-              three paths, one standard
-            </div>
-            <div className="flex items-center justify-center gap-3 mt-5 opacity-80">
-              <span className="block w-12 h-px bg-[#b8a17a]" />
-              <span className="block w-1 h-1 rounded-full bg-[#b8a17a]" />
-              <span className="block w-12 h-px bg-[#b8a17a]" />
-            </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {academyCourses.map((c) => (
-              <article
-                key={c.id}
-                id={c.id}
-                className="bg-white border border-[#ece6da] p-8 md:p-9 flex flex-col hover:shadow-[0_24px_40px_-20px_rgba(120,90,40,0.18)] transition-shadow duration-500"
-              >
-                <div className="flex items-baseline justify-between">
-                  <span className="font-display text-[#6b6760] text-[11px] tracking-[0.42em]">
-                    {c.level}
-                  </span>
-                  <span className="font-script italic text-[#8a7656] text-[16px]">{c.duration}</span>
+      <section id="batches" className="mx-auto max-w-[1180px] px-6 py-24 md:px-8 md:py-32">
+        <motion.div className="text-center" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSoon}>
+          <motion.div variants={staggerItem} className="font-display text-[11px] uppercase tracking-[0.42em] text-[#6b6760]">Upcoming Batches</motion.div>
+          <motion.h2 variants={blurItem} className="mt-3 font-display text-[30px] uppercase tracking-[0.16em] text-[#2a2a2a] md:text-[40px]">Availability</motion.h2>
+        </motion.div>
+
+        <motion.div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSoon}>
+          {batchCards.map((batch) => (
+            <motion.article variants={staggerItem} whileHover={{ y: -4 }} key={batch.title} className="border border-[#ece6da] bg-white p-6 md:p-7">
+              <div className="flex items-center justify-between gap-3">
+                <div className="font-display text-[20px] uppercase tracking-[0.1em] text-[#2a2a2a]">{batch.title}</div>
+                <span className="rounded-full border border-[#e4cfb8] bg-[#fbfaf6] px-3 py-1 font-display text-[9px] uppercase tracking-[0.28em] text-[#8a7656]">Open</span>
+              </div>
+              <div className="mt-3 font-script text-[18px] italic text-[#8a7656]">{batch.date}</div>
+              <p className="mt-5 font-serif-body text-[14px] leading-[1.8] text-[#4a4742]">{batch.note}</p>
+              <div className="mt-6 flex items-center justify-between border-t border-[#ece6da] pt-5">
+                <div>
+                  <div className="font-display text-[10px] uppercase tracking-[0.32em] text-[#6b6760]">Seats</div>
+                  <div className="mt-1 font-script text-[22px] italic text-[#2a2a2a]">{batch.seats}</div>
                 </div>
-                <h3 className="mt-4 font-display text-[#2a2a2a] text-[24px] md:text-[26px] tracking-[0.1em] leading-tight">
-                  {c.name.toUpperCase()}
-                </h3>
-                <div className="font-script italic text-[#3a3a3a] text-[17px] mt-1">
-                  {c.tagline}
-                </div>
+                <a href="#consultation" className="inline-flex items-center gap-2 border border-[#6b6760] px-4 py-2 font-display text-[10px] uppercase tracking-[0.28em] text-[#2a2a2a] transition-colors hover:bg-[#2a2a2a] hover:text-white">Reserve Seat</a>
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
+      </section>
 
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-5 text-[#6b6760] text-[12px] font-display tracking-[0.18em] uppercase">
-                  <span className="flex items-center gap-1.5"><Clock size={12} strokeWidth={1.5} /> {c.duration}</span>
-                  <span className="flex items-center gap-1.5"><Users size={12} strokeWidth={1.5} /> {c.sessions}</span>
-                </div>
+      <section className="bg-[#fafaf6] border-y border-[#ece6da]">
+        <motion.div className="mx-auto max-w-[1180px] px-6 py-24 md:px-8 md:py-32 text-center relative" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSoon}>
+          <motion.div variants={staggerItem} className="font-display text-[11px] uppercase tracking-[0.42em] text-[#6b6760]">Student Testimonials</motion.div>
+          <motion.h2 variants={blurItem} className="mt-3 font-display text-[30px] uppercase tracking-[0.16em] text-[#2a2a2a] md:text-[40px]">Alumni Voices</motion.h2>
+        </motion.div>
 
-                <p className="mt-5 text-[#4a4742] text-[14px] md:text-[15px] font-serif-body leading-[1.85]">
-                  {c.description}
-                </p>
-
-                <div className="mt-5 border-t border-[#ece6da] pt-5">
-                  <div className="font-display text-[#6b6760] text-[10px] tracking-[0.35em] uppercase mb-3">
-                    Modules
-                  </div>
-                  <ul className="space-y-2">
-                    {c.modules.map((m, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-2 text-[#4a4742] text-[13.5px] font-serif-body leading-[1.7]"
-                      >
-                        <span className="mt-[9px] block w-2 h-px bg-[#b8a17a] flex-shrink-0" />
-                        <span>{m}</span>
-                      </li>
+        <motion.div className="mx-auto -mt-10 grid max-w-[1080px] grid-cols-1 gap-5 px-6 pb-24 md:grid-cols-2 md:px-8 md:pb-32" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSoon}>
+          {academyStudents.map((person) => (
+            <motion.article variants={staggerItem} key={person.name} className="border border-[#ece6da] bg-white p-6 md:p-7">
+              <div className="flex items-center gap-4">
+                <OptimizedImage src={person.avatar} alt={person.name} className="h-16 w-16 rounded-full object-cover" />
+                <div>
+                  <div className="flex items-center gap-1 text-[#c8a15c]">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={12} fill="currentColor" strokeWidth={1.3} />
                     ))}
-                  </ul>
-                </div>
-
-                <div className="mt-7 pt-5 border-t border-[#ece6da] flex items-end justify-between gap-3">
-                  <div>
-                    <div className="font-display text-[#6b6760] text-[10px] tracking-[0.32em] uppercase">
-                      Course Fee
-                    </div>
-                    <div className="font-script italic text-[#2a2a2a] text-[22px] md:text-[24px] mt-0.5">
-                      {c.fee}
-                    </div>
                   </div>
-                  <a
-                    href="#register"
-                    className="inline-flex items-center gap-2 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-4 py-2.5 text-[10px] md:text-[11px] tracking-[0.28em] uppercase font-display"
-                  >
-                    <span>Enquire</span>
-                    <ArrowUpRight size={12} strokeWidth={1.25} />
-                  </a>
+                  <div className="mt-2 font-display text-[14px] uppercase tracking-[0.25em] text-[#2a2a2a]">{person.name}</div>
+                  <div className="font-script text-[14px] italic text-[#8a7656]">{person.role}</div>
                 </div>
-              </article>
-            ))}
-          </div>
+              </div>
+              <p className="mt-5 font-serif-body text-[14px] leading-[1.85] text-[#4a4742]">&ldquo;{person.quote}&rdquo;</p>
+            </motion.article>
+          ))}
+        </motion.div>
+      </section>
+      <section className="mx-auto max-w-[1180px] px-6 py-24 md:px-8 md:py-32">
+        <div className="text-center">
+          <div className="font-display text-[11px] uppercase tracking-[0.42em] text-[#6b6760]">FAQ</div>
+          <h2 className="mt-3 font-display text-[30px] uppercase tracking-[0.16em] text-[#2a2a2a] md:text-[40px]">Common Questions</h2>
+        </div>
+
+        <div className="mx-auto mt-14 max-w-[920px] space-y-3">
+          {faqItems.map((item, index) => {
+            const open = openFaq === index;
+            return (
+              <div key={item.q} className="border border-[#ece6da] bg-white">
+                <button onClick={() => setOpenFaq(open ? -1 : index)} className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left md:px-7">
+                  <span className="font-display text-[15px] uppercase tracking-[0.08em] text-[#2a2a2a] md:text-[18px]">{item.q}</span>
+                  <ChevronDown size={16} strokeWidth={1.5} className={`text-[#8a7656] transition-transform ${open ? 'rotate-180' : ''}`} />
+                </button>
+                {open ? (
+                  <div className="border-t border-[#ece6da] px-5 py-5 md:px-7">
+                    <p className="font-serif-body text-[14px] leading-[1.85] text-[#4a4742]">{item.a}</p>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
         </div>
       </section>
 
-      {/* ---------------- UPCOMING BATCHES ---------------- */}
-      <section className="max-w-[1180px] mx-auto px-6 md:px-8 py-20 md:py-28">
-        <div className="text-center mb-12">
-          <div className="font-display text-[#6b6760] text-[11px] tracking-[0.42em] mb-3">
-            ENROLMENT
-          </div>
-          <h2 className="font-display text-[#2a2a2a] text-[30px] md:text-[40px] tracking-[0.16em]">
-            UPCOMING BATCHES
-          </h2>
-          <div className="font-script italic text-[#3a3a3a] text-[22px] md:text-[26px] -mt-1">
-            limited seats, intimate learning
-          </div>
-        </div>
+      <section id="consultation" className="border-t border-[#ece6da] bg-[#fbfaf6]">
+        <div className="mx-auto grid max-w-[1080px] grid-cols-1 gap-10 px-6 py-24 md:grid-cols-12 md:gap-16 md:px-8 md:py-32">
+          <motion.div className="md:col-span-5" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSoon}>
+            <motion.div variants={staggerItem} className="font-display text-[11px] uppercase tracking-[0.42em] text-[#6b6760]">Consultation Form</motion.div>
+            <motion.h2 variants={blurItem} className="mt-3 font-display text-[30px] uppercase tracking-[0.14em] text-[#2a2a2a] md:text-[40px] leading-tight">Book a Consultation</motion.h2>
+            <motion.p variants={staggerItem} className="mt-7 max-w-[620px] font-serif-body text-[15px] leading-[1.9] text-[#4a4742] md:text-[16px]">Tell us what you want to learn and the team will guide you toward the right batch, timing and next step.</motion.p>
+            <motion.p variants={staggerItem} className="mt-6 font-serif-body text-[12px] italic text-[#6b6760]">Private studio consults available by appointment.</motion.p>
+          </motion.div>
 
-        {/* Desktop table */}
-        <div className="hidden md:block border border-[#ece6da] rounded-sm overflow-hidden">
-          <div className="grid grid-cols-12 bg-[#fafaf6] border-b border-[#ece6da] py-4 px-6 font-display text-[#6b6760] text-[10px] tracking-[0.32em] uppercase">
-            <div className="col-span-5">Course</div>
-            <div className="col-span-3">Start Date</div>
-            <div className="col-span-2">Seats Left</div>
-            <div className="col-span-2 text-right">Action</div>
-          </div>
-          {academyBatches.map((b, i) => (
-            <div
-              key={i}
-              className={`grid grid-cols-12 items-center px-6 py-5 ${
-                i !== academyBatches.length - 1 ? 'border-b border-[#ece6da]' : ''
-              } hover:bg-[#fcfaf4] transition-colors`}
-            >
-              <div className="col-span-5">
-                <div className="font-display text-[#2a2a2a] text-[15px] tracking-[0.08em]">
-                  {b.course}
-                </div>
-                <div className="font-script italic text-[#8a7656] text-[14px] mt-0.5">
-                  {b.mode}
-                </div>
-              </div>
-              <div className="col-span-3 flex items-center gap-2 text-[#4a4742] text-[14px] font-serif-body">
-                <Calendar size={14} strokeWidth={1.25} className="text-[#b8a17a]" />
-                {b.start}
-              </div>
-              <div className="col-span-2 text-[#4a4742] text-[14px] font-serif-body italic">
-                {b.seats}
-              </div>
-              <div className="col-span-2 text-right">
-                <a
-                  href="#register"
-                  className="inline-flex items-center gap-2 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-4 py-2 text-[10px] tracking-[0.3em] uppercase font-display"
-                >
-                  Reserve
-                  <ArrowUpRight size={12} strokeWidth={1.25} />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Mobile cards */}
-        <div className="md:hidden space-y-3">
-          {academyBatches.map((b, i) => (
-            <div key={i} className="border border-[#ece6da] p-5">
-              <div className="font-display text-[#2a2a2a] text-[15px] tracking-[0.08em]">{b.course}</div>
-              <div className="font-script italic text-[#8a7656] text-[14px] mt-0.5">{b.mode}</div>
-              <div className="flex items-center justify-between mt-3 text-[13px]">
-                <span className="flex items-center gap-1.5 text-[#4a4742] font-serif-body">
-                  <Calendar size={13} strokeWidth={1.25} className="text-[#b8a17a]" />
-                  {b.start}
+          <motion.div
+            className="md:col-span-7"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewportSoon}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {submitted ? (
+              <div className="border border-[#ece6da] bg-white p-10 text-center md:p-14">
+                <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[#d7cdb8] text-[#2a7a3a]">
+                  <GraduationCap size={22} strokeWidth={1.25} />
                 </span>
-                <span className="text-[#4a4742] italic font-serif-body">{b.seats}</span>
-              </div>
-              <a
-                href="#register"
-                className="mt-4 inline-flex w-full justify-center items-center gap-2 border border-[#6b6760] text-[#2a2a2a] px-4 py-2.5 text-[10px] tracking-[0.3em] uppercase font-display"
-              >
-                Reserve Seat
-                <ArrowUpRight size={12} strokeWidth={1.25} />
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ---------------- MASTERCLASS ---------------- */}
-      <section className="w-full bg-[#fafaf6] border-y border-[#ece6da]">
-        <div className="max-w-[1180px] mx-auto px-6 md:px-8 py-20 md:py-28 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center">
-          <div className="md:col-span-5">
-            <OptimizedImage
-              src="https://images.unsplash.com/photo-1596462502278-27bfdc403348"
-              alt="Masterclass"
-              className="w-full h-[380px] md:h-[460px] object-cover"
-            />
-          </div>
-          <div className="md:col-span-7">
-            <div className="font-display text-[#6b6760] text-[11px] tracking-[0.42em] mb-3">
-              SPECIAL EDITION
-            </div>
-            <h2 className="font-display text-[#2a2a2a] text-[30px] md:text-[44px] tracking-[0.1em] leading-tight">
-              {academyMasterclass.title.toUpperCase()}
-            </h2>
-            <div className="font-script italic text-[#8a7656] text-[20px] md:text-[24px] mt-1">
-              {academyMasterclass.duration} &middot; {academyMasterclass.date}
-            </div>
-
-            <p className="mt-6 text-[#4a4742] text-[15px] md:text-[16px] font-serif-body leading-[1.85] max-w-[560px]">
-              {academyMasterclass.description}
-            </p>
-
-            <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 max-w-[560px]">
-              {academyMasterclass.highlights.map((h, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-2 text-[#4a4742] text-[14px] font-serif-body"
-                >
-                  <Award size={14} strokeWidth={1.25} className="mt-1 text-[#b8a17a] flex-shrink-0" />
-                  <span>{h}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-7 flex flex-wrap items-end gap-x-8 gap-y-4">
-              <div>
-                <div className="font-display text-[#6b6760] text-[10px] tracking-[0.32em] uppercase">
-                  Masterclass Fee
+                <h3 className="mt-6 font-display text-[24px] tracking-[0.14em] text-[#2a2a2a] md:text-[30px]">
+                  THANK YOU
+                </h3>
+                <div className="mt-1 font-script text-[22px] italic text-[#8a7656] md:text-[26px]">
+                  your consultation is booked
                 </div>
-                <div className="font-script italic text-[#2a2a2a] text-[24px] mt-0.5">
-                  {academyMasterclass.fee}
-                </div>
-              </div>
-              <a
-                href="#register"
-                className="inline-flex items-center gap-2 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-6 py-2.5 text-[11px] tracking-[0.3em] uppercase font-display"
-              >
-                Reserve a Seat
-                <ArrowUpRight size={13} strokeWidth={1.25} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- STUDENT TESTIMONIALS ---------------- */}
-      <section className="max-w-[1180px] mx-auto px-6 md:px-8 py-20 md:py-28 text-center relative">
-        <div className="font-display text-[#6b6760] text-[11px] tracking-[0.42em] mb-3">
-          OUR ALUMNI
-        </div>
-        <h2 className="font-display text-[#2a2a2a] text-[30px] md:text-[40px] tracking-[0.16em]">
-          STUDENT STORIES
-        </h2>
-        <div className="font-script italic text-[#3a3a3a] text-[22px] md:text-[26px] -mt-1">
-          the careers we have launched
-        </div>
-
-        <div className="mt-14 max-w-[760px] mx-auto relative">
-          <div className="border border-[#ece6da] bg-white p-8 md:p-12">
-            <div className="flex flex-col items-center">
-              <OptimizedImage
-                src={student.avatar}
-                alt={student.name}
-                className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover ring-1 ring-[#ece6da]"
-              />
-              <p className="mt-7 font-script italic text-[#3a3a3a] text-[20px] md:text-[24px] leading-[1.6]">
-                &ldquo;{student.quote}&rdquo;
-              </p>
-              <div className="mt-7 font-display text-[#2a2a2a] text-[14px] tracking-[0.3em] uppercase">
-                {student.name}
-              </div>
-              <div className="font-script italic text-[#8a7656] text-[15px] mt-1">{student.role}</div>
-            </div>
-          </div>
-
-          {/* dots */}
-          <div className="mt-6 flex justify-center items-center gap-2">
-            {academyStudents.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setStudentIdx(i)}
-                aria-label={`Student ${i + 1}`}
-                className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                  i === studentIdx ? 'bg-[#2a2a2a]' : 'bg-[#cbbfa9]'
-                }`}
-              />
-            ))}
-          </div>
-
-          <button
-            onClick={prev}
-            className="absolute left-0 md:-left-6 top-1/2 -translate-y-1/2 text-[#6b6760] hover:text-[#2a2a2a] transition-colors"
-            aria-label="Previous"
-          >
-            <ChevronLeft size={26} strokeWidth={1.1} />
-          </button>
-          <button
-            onClick={next}
-            className="absolute right-0 md:-right-6 top-1/2 -translate-y-1/2 text-[#6b6760] hover:text-[#2a2a2a] transition-colors"
-            aria-label="Next"
-          >
-            <ChevronRight size={26} strokeWidth={1.1} />
-          </button>
-        </div>
-      </section>
-
-      {/* ---------------- REGISTRATION FORM ---------------- */}
-      <section id="register" className="w-full bg-[#fafaf6] border-t border-[#ece6da]">
-        <div className="max-w-[1080px] mx-auto px-6 md:px-8 py-20 md:py-28 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
-          <div className="md:col-span-5">
-            <div className="font-display text-[#6b6760] text-[11px] tracking-[0.42em] mb-3">
-              REGISTER INTEREST
-            </div>
-            <h2 className="font-display text-[#2a2a2a] text-[30px] md:text-[40px] tracking-[0.14em] leading-tight">
-              BEGIN YOUR
-            </h2>
-            <div className="font-script italic text-[#3a3a3a] text-[28px] md:text-[34px] -mt-1">
-              journey with us
-            </div>
-            <p className="mt-7 text-[#4a4742] text-[15px] md:text-[16px] font-serif-body leading-[1.85]">
-              Share your details and our admissions team will reach out within
-              24 hours with batch options, syllabus details and a private
-              studio visit invitation.
-            </p>
-
-            <ul className="mt-7 space-y-3 text-[#4a4742] text-[14px] font-serif-body">
-              <li className="flex items-center gap-3">
-                <Calendar size={14} strokeWidth={1.25} className="text-[#b8a17a]" />
-                Studio visits available Tue ? Sat, 11am ? 6pm
-              </li>
-              <li className="flex items-center gap-3">
-                <Users size={14} strokeWidth={1.25} className="text-[#b8a17a]" />
-                Small batches of 8 to 12 students
-              </li>
-              <li className="flex items-center gap-3">
-                <Award size={14} strokeWidth={1.25} className="text-[#b8a17a]" />
-                Government-recognised certificate
-              </li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-7">
-            <form
-              onSubmit={onSubmit}
-              className="bg-white border border-[#ece6da] p-7 md:p-10 grid grid-cols-1 sm:grid-cols-2 gap-5"
-            >
-              <div className="sm:col-span-2">
-                <label className="block font-display text-[10px] tracking-[0.3em] uppercase text-[#6b6760] mb-2">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={form.name}
-                  onChange={onChange('name')}
-                  className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 text-[15px] font-serif-body text-[#2a2a2a] focus:border-[#2a2a2a] focus:outline-none transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block font-display text-[10px] tracking-[0.3em] uppercase text-[#6b6760] mb-2">
-                  Phone *
-                </label>
-                <input
-                  type="tel"
-                  required
-                  value={form.phone}
-                  onChange={onChange('phone')}
-                  className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 text-[15px] font-serif-body text-[#2a2a2a] focus:border-[#2a2a2a] focus:outline-none transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block font-display text-[10px] tracking-[0.3em] uppercase text-[#6b6760] mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={form.email}
-                  onChange={onChange('email')}
-                  className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 text-[15px] font-serif-body text-[#2a2a2a] focus:border-[#2a2a2a] focus:outline-none transition-colors"
-                />
-              </div>
-              <div className="sm:col-span-2">
-                <label className="block font-display text-[10px] tracking-[0.3em] uppercase text-[#6b6760] mb-2">
-                  Interested Course
-                </label>
-                <select
-                  value={form.course}
-                  onChange={onChange('course')}
-                  className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 text-[15px] font-serif-body text-[#2a2a2a] focus:border-[#2a2a2a] focus:outline-none transition-colors"
+                <p className="mx-auto mt-5 max-w-[420px] font-serif-body text-[15px] leading-[1.85] text-[#4a4742]">
+                  The academy team will call you within 24 hours to guide you
+                  toward the right course and batch.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="mt-8 inline-flex items-center gap-2 border border-[#6b6760] px-6 py-2.5 font-display text-[11px] uppercase tracking-[0.3em] text-[#2a2a2a] transition-colors duration-500 hover:bg-[#2a2a2a] hover:text-white"
                 >
+                  Book Another Consultation
+                </button>
+              </div>
+            ) : (
+            <form onSubmit={onSubmit} className="grid grid-cols-1 gap-5 border border-[#ece6da] bg-white p-7 md:grid-cols-2 md:p-10">
+              <div>
+                <label className="mb-2 block font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Name *</label>
+                <input type="text" required value={form.name} onChange={onChange('name')} className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 font-serif-body text-[15px] text-[#2a2a2a] transition-colors focus:border-[#2a2a2a] focus:outline-none" />
+              </div>
+              <div>
+                <label className="mb-2 block font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Phone *</label>
+                <input type="tel" required value={form.phone} onChange={onChange('phone')} className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 font-serif-body text-[15px] text-[#2a2a2a] transition-colors focus:border-[#2a2a2a] focus:outline-none" />
+              </div>
+              <div>
+                <label className="mb-2 block font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Course</label>
+                <select value={form.course} onChange={onChange('course')} className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 font-serif-body text-[15px] text-[#2a2a2a] transition-colors focus:border-[#2a2a2a] focus:outline-none">
                   <option value="">Select a course</option>
-                  {academyCourses.map((c) => (
-                    <option key={c.id} value={c.name}>{c.name}</option>
+                  {academyCourses.map((course) => (
+                    <option key={course.id} value={course.name}>{course.name}</option>
                   ))}
-                  <option value="masterclass">Airbrush Masterclass</option>
-                  <option value="unsure">Not sure yet</option>
                 </select>
               </div>
-              <div className="sm:col-span-2">
-                <label className="block font-display text-[10px] tracking-[0.3em] uppercase text-[#6b6760] mb-2">
-                  Tell us a little about yourself
-                </label>
-                <textarea
-                  rows="3"
-                  value={form.message}
-                  onChange={onChange('message')}
-                  className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 text-[15px] font-serif-body text-[#2a2a2a] focus:border-[#2a2a2a] focus:outline-none transition-colors resize-none"
-                />
+              <div>
+                <label className="mb-2 block font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Preferred Batch</label>
+                <select value={form.batch} onChange={onChange('batch')} className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 font-serif-body text-[15px] text-[#2a2a2a] transition-colors focus:border-[#2a2a2a] focus:outline-none">
+                  <option value="">Select batch</option>
+                  {batchCards.map((batch) => (
+                    <option key={batch.title} value={batch.title}>{batch.title}</option>
+                  ))}
+                </select>
               </div>
-              <div className="sm:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-3">
-                {submitted ? (
-                  <div className="font-script italic text-[#2a7a3a] text-[16px]">
-                    Thank you ? we&apos;ll be in touch within 24 hours.
-                  </div>
+              <div className="md:col-span-2">
+                <label className="mb-2 block font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Message</label>
+                <textarea rows="4" value={form.message} onChange={onChange('message')} className="w-full resize-none border-b border-[#d7cdb8] bg-transparent py-2.5 font-serif-body text-[15px] text-[#2a2a2a] transition-colors focus:border-[#2a2a2a] focus:outline-none" />
+              </div>
+              <div className="md:col-span-2 flex flex-col gap-4 pt-3 sm:flex-row sm:items-center sm:justify-between">
+                {error ? (
+                  <div className="font-serif-body text-[12px] leading-relaxed text-red-600">{error}</div>
                 ) : (
-                  <div className="text-[#6b6760] text-[12px] italic font-serif-body">
-                    We&apos;ll never share your details. Promise.
-                  </div>
+                  <div className="font-serif-body text-[12px] italic text-[#6b6760]">We&apos;ll never share your details. Promise.</div>
                 )}
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center gap-2 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-7 py-3 text-[11px] tracking-[0.32em] uppercase font-display"
-                >
-                  Submit Enquiry
+                <button type="submit" disabled={sending} className="inline-flex items-center justify-center gap-2 border border-[#6b6760] px-7 py-3 font-display text-[11px] uppercase tracking-[0.32em] text-[#2a2a2a] transition-colors duration-500 hover:bg-[#2a2a2a] hover:text-white disabled:opacity-60">
+                  {sending ? 'Sending…' : 'Book Consultation'}
                   <ArrowUpRight size={13} strokeWidth={1.25} />
                 </button>
               </div>
             </form>
-          </div>
+            )}
+          </motion.div>
         </div>
       </section>
-    </main>
+
+      <footer className="border-t border-[#ece6da] bg-white">
+        <div className="mx-auto flex max-w-[1180px] flex-col gap-3 px-6 py-8 md:flex-row md:items-center md:justify-between md:px-8 md:py-10">
+          <div className="font-display text-[11px] uppercase tracking-[0.35em] text-[#6b6760]">Lush Makeovers Academy</div>
+          <div className="font-serif-body text-[12px] text-[#6b6760]">Luxury bridal education with calm, practical mentorship.</div>
+        </div>
+      </footer>
+    </motion.main>
   );
 };
 
 export default AcademyPage;
+
+
+
+
+
+

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import OptimizedImage from './OptimizedImage';
+import { pageTransition as pageVariants } from './motion';
 import { contactInfo } from '../mock';
+import { apiFetch } from '@/lib/api';
 import {
   Phone,
   MessageCircle,
@@ -22,22 +25,39 @@ const iconMap = {
 
 const ContactPage = () => {
   const [openFaq, setOpenFaq] = useState(0);
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
   const onChange = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.message) return;
-    const list = JSON.parse(localStorage.getItem('lush_contact_messages') || '[]');
-    list.push({ ...form, at: new Date().toISOString() });
-    localStorage.setItem('lush_contact_messages', JSON.stringify(list));
-    setSubmitted(true);
-    setForm({ name: '', email: '', message: '' });
+    if (!form.name || !form.phone || !form.message || sending) return;
+    setSending(true);
+    setError('');
+    try {
+      await apiFetch('/api/contact', {
+        method: 'POST',
+        body: {
+          name: form.name,
+          phone: form.phone,
+          email: form.email || null,
+          message: form.message,
+          category: 'general',
+        },
+      });
+      setSubmitted(true);
+      setForm({ name: '', phone: '', email: '', message: '' });
+    } catch {
+      setError("Something went wrong sending your message. Please try again, or reach us on WhatsApp.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
-    <main className="w-full bg-white">
+    <motion.main className="w-full bg-white" initial="hidden" animate="visible" variants={pageVariants}>
       {/* ---------------- BANNER ---------------- */}
       <section className="w-full border-b border-[#ece6da]">
         <div className="max-w-[1180px] mx-auto px-6 md:px-8 pt-16 md:pt-20 pb-14 md:pb-16 text-center">
@@ -214,6 +234,30 @@ const ContactPage = () => {
         </div>
 
         <div className="md:col-span-7">
+          {submitted ? (
+            <div className="bg-white border border-[#ece6da] p-10 md:p-14 text-center">
+              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[#d7cdb8] text-[#2a7a3a]">
+                <Send size={20} strokeWidth={1.25} />
+              </span>
+              <h4 className="mt-6 font-display text-[#2a2a2a] text-[24px] md:text-[30px] tracking-[0.14em]">
+                THANK YOU
+              </h4>
+              <div className="font-script italic text-[#8a7656] text-[22px] md:text-[26px] mt-1">
+                your message is on its way
+              </div>
+              <p className="mt-5 text-[#4a4742] text-[15px] font-serif-body leading-[1.85] max-w-[420px] mx-auto">
+                We reply to every note personally — expect to hear from us
+                within 24 hours.
+              </p>
+              <button
+                type="button"
+                onClick={() => setSubmitted(false)}
+                className="mt-8 inline-flex items-center gap-2 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-6 py-2.5 text-[11px] tracking-[0.3em] uppercase font-display"
+              >
+                Send Another Message
+              </button>
+            </div>
+          ) : (
           <form
             onSubmit={onSubmit}
             className="bg-white border border-[#ece6da] p-7 md:p-9 grid grid-cols-1 sm:grid-cols-2 gap-5"
@@ -231,6 +275,19 @@ const ContactPage = () => {
               />
             </div>
             <div>
+              <label className="block font-display text-[10px] tracking-[0.3em] uppercase text-[#6b6760] mb-2">
+                Phone *
+              </label>
+              <input
+                type="tel"
+                inputMode="tel"
+                required
+                value={form.phone}
+                onChange={onChange('phone')}
+                className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 text-[15px] font-serif-body text-[#2a2a2a] focus:border-[#2a2a2a] focus:outline-none transition-colors"
+              />
+            </div>
+            <div className="sm:col-span-2">
               <label className="block font-display text-[10px] tracking-[0.3em] uppercase text-[#6b6760] mb-2">
                 Email
               </label>
@@ -254,10 +311,8 @@ const ContactPage = () => {
               />
             </div>
             <div className="sm:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-3">
-              {submitted ? (
-                <div className="font-script italic text-[#2a7a3a] text-[16px]">
-                  Thank you  we will write back within 24 hours.
-                </div>
+              {error ? (
+                <div className="text-red-600 text-[12px] leading-relaxed font-serif-body">{error}</div>
               ) : (
                 <div className="text-[#6b6760] text-[12px] italic font-serif-body">
                   We will reply to every note personally.
@@ -265,13 +320,15 @@ const ContactPage = () => {
               )}
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-7 py-3 text-[11px] tracking-[0.32em] uppercase font-display"
+                disabled={sending}
+                className="inline-flex items-center justify-center gap-2 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-7 py-3 text-[11px] tracking-[0.32em] uppercase font-display disabled:opacity-60"
               >
-                Send Message
+                {sending ? 'Sending…' : 'Send Message'}
                 <Send size={13} strokeWidth={1.25} />
               </button>
             </div>
           </form>
+          )}
         </div>
       </section>
 
@@ -321,8 +378,11 @@ const ContactPage = () => {
           </div>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 };
 
 export default ContactPage;
+
+
+

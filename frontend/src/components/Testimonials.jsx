@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import OptimizedImage from './OptimizedImage';
 import { testimonials, testimonialBgImage } from '../mock';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { sectionReveal } from './motion';
 
 const Testimonials = () => {
   const [idx, setIdx] = useState(0);
@@ -21,19 +23,31 @@ const Testimonials = () => {
   const t = testimonials[idx];
 
   return (
-    <section className="w-full relative pb-14 md:pb-20 pt-8 md:pt-12">
-      <div className="relative min-h-[640px] md:min-h-[700px] overflow-hidden border-y border-[#ece6da] bg-[#fafaf6]">
+    <motion.section
+      className="w-full relative pb-14 md:pb-20 pt-8 md:pt-12"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={sectionReveal}
+    >
+      <div className="relative overflow-hidden border-y border-[#ece6da] bg-[#fafaf6]">
         <OptimizedImage
           src={testimonialBgImage}
-          alt="Background"
+          alt=""
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#fafaf6]/94" />
+        <div className="absolute inset-0 bg-[#fafaf6]/95" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/90" />
 
-        <div className="absolute inset-0 flex items-center justify-center px-4 md:px-10 py-14">
-          <div className="max-w-[840px] w-full text-center bg-white/82 backdrop-blur-sm border border-[#ece6da] shadow-[0_18px_50px_-35px_rgba(58,58,58,0.45)] px-6 md:px-12 py-10 md:py-14">
-            <div className="font-display text-[#3a3a3a] text-[13px] md:text-[15px] tracking-[0.45em] uppercase mb-3">
+        <motion.div
+          className="relative flex items-center justify-center px-4 md:px-10 py-16 md:py-24"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="max-w-[840px] w-full text-center bg-white border border-[#ece6da] shadow-[0_30px_70px_-45px_rgba(58,58,58,0.5)] px-6 md:px-12 py-10 md:py-14">
+            <div className="font-display text-[#8b7f72] text-[11px] md:text-[12px] tracking-[0.45em] uppercase mb-3">
               Bride Stories
             </div>
             <h2 className="font-display text-[#2a2a2a] text-[28px] md:text-[40px] tracking-[0.14em] uppercase">
@@ -47,12 +61,16 @@ const Testimonials = () => {
               <span className="block w-1.5 h-1.5 rounded-full bg-[#b8a17a]" />
               <span className="block w-12 h-px bg-[#b8a17a]" />
             </div>
-            <p className="mt-8 font-script italic text-[#3a3a3a] text-[22px] md:text-[26px] leading-[1.75] max-w-[680px] mx-auto">
-              "{t.quote}"
-            </p>
-            <p className="mt-8 text-[#6b6760] text-[12px] tracking-[0.28em] uppercase">
-              - {t.author}
-            </p>
+            <div className="mt-6 flex min-h-[230px] flex-col items-center justify-center sm:min-h-[190px] md:min-h-[210px]">
+              <motion.div key={t.quote} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
+                <p className="font-script italic text-[#3a3a3a] text-[20px] md:text-[26px] leading-[1.7] max-w-[680px] mx-auto">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <p className="mt-6 text-[#6b6760] text-[12px] tracking-[0.28em] uppercase">
+                  &mdash; {t.author}
+                </p>
+              </motion.div>
+            </div>
 
             <div className="mt-8 flex items-center justify-center gap-3">
               <button
@@ -88,9 +106,9 @@ const Testimonials = () => {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

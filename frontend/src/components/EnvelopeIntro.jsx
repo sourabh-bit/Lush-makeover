@@ -33,11 +33,7 @@ const EnvelopeIntro = () => {
       setTimeout(() => setPhase('flapOpen'), 1700),
       setTimeout(() => setPhase('cardOut'), 2500),
       setTimeout(() => setPhase('envHide'), 4000),
-      setTimeout(() => {
-        sessionStorage.setItem('lush_intro_seen', '1');
-        setPhase('done');
-        setShow(false);
-      }, 5400),
+      setTimeout(() => setPhase('done'), 5400),
     ];
 
     return () => timers.forEach(clearTimeout);

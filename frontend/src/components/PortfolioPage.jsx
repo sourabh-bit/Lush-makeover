@@ -133,7 +133,7 @@ const PortfolioPage = () => {
       {/* ---------------- LIGHTBOX ---------------- */}
       {lightbox && (
         <div
-          className="fixed inset-0 z-[100] bg-[#1c1815]/92 backdrop-blur-sm flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
+          className="fixed inset-0 z-[100] bg-[#1c1815]/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
           onClick={() => setLightbox(null)}
         >
           <button

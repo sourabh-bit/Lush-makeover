@@ -1,0 +1,607 @@
+{
+  "brandInfo": {
+    "name": "LUSH MAKEOVERS",
+    "tagline": "HAIR & MAKEUP",
+    "subtitle": "Vijayawada's most-booked bridal studio",
+    "description": "Serving brides across Vijayawada, Andhra Pradesh & destination weddings",
+    "instagram": "@lush_makeovers",
+    "instagramUrl": "https://www.instagram.com/lush_makeovers/",
+    "posts": "1,488",
+    "followers": "123k",
+    "following": "1,269"
+  },
+  "navLinks": [
+    { "label": "Home", "href": "/" },
+    { "label": "Services", "href": "/services" },
+    { "label": "Portfolio", "href": "/portfolio" },
+    { "label": "About", "href": "/about" },
+    { "label": "Academy", "href": "/academy" },
+    { "label": "Contact Me", "href": "/contact" },
+    { "label": "Inquire", "href": "/inquire" }
+  ],
+  "heroImage": "https://images.pexels.com/photos/35536264/pexels-photo-35536264.jpeg",
+  "homeHero": {
+    "headline": "TIMELESS BRIDES",
+    "subheadline": "Luxury bridal makeup for the bride who wants to look like herself — at her most beautiful.",
+    "philosophy": "At Lush Makeovers, we believe your wedding day face should still be your face. Our signature is skin that looks like skin — flawless, luminous, and photograph-ready without ever feeling heavy. With over 10 years of artistry, 3,000+ brides, and training from the London College of Makeup, every look we create is built around one idea: enhance, never mask. You will look back at your photos in 20 years and love what you see.",
+    "differentiators": [
+      "A calm, on-time bridal morning — we run your getting-ready hours to a plan, so you're never rushed to the mandap.",
+      "The natural signature — our skin-first technique gives an airbrushed finish that still looks like you in person and on camera.",
+      "London-certified artistry — led by a London College of Makeup certified artist with 10+ years of bridal experience.",
+      "Complete personal attention — your look is planned in advance, your trial is documented, and your bridal team is dedicated to you alone on the day."
+    ]
+  },
+  "elevatedImage": "https://images.pexels.com/photos/35865066/pexels-photo-35865066.jpeg",
+  "destinationImages": {
+    "left": "https://images.pexels.com/photos/34779514/pexels-photo-34779514.jpeg",
+    "right": "https://images.pexels.com/photos/37710473/pexels-photo-37710473.jpeg"
+  },
+  "meetFounderImage": "https://images.pexels.com/photos/31828127/pexels-photo-31828127.jpeg",
+  "philosophyImage": "https://images.unsplash.com/photo-1615164825769-b9bbba2906e9",
+  "curatedImage": "https://images.pexels.com/photos/27140154/pexels-photo-27140154.jpeg",
+  "testimonialBgImage": "https://images.pexels.com/photos/37710473/pexels-photo-37710473.jpeg",
+  "portfolioImages": [
+    "https://images.unsplash.com/photo-1600685890506-593fdf55949b",
+    "https://images.unsplash.com/photo-1610173827043-9db50e0d8ef9",
+    "https://images.pexels.com/photos/30809480/pexels-photo-30809480.jpeg",
+    "https://images.pexels.com/photos/9596225/pexels-photo-9596225.jpeg"
+  ],
+  "founderAccordions": [
+    {
+      "title": "Welcoming Line",
+      "content": "Thank you for being here — if you're planning your bridal look, you're in the right hands."
+    },
+    {
+      "title": "My Signature Style",
+      "content": "Soft, luminous, natural bridal makeup. I build the look from skincare up, so the finish is fresh and long-wearing through pheras, tears, and 12-hour wedding days. My brides look like the best version of themselves — never like someone else."
+    },
+    {
+      "title": "Services",
+      "content": "Signature bridal makeup, engagement & reception looks, muhurtham and multi-event wedding packages, bridal trials, party & guest makeup, saree draping and bridal hairstyling — plus professional makeup education through Lush Makeovers Academy."
+    },
+    {
+      "title": "How I Plan Your Bridal Morning",
+      "content": "Every booking starts with a look consultation and a minute-by-minute timeline for your wedding morning — hair, draping, makeup, and jewellery setting are sequenced so you're photo-ready before your photographer even asks. Outstation weddings include full travel and stay coordination."
+    },
+    {
+      "title": "Why Brides Trust Me",
+      "content": "London College of Makeup certified. 10+ years in bridal artistry. 3,000+ brides across Andhra Pradesh and Telangana. 200+ professional artists trained through our academy. A 123K-strong Instagram community that watches our work daily."
+    }
+  ],
+  "curatedPoints": [
+    {
+      "strong": "A calm, on-time bridal morning",
+      "rest": " - we run your getting-ready hours to a plan, so you're never rushed to the mandap."
+    },
+    {
+      "strong": "The natural signature",
+      "rest": " - our skin-first technique gives an airbrushed finish that still looks like you in person and on camera."
+    },
+    {
+      "strong": "London-certified artistry",
+      "rest": " - led by a London College of Makeup certified artist with 10+ years of bridal experience."
+    },
+    {
+      "strong": "Complete personal attention",
+      "rest": " - your look is planned in advance, your trial is documented, and your bridal team is dedicated to you alone on the day."
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "When researching bridal makeup artists in Vijayawada, I felt so reassured the moment I met the team at Lush Makeovers. They understood my vision and made me feel like the most radiant version of myself. The most calming experience.",
+      "author": "Sneha, Vijayawada Bride"
+    },
+    {
+      "quote": "Absolutely flawless work. My HD bridal look lasted through a 14-hour wedding day, three outfit changes and an outdoor reception and still looked picture-perfect at midnight.",
+      "author": "Divya, Hyderabad"
+    },
+    {
+      "quote": "Beyond gifted artists. They made my mother, my sister and me all look like the most beautiful versions of ourselves. Lush Makeovers is truly Vijayawada's gold standard.",
+      "author": "Anusha, Guntur"
+    }
+  ],
+  "instagramPosts": [
+    "https://images.pexels.com/photos/17154861/pexels-photo-17154861.jpeg",
+    "https://images.pexels.com/photos/34955448/pexels-photo-34955448.jpeg",
+    "https://images.pexels.com/photos/17001511/pexels-photo-17001511.jpeg"
+  ],
+  "blogPosts": [
+    {
+      "image": "https://images.pexels.com/photos/32113420/pexels-photo-32113420.jpeg",
+      "title": "M & J at Novotel Vijayawada — Krishna River Wedding"
+    },
+    {
+      "image": "https://images.pexels.com/photos/27140154/pexels-photo-27140154.jpeg",
+      "title": "A & K's Sophisticated Black Tie Wedding at Taj Krishna"
+    },
+    {
+      "image": "https://images.pexels.com/photos/35865066/pexels-photo-35865066.jpeg",
+      "title": "P & S's Romantic Riverfront Vijayawada Wedding"
+    }
+  ],
+  "servicesBanner": {
+    "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "eyebrow": "SIGNATURE OFFERINGS",
+    "title": "Services",
+    "subtitle": "crafted for brides, families and every wedding celebration",
+    "quote": "Beauty is not overdone here. It is sculpted carefully, so you look like yourself at your most unforgettable."
+  },
+  "servicesList": [
+    {
+      "id": "signature-bridal",
+      "name": "Signature Bridal Makeup",
+      "subtitle": "by Sri",
+      "description": "The complete luxury bridal experience with the founder herself.",
+      "bullets": [
+        "Personal look consultation & bridal morning timeline",
+        "HD / airbrush skin-first application, 12-hour wear",
+        "Bridal hairstyling & saree draping coordination",
+        "Jewellery & dupatta setting, photo-ready finish"
+      ],
+      "priceLabel": "Starting price",
+      "price": "Rs 55,000 per look",
+      "note": "Wedding-day look: Rs 65,000",
+      "image": "https://images.pexels.com/photos/35538643/pexels-photo-35538643.jpeg"
+    },
+    {
+      "id": "senior-artist",
+      "name": "Bridal Makeup",
+      "subtitle": "Senior Artist",
+      "description": "The same Lush Makeovers standards, techniques, and products - delivered by our senior artists.",
+      "bullets": [
+        "Lush-trained senior artist",
+        "HD skin-first application, long-wear finish",
+        "Hairstyling & draping included",
+        "Perfect for engagement, haldi, mehendi & sangeet"
+      ],
+      "priceLabel": "Starting price",
+      "price": "Rs 25,000 per look",
+      "note": "Recommended for single-event bookings and pre-wedding looks",
+      "image": "https://images.pexels.com/photos/34955448/pexels-photo-34955448.jpeg"
+    }
+  ],
+  "portfolioBanner": {
+    "eyebrow": "THE GALLERY",
+    "title": "Portfolio",
+    "subtitle": "a collection of love stories",
+    "quote": "Every bride a quiet study in light, jewellery and timeless artistry."
+  },
+  "portfolioCategories": [
+    { "id": "all", "label": "All" },
+    { "id": "bridal", "label": "Bridal" },
+    { "id": "reception", "label": "Reception" },
+    { "id": "engagement", "label": "Engagement" },
+    { "id": "detail", "label": "Details" }
+  ],
+  "portfolioWorks": [
+    {
+      "id": 1,
+      "image": "https://images.unsplash.com/photo-1600685890506-593fdf55949b",
+      "title": "Aishwarya",
+      "location": "Vijayawada",
+      "category": "bridal",
+      "catLabel": "Traditional Bridal",
+      "span": "tall",
+      "year": "2024"
+    },
+    {
+      "id": 2,
+      "image": "https://images.unsplash.com/photo-1610173827043-9db50e0d8ef9",
+      "title": "Sanjana",
+      "location": "Hyderabad",
+      "category": "bridal",
+      "catLabel": "South Indian Bridal",
+      "span": "square",
+      "year": "2024"
+    },
+    {
+      "id": 3,
+      "image": "https://images.unsplash.com/photo-1684868268327-7e5590bcfbd6",
+      "title": "Detail Study",
+      "location": "Studio",
+      "category": "detail",
+      "catLabel": "Makeup Detail",
+      "span": "square",
+      "year": "2024"
+    },
+    {
+      "id": 4,
+      "image": "https://images.pexels.com/photos/30809480/pexels-photo-30809480.jpeg",
+      "title": "Meghana",
+      "location": "Vijayawada",
+      "category": "bridal",
+      "catLabel": "Traditional Bridal",
+      "span": "wide",
+      "year": "2023"
+    },
+    {
+      "id": 5,
+      "image": "https://images.pexels.com/photos/9596225/pexels-photo-9596225.jpeg",
+      "title": "Heirloom",
+      "location": "Studio",
+      "category": "detail",
+      "catLabel": "Jewellery Story",
+      "span": "tall",
+      "year": "2024"
+    },
+    {
+      "id": 6,
+      "image": "https://images.unsplash.com/flagged/photo-1551854716-8b811be39e7e",
+      "title": "Lavanya",
+      "location": "Guntur",
+      "category": "reception",
+      "catLabel": "Reception Glam",
+      "span": "square",
+      "year": "2024"
+    },
+    {
+      "id": 7,
+      "image": "https://images.unsplash.com/photo-1684868265714-fd2300637c23",
+      "title": "Hema",
+      "location": "Vijayawada",
+      "category": "engagement",
+      "catLabel": "Engagement",
+      "span": "tall",
+      "year": "2024"
+    },
+    {
+      "id": 8,
+      "image": "https://images.unsplash.com/photo-1610047614301-13c63f00c032",
+      "title": "Pranavi",
+      "location": "Krishna District",
+      "category": "bridal",
+      "catLabel": "South Indian Bridal",
+      "span": "square",
+      "year": "2023"
+    },
+    {
+      "id": 9,
+      "image": "https://images.pexels.com/photos/3460676/pexels-photo-3460676.jpeg",
+      "title": "Sravya",
+      "location": "Hyderabad",
+      "category": "bridal",
+      "catLabel": "Modern Bridal",
+      "span": "wide",
+      "year": "2024"
+    },
+    {
+      "id": 10,
+      "image": "https://images.pexels.com/photos/32315685/pexels-photo-32315685.jpeg",
+      "title": "Anvitha",
+      "location": "Vijayawada",
+      "category": "reception",
+      "catLabel": "Reception Glam",
+      "span": "square",
+      "year": "2024"
+    },
+    {
+      "id": 11,
+      "image": "https://images.unsplash.com/photo-1630526720753-aa4e71acf67d",
+      "title": "Keerthi",
+      "location": "Tirupati",
+      "category": "engagement",
+      "catLabel": "Engagement",
+      "span": "tall",
+      "year": "2023"
+    },
+    {
+      "id": 12,
+      "image": "https://images.pexels.com/photos/34955448/pexels-photo-34955448.jpeg",
+      "title": "Soft Glow",
+      "location": "Studio",
+      "category": "detail",
+      "catLabel": "Beauty Detail",
+      "span": "square",
+      "year": "2024"
+    }
+  ],
+  "portfolioFeatured": {
+    "image": "https://images.unsplash.com/photo-1600685890506-593fdf55949b",
+    "eyebrow": "FEATURED STORY",
+    "title": "Aishwarya",
+    "subtitle": "a temple wedding in Vijayawada",
+    "excerpt": "A South Indian bride in silk and gold — soft kohl, dewy skin and a calm, unhurried morning. Photographed in the temple courtyard at first light."
+  },
+  "academyBanner": {
+    "eyebrow": "LUSH MAKEOVERS ACADEMY",
+    "title": "Lush Makeovers Academy",
+    "subtitle": "Professional makeup education by Sri - London College of Makeup certified artist and mentor to 200+ working professionals.",
+    "quote": "Learn in a working bridal studio with focused batches, real model practice, and a teaching style built for working artists.",
+    "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9"
+  },
+  "academyStats": [
+    { "v": "5 Days", "l": "Masterclass" },
+    { "v": "10-12", "l": "Batch Size" },
+    { "v": "200+", "l": "Artists Trained" },
+    { "v": "Real Models", "l": "Hands-On Practice" }
+  ],
+  "academyCourses": [
+    {
+      "id": "masterclass",
+      "level": "01",
+      "name": "Professional Bridal Masterclass",
+      "duration": "5 Days",
+      "sessions": "Full-Day Intensive",
+      "fee": "35,000",
+      "earlyBird": "28,000",
+      "tagline": "The core bridal program led by Sri.",
+      "description": "A focused 5-day intensive built for artists who want practical bridal confidence.",
+      "modules": [
+        "Hands-on practice on live models",
+        "HD & airbrush techniques",
+        "Signature natural bridal look",
+        "Hairstyling & draping modules",
+        "Business & pricing guidance",
+        "Certificate of completion"
+      ]
+    }
+  ],
+  "academyBatches": [
+    {
+      "course": "Professional Bridal Masterclass",
+      "start": "Monthly intake",
+      "seats": "10 to 12 seats",
+      "mode": "In-Studio - Vijayawada"
+    },
+    {
+      "course": "Beginner Bridal Starter",
+      "start": "On request",
+      "seats": "Limited seats",
+      "mode": "In-Studio - Vijayawada"
+    }
+  ],
+  "academyMasterclass": {
+    "title": "Professional Bridal Masterclass",
+    "date": "5 Days",
+    "duration": "5 Days",
+    "fee": "35,000",
+    "earlyBird": "28,000",
+    "description": "A five-day bridal intensive for serious artists who want to train with Sri.",
+    "highlights": [
+      "Hands-on practice on live models",
+      "HD and airbrush technique training",
+      "Signature natural bridal look",
+      "Hairstyling and draping modules",
+      "Business and pricing guidance",
+      "Certificate of completion"
+    ]
+  },
+  "academyStudents": [
+    {
+      "quote": "The masterclass gave me a full bridal workflow I could trust.",
+      "name": "Harika R.",
+      "role": "Masterclass - 2025",
+      "avatar": "https://images.unsplash.com/photo-1610047614301-13c63f00c032"
+    },
+    {
+      "quote": "Every session was practical and calm. I left more confident.",
+      "name": "Sushma K.",
+      "role": "Alumni - Bridal Training",
+      "avatar": "https://images.pexels.com/photos/30809480/pexels-photo-30809480.jpeg"
+    },
+    {
+      "quote": "Practising on live models changed everything for me. I booked my first paid bride two weeks after finishing.",
+      "name": "Pravallika M.",
+      "role": "Masterclass - 2025",
+      "avatar": "https://images.pexels.com/photos/9596225/pexels-photo-9596225.jpeg"
+    },
+    {
+      "quote": "Small batch, personal attention, and honest feedback on every look. Worth every rupee.",
+      "name": "Anjali D.",
+      "role": "Alumni - Bridal Training",
+      "avatar": "https://images.pexels.com/photos/7580837/pexels-photo-7580837.jpeg"
+    }
+  ],
+  "academyFaqs": [],
+  "aboutFounder": {
+    "name": "Sri",
+    "fullName": "Sri Lakshmi",
+    "role": "Founder & Lead Bridal Artist, Lush Makeovers",
+    "portrait": "https://images.pexels.com/photos/7580837/pexels-photo-7580837.jpeg",
+    "workingShot": "https://images.pexels.com/photos/37710473/pexels-photo-37710473.jpeg",
+    "signaturePhoto": "https://images.pexels.com/photos/35538643/pexels-photo-35538643.jpeg",
+    "greeting": "Hi, I'm Sri - bridal artist, educator, and the face behind Lush Makeovers.",
+    "intro": "Bridal beauty, for me, began as passion and became a calling grounded in calm, precision, and care."
+  },
+  "aboutStory": [
+    {
+      "title": "How it started",
+      "body": "Makeup began as a passion long before it became a profession. What started with doing looks for friends and family in Vijayawada grew into a calling: helping brides feel completely, confidently themselves on the biggest day of their lives. Add 1-2 personal lines here about your first bride and the moment you knew this was your path."
+    },
+    {
+      "title": "Training",
+      "body": "To build world-class technique, Sri trained and certified at the London College of Makeup, bringing international standards in skin prep, HD and airbrush artistry back to Andhra Pradesh. Continuous learning remains part of the studio's DNA; techniques are updated every season."
+    },
+    {
+      "title": "The studio",
+      "body": "Lush Makeovers opened its doors in Vijayawada in 2016, growing from a one-artist practice into a full bridal studio with a trained in-house team. Today the studio serves brides across AP and Telangana and travels for destination weddings across India."
+    },
+    {
+      "title": "The academy",
+      "body": "With demand growing, Sri began teaching, and Lush Makeovers Academy was born. Over 200 professional artists have now been trained through hands-on masterclasses, many of whom run successful bridal businesses of their own. Teaching keeps the craft sharp and the standards high."
+    }
+  ],
+  "aboutMilestones": [
+    { "year": "2013", "label": "First bridal booking" },
+    { "year": "2014", "label": "London College of Makeup certification" },
+    { "year": "2016", "label": "Lush Makeovers studio opens in Vijayawada" },
+    { "year": "2020", "label": "1,000th bride" },
+    { "year": "2021", "label": "Lush Makeovers Academy launches; first professional batch" },
+    { "year": "2026", "label": "3,000+ brides served - 200+ artists trained - 123K Instagram community" }
+  ],
+  "aboutCredentials": [
+    {
+      "icon": "award",
+      "title": "London College of Makeup",
+      "sub": "Certified Professional Makeup Artist"
+    },
+    {
+      "icon": "star",
+      "title": "10+ Years of Bridal Artistry",
+      "sub": "3,000+ brides and counting"
+    },
+    {
+      "icon": "users",
+      "title": "Educator",
+      "sub": "200+ professional artists trained"
+    },
+    {
+      "icon": "sparkles",
+      "title": "Awards & Recognition",
+      "sub": "Add awards, press features, and brand collaborations here"
+    }
+  ],
+  "aboutPullQuote": "A bride should look like herself on her wedding day - only unforgettable.",
+  "aboutTeam": [
+    {
+      "name": "Sravani",
+      "role": "Senior Bridal Artist",
+      "image": "https://images.pexels.com/photos/30809480/pexels-photo-30809480.jpeg"
+    },
+    {
+      "name": "Gousia",
+      "role": "Senior Bridal Artist",
+      "image": "https://images.pexels.com/photos/9596225/pexels-photo-9596225.jpeg"
+    },
+    {
+      "name": "Buddi",
+      "role": "Bridal Artist",
+      "image": "https://images.unsplash.com/photo-1610047614301-13c63f00c032"
+    },
+    {
+      "name": "Harshitha",
+      "role": "In-house Artist",
+      "image": "https://images.pexels.com/photos/7580837/pexels-photo-7580837.jpeg"
+    },
+    {
+      "name": "Meghana",
+      "role": "In-house Artist",
+      "image": "https://images.pexels.com/photos/35538643/pexels-photo-35538643.jpeg"
+    },
+    {
+      "name": "Sandhya",
+      "role": "In-house Artist",
+      "image": "https://images.pexels.com/photos/37710473/pexels-photo-37710473.jpeg"
+    },
+    {
+      "name": "Pavani",
+      "role": "Client Relations & Bookings Manager",
+      "image": "https://images.pexels.com/photos/27140154/pexels-photo-27140154.jpeg"
+    }
+  ],
+  "contactInfo": {
+    "eyebrow": "WRITE TO US",
+    "title": "Contact",
+    "subtitle": "we would love to hear from you",
+    "greeting": "Whether you are planning a wedding, exploring the academy, or simply have a quiet question — please reach out. We respond personally to every message within 24 hours.",
+    "studioImage": "https://images.pexels.com/photos/3997989/pexels-photo-3997989.jpeg",
+    "channels": [
+      {
+        "key": "phone",
+        "label": "By Phone",
+        "value": "+91 90000 00000",
+        "hint": "Mon - Sat, 10am to 7pm IST",
+        "href": "tel:+919000000000"
+      },
+      {
+        "key": "whatsapp",
+        "label": "On WhatsApp",
+        "value": "+91 90000 00000",
+        "hint": "Fastest replies for bridal enquiries",
+        "href": "https://wa.me/919000000000"
+      },
+      {
+        "key": "email",
+        "label": "By Email",
+        "value": "hello@lushmakeovers.in",
+        "hint": "Reply within 24 hours",
+        "href": "mailto:hello@lushmakeovers.in"
+      },
+      {
+        "key": "instagram",
+        "label": "On Instagram",
+        "value": "@lushmakeovers",
+        "hint": "Behind the scenes, daily",
+        "href": "https://www.instagram.com/lush_makeovers/"
+      }
+    ],
+    "studio": {
+      "line1": "Lush Makeovers Studio",
+      "line2": "3rd Floor, Park Avenue,",
+      "line3": "M.G. Road, Vijayawada 520010",
+      "state": "Andhra Pradesh, India"
+    },
+    "hours": [
+      { "day": "Monday - Friday", "time": "10:00 am - 7:00 pm" },
+      { "day": "Saturday", "time": "09:00 am - 8:00 pm" },
+      { "day": "Sunday", "time": "By appointment only" }
+    ],
+    "faqs": [
+      {
+        "q": "How far in advance should I book?",
+        "a": "For wedding dates, we recommend booking 4 to 8 months in advance. Trial appointments can usually be scheduled within 2 to 3 weeks."
+      },
+      {
+        "q": "Do you travel for destination weddings?",
+        "a": "Yes, we travel across India and to international destinations. Travel and accommodation are billed separately and discussed transparently during enquiry."
+      },
+      {
+        "q": "Can the studio accommodate the bride's family?",
+        "a": "Absolutely. Our studio can comfortably host the bride and up to six family members or bridesmaids for a single morning."
+      },
+      {
+        "q": "Do you offer Academy walk-ins?",
+        "a": "Academy visits are strictly by appointment. Please write to us with your preferred date and we will block a private studio walkthrough."
+      }
+    ]
+  },
+  "inquireConfig": {
+    "eyebrow": "BEGIN AN ENQUIRY",
+    "title": "Inquire",
+    "subtitle": "a private invitation to plan your day",
+    "intro": "Share a few details about your celebration. Our admissions team will respond within 24 hours with availability, a tailored quote and an invitation to a private studio visit.",
+    "heroImage": "https://images.pexels.com/photos/9596225/pexels-photo-9596225.jpeg",
+    "occasions": [
+      "Bridal - Wedding Day",
+      "Bridal - Engagement",
+      "Bridal - Reception",
+      "Family / Bridesmaids",
+      "Pre-Bridal Trial",
+      "Academy Enquiry",
+      "Masterclass",
+      "Something else"
+    ],
+    "hearAbout": [
+      "Instagram",
+      "A friend",
+      "Wedding planner",
+      "Google search",
+      "Featured press",
+      "Other"
+    ],
+    "promises": [
+      "A personal response within 24 hours",
+      "A tailored quote - no template pricing",
+      "A private studio visit, no obligation",
+      "Your details treated with absolute discretion"
+    ]
+  },
+  "seo": {
+    "title": "Lush Makeovers | Bridal Hair and Makeup Studio",
+    "description": "Luxury bridal beauty for modern brides in Vijayawada and destination weddings.",
+    "keywords": ["bridal makeup", "Vijayawada", "makeup artist", "academy"],
+    "canonical": "https://lushmakeovers.in",
+    "ogImage": "https://images.pexels.com/photos/35536264/pexels-photo-35536264.jpeg"
+  },
+  "settings": {
+    "businessName": "Lush Makeovers",
+    "phone": "+91 90000 00000",
+    "email": "hello@lushmakeovers.in",
+    "whatsapp": "+91 90000 00000",
+    "instagram": "@lush_makeovers",
+    "address": "3rd Floor, Park Avenue, M.G. Road, Vijayawada 520010",
+    "workingHours": "Mon-Sat 10am to 7pm",
+    "logo": "/logo.png",
+    "favicon": "/favicon.ico"
+  }
+}

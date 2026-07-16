@@ -1,70 +1,116 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import OptimizedImage from './OptimizedImage';
 import { brandInfo, instagramPosts } from '../mock';
-import { Instagram as IgIcon } from 'lucide-react';
+import { Instagram as IgIcon, BadgeCheck } from 'lucide-react';
+import { sectionReveal, staggerContainer, staggerItem, viewportOnce } from './motion';
 
 const Instagram = () => {
+  const stats = [
+    { v: brandInfo.posts, l: 'Posts' },
+    { v: brandInfo.followers, l: 'Followers' },
+    { v: brandInfo.following, l: 'Following' },
+  ];
+
   return (
-    <section className="w-full bg-white py-20 md:py-24">
+    <motion.section
+      className="w-full bg-white py-20 md:py-24"
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce}
+      variants={sectionReveal}
+    >
       <div className="max-w-[1080px] mx-auto px-4 md:px-8 text-center">
         <div className="font-script italic text-[#3a3a3a] text-[26px] md:text-[30px]">
           Need More Inspo?
         </div>
-        <div className="mt-1 font-display text-[#3a3a3a] text-[20px] md:text-[24px] tracking-[0.32em]">
+        <div className="mt-1 font-display text-[#3a3a3a] text-[18px] md:text-[24px] tracking-[0.28em] md:tracking-[0.32em]">
           FOLLOW US ON INSTAGRAM
         </div>
 
-        <div className="mt-12 max-w-[820px] mx-auto border border-[#e3dcd1] bg-white px-6 md:px-10 py-8 text-left">
-          <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-6">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#d6c4a7] to-[#efe1c8] flex items-center justify-center text-[#3a3a3a] font-display text-[18px] tracking-widest">
-              LM
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center justify-between flex-wrap gap-3">
-                <div className="text-[#3a3a3a] text-[18px] font-serif-body">
-                  {brandInfo.instagram}
+        <motion.div
+          className="mt-10 md:mt-12 max-w-[520px] mx-auto border border-[#e3dcd1] bg-white text-left shadow-[0_28px_60px_-48px_rgba(58,58,58,0.5)]"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
+          {/* profile row — avatar with story ring + stats, like the app */}
+          <motion.div variants={staggerItem} className="flex items-center gap-5 sm:gap-7 px-5 sm:px-7 pt-6">
+            <div className="shrink-0 rounded-full bg-gradient-to-tr from-[#c8a15c] via-[#d6c4a7] to-[#efe1c8] p-[2.5px]">
+              <div className="rounded-full bg-white p-[2.5px]">
+                <div className="w-16 h-16 sm:w-[74px] sm:h-[74px] rounded-full bg-gradient-to-tr from-[#d6c4a7] to-[#efe1c8] flex items-center justify-center text-[#3a3a3a] font-display text-[17px] tracking-widest">
+                  LM
                 </div>
-                <a
-                  href={brandInfo.instagramUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-[12px] tracking-[0.25em] uppercase border border-[#6b6760] px-4 py-1.5 text-[#3a3a3a] hover:bg-[#6b6760] hover:text-[#f7f4ef] transition-colors flex items-center gap-2"
-                >
-                  <IgIcon size={13} strokeWidth={1.5} /> Follow
-                </a>
-              </div>
-              <div className="mt-3 flex flex-wrap gap-6 text-[13px] text-[#4a4742]">
-                <span><strong className="text-[#3a3a3a]">{brandInfo.posts}</strong> Posts</span>
-                <span><strong className="text-[#3a3a3a]">{brandInfo.followers}</strong> Followers</span>
-                <span><strong className="text-[#3a3a3a]">{brandInfo.following}</strong> Following</span>
               </div>
             </div>
-          </div>
+            <div className="flex flex-1 items-center justify-around gap-2">
+              {stats.map((s) => (
+                <div key={s.l} className="text-center">
+                  <div className="font-script italic text-[#2a2a2a] text-[20px] sm:text-[24px] leading-none">
+                    {s.v}
+                  </div>
+                  <div className="mt-1.5 font-display text-[9px] sm:text-[10px] tracking-[0.18em] uppercase text-[#8b7f72]">
+                    {s.l}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
-          <div className="mt-5 text-[14px] text-[#3a3a3a] leading-[1.7] font-serif-body">
-            <div className="font-medium">Lush Makeovers | Vijayawada Bridal Beauty</div>
-            <div>Vijayawada&apos;s most-booked bridal studio</div>
-            <div>1000+ brides &middot; HD &middot; Airbrush &middot; Traditional</div>
-            <div>200+ makeup artists trained</div>
-            <div>Vijayawada &middot; Andhra Pradesh &middot; Destination</div>
-            <a href={brandInfo.instagramUrl} target="_blank" rel="noreferrer" className="text-[#6b6760] text-[13px] mt-1 hover:text-[#3a3a3a] transition-colors">
-              {brandInfo.instagramUrl}
+          {/* handle + bio */}
+          <motion.div variants={staggerItem} className="px-5 sm:px-7 pt-5">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[#2a2a2a] text-[15px] sm:text-[16px] font-medium font-serif-body">
+                {brandInfo.instagram}
+              </span>
+              <BadgeCheck size={15} className="text-[#c8a15c]" fill="#f3e7d3" />
+            </div>
+            <div className="mt-2 space-y-0.5 text-[13px] sm:text-[13.5px] text-[#4a4742] leading-[1.65] font-serif-body">
+              <div className="font-medium text-[#2a2a2a]">Lush Makeovers | Vijayawada Bridal Beauty</div>
+              <div>Vijayawada&apos;s most-booked bridal studio</div>
+              <div>1000+ brides &middot; HD &middot; Airbrush &middot; Traditional</div>
+              <div>200+ makeup artists trained</div>
+            </div>
+          </motion.div>
+
+          {/* follow button — full width like the app */}
+          <motion.div variants={staggerItem} className="px-5 sm:px-7 pt-5">
+            <a
+              href={brandInfo.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex h-11 w-full items-center justify-center gap-2 bg-[#1f1f1f] text-white text-[11px] tracking-[0.28em] uppercase font-display transition-colors hover:bg-black"
+            >
+              <IgIcon size={14} strokeWidth={1.5} />
+              Follow {brandInfo.instagram}
             </a>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-3 gap-3 mt-7">
+          {/* feed grid — tight gaps, square tiles, like the app */}
+          <motion.div variants={staggerItem} className="mt-6 grid grid-cols-3 gap-[3px]">
             {instagramPosts.map((src, i) => (
-              <div key={i} className="img-zoom h-[160px] md:h-[210px] relative">
-                <OptimizedImage src={src} alt={`Instagram post ${i + 1}`} className="w-full h-full object-cover" />
-                <div className="absolute top-2 right-2 text-white">
-                  <IgIcon size={16} strokeWidth={1.5} />
+              <a
+                key={`${src}-${i}`}
+                href={brandInfo.instagramUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="group relative block aspect-square overflow-hidden bg-[#f3ede2]"
+              >
+                <OptimizedImage
+                  src={src}
+                  alt={`Instagram post ${i + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/25">
+                  <IgIcon size={20} strokeWidth={1.5} className="text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
-              </div>
+              </a>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
