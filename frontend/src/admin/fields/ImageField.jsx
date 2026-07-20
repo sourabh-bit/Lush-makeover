@@ -1,9 +1,16 @@
 import React, { useRef, useState } from 'react';
 import { Camera, Link2, Loader2 } from 'lucide-react';
 import { useImageUpload } from '../hooks/useImageUpload';
+import OptimizedImage from '../../components/OptimizedImage';
 
 // A photo field: shows the current photo with one big "Change photo" button.
 // On phones the file input opens the camera / photo library chooser.
+//
+// The preview box uses a moderate 4:3 ratio (not the old fixed h-44 + fluid
+// width, which on a wide admin column stretched into a 5:1+ banner shape —
+// nothing like the real photo — and blind-centered with no idea where the
+// face was). Cloudinary's face-aware auto-crop plus a sane aspect ratio
+// means this preview now actually looks like the photo that was uploaded.
 const ImageField = ({ value, onChange, label }) => {
   const inputRef = useRef(null);
   const { upload, uploading } = useImageUpload();
@@ -20,9 +27,14 @@ const ImageField = ({ value, onChange, label }) => {
     <div className="rounded-2xl border border-black/5 bg-[#faf8f4] p-3">
       <div className="overflow-hidden rounded-xl bg-[#efe9df]">
         {value ? (
-          <img src={value} alt={label || 'Selected'} className="h-44 w-full object-cover" />
+          <OptimizedImage
+            src={value}
+            alt={label || 'Selected'}
+            aspectRatio="4:3"
+            className="aspect-[4/3] w-full object-cover object-top"
+          />
         ) : (
-          <div className="flex h-44 w-full items-center justify-center text-[13px] text-[#8b7f72]">
+          <div className="flex aspect-[4/3] w-full items-center justify-center text-[13px] text-[#8b7f72]">
             No photo yet
           </div>
         )}

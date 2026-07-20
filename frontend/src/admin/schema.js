@@ -322,7 +322,6 @@ export const sitePages = [
           { key: 'role', label: 'Your Title', type: 'text' },
           { key: 'portrait', label: 'Portrait Photo', type: 'image' },
           { key: 'workingShot', label: 'Working Photo', type: 'image' },
-          { key: 'signaturePhoto', label: 'Signature-Look Photo', type: 'image' },
           { key: 'greeting', label: 'Greeting Line', type: 'textarea' },
           { key: 'intro', label: 'Short Introduction', type: 'textarea' },
         ],

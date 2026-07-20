@@ -123,6 +123,14 @@ const Header = () => {
             <div className="flex flex-col items-center gap-6 w-full max-w-[280px]">
               {navLinks.map((link) => renderLink(link, 'text-[#fcfaf7] text-[13px] tracking-[0.38em] drop-shadow-[0_1px_1px_rgba(0,0,0,0.45)]'))}
             </div>
+            <Link
+              to="/admin/login"
+              onClick={() => setOpen(false)}
+              className="mt-10 flex items-center gap-2 text-[#f3e8de] text-[11px] tracking-[0.28em] uppercase drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)] border border-white/25 px-5 py-2.5"
+            >
+              <User size={13} strokeWidth={1.25} />
+              <span>Log In</span>
+            </Link>
           </nav>
         </div>
       )}

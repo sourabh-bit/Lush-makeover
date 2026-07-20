@@ -17,8 +17,11 @@ const isCloudinaryUrl = (url) => url.hostname.toLowerCase() === 'res.cloudinary.
 // and crop around it, instead of a blind center-crop that can cut off heads.
 // ar_ is a hint, not an exact requirement — CSS object-fit still does the
 // final fit against each container, so an approximate ratio is fine.
+// q_100 forces full quality, no compression — Cloudinary's own q_auto looked
+// visibly softer on close-up makeup detail, which is exactly the kind of
+// photo this site lives on, so quality is never traded for file size here.
 const buildCloudinaryTransform = (aspectRatio, width) => {
-  const parts = ['c_fill', 'g_auto', 'q_auto', 'f_auto'];
+  const parts = ['c_fill', 'g_auto', 'q_100'];
   if (aspectRatio) parts.push(`ar_${aspectRatio}`);
   if (width) parts.push(`w_${width}`);
   return parts.join(',');

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Camera, Loader2, Plus, X } from 'lucide-react';
 import { useImageUpload } from '../hooks/useImageUpload';
+import OptimizedImage from '../../components/OptimizedImage';
 
 // A list of photos shown as a grid. Tap a photo to replace it,
 // the X to remove it, or the big tile to add a new one.
@@ -41,7 +42,7 @@ const ImagesField = ({ value = [], onChange }) => {
               className="block w-full overflow-hidden rounded-xl"
               aria-label="Replace photo"
             >
-              <img src={photo} alt="" className="aspect-square w-full object-cover" />
+              <OptimizedImage src={photo} alt="" aspectRatio="1:1" className="aspect-square w-full object-cover object-top" />
               <span className="absolute inset-0 flex items-center justify-center rounded-xl bg-black/0 text-white transition-colors group-active:bg-black/30">
                 <Camera size={18} className="opacity-0 transition-opacity group-active:opacity-100" />
               </span>
