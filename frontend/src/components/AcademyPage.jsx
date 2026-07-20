@@ -55,17 +55,17 @@ const AcademyPage = () => {
     setSending(true);
     setError('');
     const lines = [
-      form.course && `Course: ${form.course}`,
       form.batch && `Preferred batch: ${form.batch}`,
       form.message && `Message: ${form.message}`,
     ].filter(Boolean);
     try {
-      await apiFetch('/api/contact', {
+      await apiFetch('/api/bookings', {
         method: 'POST',
         body: {
-          name: form.name,
+          customer: form.name,
           phone: form.phone,
-          message: lines.join('\n') || 'Consultation request',
+          service: form.course || 'Academy Consultation',
+          notes: lines.join('\n') || 'Consultation request',
           category: 'academy',
         },
       });

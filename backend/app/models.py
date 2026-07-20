@@ -34,12 +34,14 @@ class CmsUpsert(BaseModel):
 class BookingInput(BaseModel):
     customer: str
     phone: str
-    email: EmailStr
+    email: Optional[EmailStr] = None
     service: str
-    date: str
-    time: str
+    date: Optional[str] = None
+    time: Optional[str] = None
     amount: Optional[str] = None
     notes: Optional[str] = None
+    # Which enquiry form this came from: wedding | academy
+    category: str = "wedding"
 
 
 class MessageInput(BaseModel):

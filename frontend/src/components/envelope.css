@@ -231,7 +231,10 @@
 .env-card.card-out {
   opacity: 1;
   width: min(520px, 90vw);
-  height: min(560px, 80vh);
+  /* 560px left ~0px of breathing room below the button once every block
+     of text was accounted for — the button touching the card edge at
+     "100% zoom" was that math finally running out, not a fluke. */
+  height: min(620px, 82vh);
   bottom: 50%;
   transform: translate(-50%, 50%) scale(1);
   z-index: 8;
@@ -420,9 +423,11 @@
   .env-wrap { width: 78vw; height: 210px; }
   .env-card.card-out {
     width: 92vw;
-    height: 80vh;
+    /* Sized to the compact content above, not a large vh share — a tall
+       phone screen otherwise leaves a big empty gap under the button. */
+    height: min(480px, 78vh);
   }
 }
 @media (max-height: 720px) {
-  .env-card.card-out { height: 86vh; }
+  .env-card.card-out { height: min(480px, 78vh); }
 }

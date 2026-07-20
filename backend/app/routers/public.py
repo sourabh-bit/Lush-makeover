@@ -5,7 +5,7 @@ from fastapi import APIRouter
 
 from ..config import FRONTEND_URL, SEED_ADMIN_EMAIL
 from ..database import db
-from ..email_service import send_booking_confirmation, send_enquiry_confirmation, send_new_enquiry_notification
+from ..email_service import send_booking_received, send_enquiry_confirmation, send_new_enquiry_notification
 from ..models import BookingInput, MessageInput
 from ..utils import bootstrap_payload, new_id, now_utc
 
@@ -54,18 +54,22 @@ async def create_contact(payload: MessageInput) -> Dict[str, Any]:
 
 @router.post("/bookings")
 async def create_booking(payload: BookingInput) -> Dict[str, Any]:
-    doc = {"id": new_id("booking_"), "client_user_id": None, "customer": payload.customer, "phone": payload.phone, "email": payload.email, "service": payload.service, "date": payload.date, "time": payload.time, "amount": payload.amount, "notes": payload.notes, "status": "pending", "created_at": now_utc()}
+    doc = {"id": new_id("booking_"), "client_user_id": None, "customer": payload.customer, "phone": payload.phone, "email": payload.email, "service": payload.service, "date": payload.date, "time": payload.time, "amount": payload.amount, "notes": payload.notes, "category": payload.category, "status": "pending", "created_at": now_utc()}
     await db.bookings.insert_one(doc)
 
+    schedule = payload.service
+    if payload.date:
+        schedule += f" — {payload.date}" + (f" {payload.time}" if payload.time else "")
     send_new_enquiry_notification(
         await _notify_email(),
         payload.customer,
         payload.phone,
         payload.email,
-        "booking",
-        f"{payload.service} — {payload.date} {payload.time}" + (f"\n{payload.notes}" if payload.notes else ""),
+        payload.category,
+        schedule + (f"\n{payload.notes}" if payload.notes else ""),
         f"{FRONTEND_URL}/admin/bookings",
     )
-    send_booking_confirmation(payload.email, payload.customer, payload.service, payload.date, payload.time)
+    if payload.email:
+        send_booking_received(payload.email, payload.customer, payload.service, payload.date, payload.time)
 
     return {"ok": True, "booking_id": doc["id"]}

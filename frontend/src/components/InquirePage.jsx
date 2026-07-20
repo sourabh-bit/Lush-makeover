@@ -26,7 +26,6 @@ const initialForm = {
   venue: '',
   city: '',
   guests: '',
-  budget: '',
   hearAbout: '',
   message: '',
 };
@@ -53,29 +52,28 @@ const InquirePage = () => {
     if (!form.fullName || !form.phone || !form.occasion || sending) return;
     setSending(true);
     setError('');
-    // Compose every answer into one readable enquiry for the studio.
+    // Compose every remaining answer into notes for the studio.
     const lines = [
       context && (context.kind === 'service'
         ? `Service enquired: ${context.label}`
         : `Reference look (from portfolio): ${context.label}`),
-      `Enquiry: ${form.occasion}`,
       form.partner && `Partner: ${form.partner}`,
-      form.weddingDate && `Date: ${form.weddingDate}`,
       form.venue && `Venue: ${form.venue}`,
       form.city && `City: ${form.city}`,
       form.guests && `People needing makeup: ${form.guests}`,
-      form.budget && `Budget: ${form.budget}`,
       form.hearAbout && `Heard about us via: ${form.hearAbout}`,
       form.message && `Message: ${form.message}`,
     ].filter(Boolean);
     try {
-      await apiFetch('/api/contact', {
+      await apiFetch('/api/bookings', {
         method: 'POST',
         body: {
-          name: form.fullName,
+          customer: form.fullName,
           phone: form.phone,
           email: form.email || null,
-          message: lines.join('\n'),
+          service: form.occasion,
+          date: form.weddingDate || null,
+          notes: lines.join('\n'),
           category: 'wedding',
         },
       });
@@ -412,19 +410,6 @@ const InquirePage = () => {
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <SelectField
-                      label="Approximate Budget"
-                      value={form.budget}
-                      onChange={onChange('budget')}
-                      options={[
-                        '',
-                        'Under ₹50,000',
-                        '₹50,000 – ₹1,00,000',
-                        '₹1,00,000 – ₹2,00,000',
-                        '₹2,00,000 – ₹5,00,000',
-                        '₹5,00,000 +',
-                      ]}
-                    />
                     <SelectField
                       label="How did you hear about us?"
                       value={form.hearAbout}

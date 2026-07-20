@@ -46,8 +46,16 @@ def send_enquiry_confirmation(to_email: str, name: str) -> bool:
     return _send(to_email, subject, html)
 
 
-def send_booking_confirmation(to_email: str, customer: str, service: str, date: str, time: str) -> bool:
-    subject, html = templates.booking_confirmation(customer, service, date, time)
+def send_booking_received(to_email: str, customer: str, service: str, date: Optional[str] = None, time: Optional[str] = None) -> bool:
+    """The form-submission email — deliberately says "received", not
+    "confirmed". Pair with send_booking_confirmed, sent only when the admin
+    actually confirms the booking from the dashboard."""
+    subject, html = templates.booking_received(customer, service, date, time)
+    return _send(to_email, subject, html)
+
+
+def send_booking_confirmed(to_email: str, customer: str, service: str, date: Optional[str] = None, time: Optional[str] = None) -> bool:
+    subject, html = templates.booking_confirmed(customer, service, date, time)
     return _send(to_email, subject, html)
 
 

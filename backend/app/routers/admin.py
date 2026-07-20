@@ -7,7 +7,7 @@ from pydantic import EmailStr
 
 from ..config import FRONTEND_URL
 from ..database import db
-from ..email_service import send_booking_confirmation, send_team_welcome_email
+from ..email_service import send_booking_confirmed, send_booking_received, send_team_welcome_email
 from ..models import BookingInput, OrderInput, StatusUpdate
 from ..security import hash_password, require_user, safe_user
 from ..utils import new_id, now_utc
@@ -78,6 +78,11 @@ async def update_booking_status(request: Request, booking_id: str, payload: Stat
     if not booking:
         raise HTTPException(status_code=404, detail="Booking not found")
     await db.bookings.update_one({"id": booking_id}, {"$set": {"status": payload.status}})
+    # The "your booking is confirmed" email only ever goes out from here —
+    # i.e. only once a real person has reviewed and confirmed it, never at
+    # the moment the customer merely submits the form.
+    if payload.status == "confirmed" and booking.get("email"):
+        send_booking_confirmed(booking["email"], booking["customer"], booking["service"], booking.get("date"), booking.get("time"))
     return {"ok": True, "id": booking_id, "status": payload.status}
 
 
@@ -93,10 +98,11 @@ async def create_order(request: Request, payload: OrderInput) -> Dict[str, Any]:
 @router.post("/bookings")
 async def create_booking_admin(request: Request, payload: BookingInput) -> Dict[str, Any]:
     await require_user(request, ADMIN_ROLES)
-    doc = {"id": new_id("booking_"), "client_user_id": None, "customer": payload.customer, "phone": payload.phone, "email": payload.email, "service": payload.service, "date": payload.date, "time": payload.time, "amount": payload.amount, "notes": payload.notes, "status": "pending", "created_at": now_utc()}
+    doc = {"id": new_id("booking_"), "client_user_id": None, "customer": payload.customer, "phone": payload.phone, "email": payload.email, "service": payload.service, "date": payload.date, "time": payload.time, "amount": payload.amount, "notes": payload.notes, "category": payload.category, "status": "pending", "created_at": now_utc()}
     await db.bookings.insert_one(doc)
     doc.pop("_id", None)  # insert_one injects Mongo's _id into doc; not JSON-serializable
-    send_booking_confirmation(payload.email, payload.customer, payload.service, payload.date, payload.time)
+    if payload.email:
+        send_booking_received(payload.email, payload.customer, payload.service, payload.date, payload.time)
     return doc
 
 
