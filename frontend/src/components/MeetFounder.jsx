@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import OptimizedImage from './OptimizedImage';
-import { founderAccordions } from '../mock';
+import { founderAccordions, meetFounderImage } from '../mock';
 import { ChevronDown } from 'lucide-react';
 import { sectionReveal, staggerContainer, staggerItem } from './motion';
 
@@ -60,9 +60,10 @@ const MeetFounder = () => {
             <div className="relative z-30 px-6 sm:px-8 pt-8 pb-10">
               <motion.div className="mx-auto w-[78vw] max-w-[310px] shadow-[0_24px_48px_-34px_rgba(35,24,18,0.5)]" whileHover={{ y: -4 }} transition={{ duration: 0.25 }}>
                 <OptimizedImage
-                  src="/founder-photo.jpg"
+                  src={meetFounderImage}
                   alt="Founder with bride"
-                  className="w-full aspect-[3/4] object-cover"
+                  aspectRatio="3:4"
+                  className="w-full aspect-[3/4] object-cover object-top"
                 />
               </motion.div>
             </div>
@@ -99,9 +100,10 @@ const MeetFounder = () => {
 
           <motion.div className="img-zoom" whileHover={{ y: -4 }} transition={{ duration: 0.25 }}>
             <OptimizedImage
-              src="/founder-photo.jpg"
+              src={meetFounderImage}
               alt="Founder with bride"
-              className="w-full h-[480px] md:h-[620px] object-cover"
+              aspectRatio="4:5"
+              className="w-full h-[480px] md:h-[620px] object-cover object-top"
             />
             <div className="text-right text-[#6b6760] text-[10px] italic tracking-wider mt-2">
               Behind the Scenes Photo

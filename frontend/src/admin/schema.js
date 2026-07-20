@@ -252,6 +252,7 @@ export const sitePages = [
         titleField: 'name',
         fields: [
           { key: 'id', type: 'hidden' },
+          { key: 'image', label: 'Photo', type: 'image', help: 'Shown beside this course — photos alternate left/right down the page automatically' },
           { key: 'level', label: 'Course Number', type: 'text', help: 'For example: 01' },
           { key: 'name', label: 'Course Name', type: 'text' },
           { key: 'duration', label: 'How Long', type: 'text' },
@@ -275,21 +276,6 @@ export const sitePages = [
           { key: 'start', label: 'When It Starts', type: 'text' },
           { key: 'seats', label: 'Seats', type: 'text' },
           { key: 'mode', label: 'Where', type: 'text' },
-        ],
-      },
-      {
-        key: 'academyMasterclass',
-        label: 'Masterclass',
-        help: 'The highlighted masterclass block',
-        kind: 'object',
-        fields: [
-          { key: 'title', label: 'Title', type: 'text' },
-          { key: 'date', label: 'Date', type: 'text' },
-          { key: 'duration', label: 'How Long', type: 'text' },
-          { key: 'fee', label: 'Fee', type: 'text' },
-          { key: 'earlyBird', label: 'Early-Bird Fee', type: 'text' },
-          { key: 'description', label: 'Description', type: 'textarea' },
-          { key: 'highlights', label: "What's Included", type: 'list', itemLabel: 'Line' },
         ],
       },
       {

@@ -9,6 +9,7 @@ import {
   staggerItem,
   blurItem,
   curtainLeft,
+  curtainRight,
   curtainImage,
   viewportOnce,
   viewportSoon,
@@ -18,7 +19,6 @@ import {
   academyStats,
   academyCourses,
   academyBatches,
-  academyMasterclass,
   academyStudents,
   academyFaqs,
 } from '../mock';
@@ -40,7 +40,7 @@ const batchCards = academyBatches.map((batch) => ({ title: batch.course, date: b
 
 const AcademyPage = () => {
   const [studentIdx, setStudentIdx] = useState(0);
-  const [form, setForm] = useState({ name: '', phone: '', course: '', batch: '', message: '' });
+  const [form, setForm] = useState({ name: '', phone: '', email: '', course: '', batch: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
@@ -64,13 +64,14 @@ const AcademyPage = () => {
         body: {
           customer: form.name,
           phone: form.phone,
+          email: form.email || null,
           service: form.course || 'Academy Consultation',
           notes: lines.join('\n') || 'Consultation request',
           category: 'academy',
         },
       });
       setSubmitted(true);
-      setForm({ name: '', phone: '', course: '', batch: '', message: '' });
+      setForm({ name: '', phone: '', email: '', course: '', batch: '', message: '' });
     } catch {
       setError('Something went wrong. Please try again, or reach us on WhatsApp.');
     } finally {
@@ -81,7 +82,6 @@ const AcademyPage = () => {
   const prev = () => setStudentIdx((studentIdx - 1 + academyStudents.length) % academyStudents.length);
   const next = () => setStudentIdx((studentIdx + 1) % academyStudents.length);
   const student = academyStudents[studentIdx];
-  const featuredCourse = academyCourses[0];
 
   return (
     <motion.main className="w-full bg-white" initial="hidden" animate="visible" variants={pageVariants}>
@@ -119,52 +119,70 @@ const AcademyPage = () => {
         </div>
       </section>
 
-      <section id="courses" className="mx-auto grid max-w-[1180px] grid-cols-1 gap-10 px-6 py-16 md:grid-cols-12 md:items-center md:gap-16 md:px-8 md:py-24">
-        <motion.div className="md:col-span-5" initial="hidden" whileInView="visible" viewport={viewportOnce}>
-          <motion.div className="overflow-hidden" variants={curtainLeft}>
-            <motion.div variants={curtainImage}>
-              <OptimizedImage src={featuredCourse.image || 'https://images.pexels.com/photos/37710473/pexels-photo-37710473.jpeg'} alt="Professional Bridal Masterclass" className="h-[420px] w-full object-cover md:h-[560px]" />
-            </motion.div>
-          </motion.div>
-        </motion.div>
-        <motion.div className="md:col-span-7" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSoon}>
-          <motion.div variants={staggerItem} className="inline-flex items-center gap-2 rounded-full border border-[#e4cfb8] bg-[#fbf7ef] px-4 py-1.5 font-display text-[10px] uppercase tracking-[0.32em] text-[#8a7656]">
-            <Sparkles size={12} strokeWidth={1.5} /> Flagship Program
-          </motion.div>
-          <motion.h2 variants={staggerItem} className="mt-5 font-display text-[28px] uppercase tracking-[0.12em] text-[#2a2a2a] md:text-[44px] leading-tight">{academyMasterclass.title}</motion.h2>
-          <motion.div variants={staggerItem} className="mt-2 font-script text-[20px] italic text-[#8a7656] md:text-[24px]">{featuredCourse.tagline}</motion.div>
-          <motion.p variants={staggerItem} className="mt-5 max-w-[700px] font-serif-body text-[15px] leading-[1.9] text-[#4a4742] md:text-[16px]">{academyMasterclass.description}</motion.p>
+      <section id="courses" className="mx-auto max-w-[1180px] px-6 py-16 md:px-8 md:py-24">
+        <div className="space-y-16 md:space-y-24">
+          {academyCourses.map((course, i) => {
+            const isReversed = i % 2 === 1;
+            return (
+              <div
+                key={course.id}
+                className={`grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center md:gap-16 ${
+                  isReversed ? 'md:[&>*:first-child]:order-2' : ''
+                }`}
+              >
+                <motion.div className="md:col-span-5" initial="hidden" whileInView="visible" viewport={viewportOnce}>
+                  <motion.div className="overflow-hidden" variants={isReversed ? curtainRight : curtainLeft}>
+                    <motion.div variants={curtainImage}>
+                      <OptimizedImage src={course.image || 'https://images.pexels.com/photos/37710473/pexels-photo-37710473.jpeg'} alt={course.name} aspectRatio="4:5" className="h-[420px] w-full object-cover object-top md:h-[560px]" />
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+                <motion.div className="md:col-span-7" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSoon}>
+                  <motion.div variants={staggerItem} className="inline-flex items-center gap-2 rounded-full border border-[#e4cfb8] bg-[#fbf7ef] px-4 py-1.5 font-display text-[10px] uppercase tracking-[0.32em] text-[#8a7656]">
+                    <Sparkles size={12} strokeWidth={1.5} /> {i === 0 ? 'Flagship Program' : `Course ${course.level || String(i + 1).padStart(2, '0')}`}
+                  </motion.div>
+                  <motion.h2 variants={staggerItem} className="mt-5 font-display text-[28px] uppercase tracking-[0.12em] text-[#2a2a2a] md:text-[44px] leading-tight">{course.name}</motion.h2>
+                  <motion.div variants={staggerItem} className="mt-2 font-script text-[20px] italic text-[#8a7656] md:text-[24px]">{course.tagline}</motion.div>
+                  <motion.p variants={staggerItem} className="mt-5 max-w-[700px] font-serif-body text-[15px] leading-[1.9] text-[#4a4742] md:text-[16px]">{course.description}</motion.p>
 
-          <motion.div variants={staggerItem} className="mt-7 flex flex-wrap items-center gap-x-10 gap-y-5 border-y border-[#ece6da] py-6">
-            <div>
-              <div className="font-display text-[10px] uppercase tracking-[0.3em] text-[#8a7656]">Early-Bird Fee</div>
-              <div className="mt-1.5 font-display text-[32px] leading-none text-[#2a2a2a] md:text-[38px]">₹{academyMasterclass.earlyBird}</div>
-            </div>
-            <div>
-              <div className="font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Regular Fee</div>
-              <div className="mt-1.5 font-serif-body text-[20px] text-[#8b8378] line-through md:text-[22px]">₹{academyMasterclass.fee}</div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 font-serif-body text-[13.5px] text-[#4a4742]"><Clock size={14} strokeWidth={1.5} className="text-[#b8a17a]" /> {academyMasterclass.duration}, full-day intensive</div>
-              <div className="flex items-center gap-2 font-serif-body text-[13.5px] text-[#4a4742]"><Award size={14} strokeWidth={1.5} className="text-[#b8a17a]" /> Certificate of completion</div>
-            </div>
-          </motion.div>
+                  <motion.div variants={staggerItem} className="mt-7 flex flex-wrap items-center gap-x-10 gap-y-5 border-y border-[#ece6da] py-6">
+                    <div>
+                      <div className="font-display text-[10px] uppercase tracking-[0.3em] text-[#8a7656]">Early-Bird Fee</div>
+                      <div className="mt-1.5 font-display text-[32px] leading-none text-[#2a2a2a] md:text-[38px]">₹{course.earlyBird}</div>
+                    </div>
+                    <div>
+                      <div className="font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Regular Fee</div>
+                      <div className="mt-1.5 font-serif-body text-[20px] text-[#8b8378] line-through md:text-[22px]">₹{course.fee}</div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 font-serif-body text-[13.5px] text-[#4a4742]"><Clock size={14} strokeWidth={1.5} className="text-[#b8a17a]" /> {course.duration}{course.sessions ? `, ${course.sessions}` : ''}</div>
+                      <div className="flex items-center gap-2 font-serif-body text-[13.5px] text-[#4a4742]"><Award size={14} strokeWidth={1.5} className="text-[#b8a17a]" /> Certificate of completion</div>
+                    </div>
+                  </motion.div>
 
-          <motion.div variants={staggerItem} className="mt-8 font-display text-[11px] uppercase tracking-[0.42em] text-[#6b6760]">What You Will Learn</motion.div>
-          <motion.div variants={staggerContainer} className="mt-4 grid gap-3 sm:grid-cols-2">
-            {academyMasterclass.highlights.slice(0, 6).map((item, i) => (
-              <motion.div variants={staggerItem} key={item} className="flex items-start gap-3.5 border border-[#ece6da] bg-white p-4 shadow-[0_18px_38px_-34px_rgba(58,58,58,0.4)]">
-                <span className="font-script text-[22px] italic leading-none text-[#b8a17a]">{String(i + 1).padStart(2, '0')}</span>
-                <span className="font-serif-body text-[14px] leading-[1.7] text-[#4a4742]">{item}</span>
-              </motion.div>
-            ))}
-          </motion.div>
+                  {course.modules?.length > 0 && (
+                    <>
+                      <motion.div variants={staggerItem} className="mt-8 font-display text-[11px] uppercase tracking-[0.42em] text-[#6b6760]">What You Will Learn</motion.div>
+                      <motion.div variants={staggerContainer} className="mt-4 grid gap-3 sm:grid-cols-2">
+                        {course.modules.slice(0, 6).map((item, idx) => (
+                          <motion.div variants={staggerItem} key={item} className="flex items-start gap-3.5 border border-[#ece6da] bg-white p-4 shadow-[0_18px_38px_-34px_rgba(58,58,58,0.4)]">
+                            <span className="font-script text-[22px] italic leading-none text-[#b8a17a]">{String(idx + 1).padStart(2, '0')}</span>
+                            <span className="font-serif-body text-[14px] leading-[1.7] text-[#4a4742]">{item}</span>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    </>
+                  )}
 
-          <motion.div variants={staggerItem} className="mt-9 flex flex-wrap gap-3">
-            <a href="#consultation" className="inline-flex items-center gap-2 border border-[#2a2a2a] bg-[#2a2a2a] px-7 py-3 font-display text-[11px] uppercase tracking-[0.3em] text-white shadow-[0_18px_38px_-20px_rgba(0,0,0,0.55)] transition-colors duration-500 hover:bg-black">Reserve Your Seat <ArrowUpRight size={13} strokeWidth={1.25} /></a>
-            <a href="#batches" className="inline-flex items-center gap-2 border border-[#6b6760] px-7 py-3 font-display text-[11px] uppercase tracking-[0.3em] text-[#2a2a2a] transition-colors duration-500 hover:bg-[#fbfaf6]">View Upcoming Batches</a>
-          </motion.div>
-        </motion.div>
+                  <motion.div variants={staggerItem} className="mt-9 flex flex-wrap gap-3">
+                    <a href="#consultation" className="inline-flex items-center gap-2 border border-[#2a2a2a] bg-[#2a2a2a] px-7 py-3 font-display text-[11px] uppercase tracking-[0.3em] text-white shadow-[0_18px_38px_-20px_rgba(0,0,0,0.55)] transition-colors duration-500 hover:bg-black">Reserve Your Seat <ArrowUpRight size={13} strokeWidth={1.25} /></a>
+                    <a href="#batches" className="inline-flex items-center gap-2 border border-[#6b6760] px-7 py-3 font-display text-[11px] uppercase tracking-[0.3em] text-[#2a2a2a] transition-colors duration-500 hover:bg-[#fbfaf6]">View Upcoming Batches</a>
+                  </motion.div>
+                </motion.div>
+              </div>
+            );
+          })}
+        </div>
       </section>
 
 
@@ -215,7 +233,7 @@ const AcademyPage = () => {
           {academyStudents.map((person) => (
             <motion.article variants={staggerItem} key={person.name} className="border border-[#ece6da] bg-white p-6 md:p-7">
               <div className="flex items-center gap-4">
-                <OptimizedImage src={person.avatar} alt={person.name} className="h-16 w-16 rounded-full object-cover" />
+                <OptimizedImage src={person.avatar} alt={person.name} aspectRatio="1:1" className="h-16 w-16 rounded-full object-cover object-top" />
                 <div>
                   <div className="flex items-center gap-1 text-[#c8a15c]">
                     {[...Array(5)].map((_, i) => (
@@ -312,6 +330,10 @@ const AcademyPage = () => {
                 <input type="tel" required value={form.phone} onChange={onChange('phone')} className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 font-serif-body text-[15px] text-[#2a2a2a] transition-colors focus:border-[#2a2a2a] focus:outline-none" />
               </div>
               <div>
+                <label className="mb-2 block font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Email</label>
+                <input type="email" value={form.email} onChange={onChange('email')} placeholder="So we can email your confirmation" className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 font-serif-body text-[15px] text-[#2a2a2a] transition-colors focus:border-[#2a2a2a] focus:outline-none placeholder:text-[#bcb3a4]" />
+              </div>
+              <div>
                 <label className="mb-2 block font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Course</label>
                 <select value={form.course} onChange={onChange('course')} className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 font-serif-body text-[15px] text-[#2a2a2a] transition-colors focus:border-[#2a2a2a] focus:outline-none">
                   <option value="">Select a course</option>
@@ -320,7 +342,7 @@ const AcademyPage = () => {
                   ))}
                 </select>
               </div>
-              <div>
+              <div className="md:col-span-2">
                 <label className="mb-2 block font-display text-[10px] uppercase tracking-[0.3em] text-[#6b6760]">Preferred Batch</label>
                 <select value={form.batch} onChange={onChange('batch')} className="w-full border-b border-[#d7cdb8] bg-transparent py-2.5 font-serif-body text-[15px] text-[#2a2a2a] transition-colors focus:border-[#2a2a2a] focus:outline-none">
                   <option value="">Select batch</option>

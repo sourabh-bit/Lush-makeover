@@ -36,7 +36,6 @@ export const academyBanner = pick('academyBanner');
 export const academyStats = pick('academyStats');
 export const academyCourses = pick('academyCourses');
 export const academyBatches = pick('academyBatches');
-export const academyMasterclass = pick('academyMasterclass');
 export const academyStudents = pick('academyStudents');
 export const academyFaqs = pick('academyFaqs') || [];
 

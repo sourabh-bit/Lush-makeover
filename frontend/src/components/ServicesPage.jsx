@@ -130,7 +130,8 @@ const ServicesPage = () => {
                         <OptimizedImage
                           src={service.image}
                           alt={service.name}
-                          className="w-full h-[320px] sm:h-[380px] md:h-[460px] object-cover"
+                          aspectRatio="4:5"
+                          className="w-full h-[320px] sm:h-[380px] md:h-[460px] object-cover object-top"
                         />
                       </motion.div>
                       {isFeature ? (

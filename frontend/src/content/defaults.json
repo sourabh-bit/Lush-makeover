@@ -318,6 +318,7 @@
   "academyCourses": [
     {
       "id": "masterclass",
+      "image": "https://images.pexels.com/photos/37710473/pexels-photo-37710473.jpeg",
       "level": "01",
       "name": "Professional Bridal Masterclass",
       "duration": "5 Days",
@@ -333,6 +334,25 @@
         "Hairstyling & draping modules",
         "Business & pricing guidance",
         "Certificate of completion"
+      ]
+    },
+    {
+      "id": "beginner-starter",
+      "image": "https://images.pexels.com/photos/34955448/pexels-photo-34955448.jpeg",
+      "level": "02",
+      "name": "Beginner Bridal Starter",
+      "duration": "2 Days",
+      "sessions": "Weekend Intensive",
+      "fee": "18,000",
+      "earlyBird": "14,000",
+      "tagline": "A gentle starting point for new artists.",
+      "description": "A focused 2-day foundation course for those just starting their bridal makeup journey, with plenty of hands-on guidance.",
+      "modules": [
+        "Skin prep & base fundamentals",
+        "Everyday bridal look basics",
+        "Product & tool essentials",
+        "Working with clients",
+        "Certificate of participation"
       ]
     }
   ],
@@ -350,22 +370,6 @@
       "mode": "In-Studio - Vijayawada"
     }
   ],
-  "academyMasterclass": {
-    "title": "Professional Bridal Masterclass",
-    "date": "5 Days",
-    "duration": "5 Days",
-    "fee": "35,000",
-    "earlyBird": "28,000",
-    "description": "A five-day bridal intensive for serious artists who want to train with Sri.",
-    "highlights": [
-      "Hands-on practice on live models",
-      "HD and airbrush technique training",
-      "Signature natural bridal look",
-      "Hairstyling and draping modules",
-      "Business and pricing guidance",
-      "Certificate of completion"
-    ]
-  },
   "academyStudents": [
     {
       "quote": "The masterclass gave me a full bridal workflow I could trust.",

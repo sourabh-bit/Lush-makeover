@@ -82,9 +82,10 @@ const AboutPage = () => {
             >
               <motion.div variants={curtainImage}>
                 <OptimizedImage
-                  src="/founder-photo.jpg"
+                  src={aboutFounder.portrait}
                   alt={aboutFounder.fullName}
-                  className="w-full h-[440px] sm:h-[520px] md:h-[660px] object-cover"
+                  aspectRatio="3:4"
+                  className="w-full h-[440px] sm:h-[520px] md:h-[660px] object-cover object-top"
                 />
               </motion.div>
               {[
@@ -427,7 +428,8 @@ const AboutPage = () => {
                     src={m.image}
                     alt={m.name}
                     loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    aspectRatio="3:4"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
                   />
                 </motion.div>
               </motion.div>
