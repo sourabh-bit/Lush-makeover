@@ -25,7 +25,10 @@ def verify_password(raw: str, hashed: str) -> bool:
 
 
 def safe_user(user: Dict[str, Any]) -> Dict[str, Any]:
-    return {k: v for k, v in user.items() if k != "password_hash"}
+    # Drop password_hash plus Mongo's own _id (an ObjectId, injected into the
+    # dict by insert_one/find_one) — neither is safe to send to the client or
+    # JSON-serializable as-is.
+    return {k: v for k, v in user.items() if k not in ("password_hash", "_id")}
 
 
 def encode_token(user: Dict[str, Any], token_type: str, jti: str, expires: timedelta) -> str:

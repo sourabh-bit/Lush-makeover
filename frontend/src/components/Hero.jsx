@@ -58,13 +58,13 @@ const Hero = () => {
                 { to: '/academy', label: 'Academy' },
                 { to: '/contact', label: 'Contact' },
               ].map((item) => (
-                <motion.div key={item.label} className="flex-1 sm:flex-none" variants={staggerItem} whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }}>
+                <motion.div key={item.label} className="flex-1 min-w-0 sm:flex-none" variants={staggerItem} whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }}>
                   <Link
                     to={item.to}
-                    className="flex w-full items-center justify-between gap-2 bg-white/95 backdrop-blur px-3.5 py-3 sm:px-5 sm:py-3.5 text-[#1f1f1f] text-[9px] sm:text-[11px] tracking-[0.28em] sm:tracking-[0.34em] uppercase font-display shadow-[0_14px_34px_-18px_rgba(0,0,0,0.55)] transition-colors duration-300 hover:bg-[#1f1f1f] hover:text-white"
+                    className="flex w-full items-center justify-between gap-1.5 sm:gap-2 bg-white/95 backdrop-blur px-2.5 py-3 sm:px-5 sm:py-3.5 text-[#1f1f1f] text-[9px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.34em] uppercase font-display shadow-[0_14px_34px_-18px_rgba(0,0,0,0.55)] transition-colors duration-300 hover:bg-[#1f1f1f] hover:text-white"
                   >
-                    <span>{item.label}</span>
-                    <ArrowUpRight size={13} strokeWidth={1.5} className="shrink-0" />
+                    <span className="truncate">{item.label}</span>
+                    <ArrowUpRight size={12} strokeWidth={1.5} className="shrink-0" />
                   </Link>
                 </motion.div>
               ))}

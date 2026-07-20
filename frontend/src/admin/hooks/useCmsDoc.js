@@ -67,6 +67,13 @@ export function useCmsDoc(key) {
         body: { key, payload: draft, ...docMeta.current },
       });
       setDirty(false);
+      // Drop the public site's cached content so the very next load (e.g. the
+      // owner checking her work) fetches fresh instead of showing a reload-old cache.
+      try {
+        localStorage.removeItem('lush-cms-cache-v1');
+      } catch {
+        /* storage unavailable — fine, next load just falls back to the network fetch anyway */
+      }
       toast.success('Saved! Your website is updated.');
       return true;
     } catch {

@@ -392,7 +392,28 @@
       "avatar": "https://images.pexels.com/photos/7580837/pexels-photo-7580837.jpeg"
     }
   ],
-  "academyFaqs": [],
+  "academyFaqs": [
+    {
+      "q": "Do I need prior makeup experience?",
+      "a": "No. The masterclass starts from professional fundamentals and builds up to complete bridal looks. Batches are small (10-12 students), so the teaching adapts to your level - dedicated beginners and working artists both fit in."
+    },
+    {
+      "q": "Will I practise on real models?",
+      "a": "Yes. Every student works hands-on on live models throughout the course - not just on face charts - so you leave with real bridal experience you can show clients."
+    },
+    {
+      "q": "Do I get a certificate?",
+      "a": "Yes. You receive a Lush Makeovers Academy certificate of completion at the end of the masterclass."
+    },
+    {
+      "q": "Where are the classes held?",
+      "a": "In our working bridal studio on M.G. Road, Vijayawada - you learn in the same space where real brides are styled every week."
+    },
+    {
+      "q": "How do I reserve a seat?",
+      "a": "Book a consultation using the form below. The academy team will call you within 24 hours to confirm your batch and reserve your seat."
+    }
+  ],
   "aboutFounder": {
     "name": "Sri",
     "fullName": "Sri Lakshmi",
@@ -587,9 +608,9 @@
     ]
   },
   "seo": {
-    "title": "Lush Makeovers | Bridal Hair and Makeup Studio",
-    "description": "Luxury bridal beauty for modern brides in Vijayawada and destination weddings.",
-    "keywords": ["bridal makeup", "Vijayawada", "makeup artist", "academy"],
+    "title": "Bridal Makeup & Destination Wedding Makeup Artist in India | Lush Makeovers",
+    "description": "HD & airbrush bridal makeup, hairstyling & saree draping for weddings and destination weddings across India. 3,000+ brides, 10+ years. Studio in Vijayawada — we travel anywhere in India.",
+    "keywords": ["bridal makeup artist India", "destination wedding makeup artist", "bridal makeup Vijayawada", "HD bridal makeup", "airbrush makeup", "South Indian bridal makeup", "makeup academy"],
     "canonical": "https://lushmakeovers.in",
     "ogImage": "https://images.pexels.com/photos/35536264/pexels-photo-35536264.jpeg"
   },

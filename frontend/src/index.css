@@ -31,17 +31,21 @@ body {
   letter-spacing: 0.01em;
 }
 
-.App .font-display,
-.App .font-script {
-  color: #6d6057;
-}
+/* Default display/script colors. :where() keeps specificity at one class
+   and @layer base puts them before utilities, so any Tailwind text-*
+   utility (e.g. text-white on dark buttons) always overrides them. */
+@layer base {
+  .App :where(.font-display, .font-script) {
+    color: #6d6057;
+  }
 
-#home .font-display {
-  color: #6f5a3d;
-}
+  :where(#home) .font-display {
+    color: #6f5a3d;
+  }
 
-#home .font-script {
-  color: #8a6a40;
+  :where(#home) .font-script {
+    color: #8a6a40;
+  }
 }
 .font-serif-body {
   font-family: 'Manrope', 'Inter', 'Segoe UI', Arial, sans-serif;

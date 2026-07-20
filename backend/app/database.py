@@ -6,11 +6,16 @@ from __future__ import annotations
 import copy
 from typing import Any, Dict, List, Optional
 
+import certifi
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from .config import DB_NAME, MONGO_URL
 
-mongo_client = AsyncIOMotorClient(MONGO_URL)
+# tlsCAFile=certifi.where() avoids "certificate verify failed: unable to get
+# local issuer certificate" against MongoDB Atlas on machines (notably
+# Windows/some minimal Linux images) whose Python install doesn't ship a
+# trusted CA bundle. Harmless where the OS store already works fine.
+mongo_client = AsyncIOMotorClient(MONGO_URL, tlsCAFile=certifi.where())
 _current_db: Any = mongo_client[DB_NAME]
 
 

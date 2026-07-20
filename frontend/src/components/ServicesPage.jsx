@@ -16,6 +16,9 @@ import {
 } from './motion';
 import { servicesBanner, servicesList } from '../mock';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const MotionLink = motion.create(Link);
 
 const ServicesPage = () => {
   const bgImage = encodeURI('/ChatGPT Image Jul 8, 2026, 02_36_18 AM.png');
@@ -195,8 +198,8 @@ const ServicesPage = () => {
                         ) : null}
                       </div>
 
-                      <motion.a
-                        href="/inquire"
+                      <MotionLink
+                        to={`/inquire?service=${encodeURIComponent(service.name + (service.subtitle ? ` (${service.subtitle})` : ''))}`}
                         whileHover={{ y: -2 }}
                         whileTap={{ scale: 0.98 }}
                         style={{ color: '#ffffff' }}
@@ -209,7 +212,7 @@ const ServicesPage = () => {
                           style={{ color: '#ffffff' }}
                           className="transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                         />
-                      </motion.a>
+                      </MotionLink>
                     </motion.div>
                   </motion.div>
                 </article>

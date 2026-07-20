@@ -46,9 +46,14 @@ const Footer = () => {
         <div className="text-[#6b6760] text-[12px] tracking-wider">
           {new Date().getFullYear()} Lush Makeovers. All rights reserved.
         </div>
-        <div className="text-[#6b6760] text-[12px] tracking-[0.2em] uppercase">
-          Designed with love in Vijayawada
-        </div>
+        <a
+          href="https://www.instagram.com/sourabhroy3446/"
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-1.5 text-[#6b6760] text-[12px] tracking-wider hover:text-[#a08f7d] transition-colors"
+        >
+          Designed with love by <span className="text-[#4a4742] font-medium">Sourabh Roy</span> <Instagram size={13} strokeWidth={1.5} />
+        </a>
       </div>
     </footer>
   );

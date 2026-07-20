@@ -13,7 +13,13 @@
 // fields), hidden (kept in the data but never shown).
 import defaults from '../content/defaults.json';
 
-const portfolioCategoryOptions = defaults.portfolioCategories
+// Prefer live CMS content if it has already loaded (see src/index.js), so a
+// category renamed/added in the admin shows up here too — falls back to
+// defaults.json before the CMS bootstrap has loaded.
+const liveContent = typeof window !== 'undefined' ? window.__LUSH_CMS__ || {} : {};
+const currentPortfolioCategories = liveContent.portfolioCategories || defaults.portfolioCategories;
+
+const portfolioCategoryOptions = currentPortfolioCategories
   .filter((category) => category.id !== 'all')
   .map((category) => ({ value: category.id, label: category.label }));
 
@@ -145,6 +151,18 @@ export const sitePages = [
           { key: 'title', label: 'Page Title', type: 'text' },
           { key: 'subtitle', label: 'Line Under the Title', type: 'text' },
           { key: 'quote', label: 'Quote', type: 'textarea' },
+        ],
+      },
+      {
+        key: 'portfolioCategories',
+        label: 'Filter Buttons',
+        help: 'The category buttons brides use to filter your gallery (e.g. Bridal, Reception). Renaming one here changes its button text everywhere. To add a brand-new category, also give each photo that category further down.',
+        kind: 'collection',
+        itemNoun: 'Category',
+        titleField: 'label',
+        fields: [
+          { key: 'id', type: 'hidden' },
+          { key: 'label', label: 'Button Text', type: 'text' },
         ],
       },
       {
@@ -286,6 +304,18 @@ export const sitePages = [
           { key: 'name', label: 'Student Name', type: 'text' },
           { key: 'role', label: 'Course & Year', type: 'text' },
           { key: 'avatar', label: 'Photo', type: 'image' },
+        ],
+      },
+      {
+        key: 'academyFaqs',
+        label: 'Common Questions',
+        help: 'The FAQ list on the academy page',
+        kind: 'collection',
+        itemNoun: 'Question',
+        titleField: 'q',
+        fields: [
+          { key: 'q', label: 'Question', type: 'text' },
+          { key: 'a', label: 'Answer', type: 'textarea' },
         ],
       },
     ],
@@ -470,6 +500,18 @@ export const sitePages = [
     description: 'Your studio name, contacts and Google info',
     sections: [
       {
+        key: 'navLinks',
+        label: 'Menu Links',
+        help: 'The navigation menu shown at the top of every page, in order',
+        kind: 'collection',
+        itemNoun: 'Menu Link',
+        titleField: 'label',
+        fields: [
+          { key: 'label', label: 'Menu Text', type: 'text' },
+          { key: 'href', label: 'Links To', type: 'text', help: 'A page on your site, e.g. /services, /portfolio, /contact' },
+        ],
+      },
+      {
         key: 'settings',
         label: 'Studio Details',
         help: 'Your main business information',
@@ -483,7 +525,7 @@ export const sitePages = [
           { key: 'address', label: 'Address', type: 'textarea' },
           { key: 'workingHours', label: 'Working Hours', type: 'text' },
           { key: 'logo', type: 'hidden' },
-          { key: 'favicon', type: 'hidden' },
+          { key: 'favicon', label: 'Browser Tab Icon', type: 'image', help: 'Small square image shown in the browser tab. Upload a square photo or logo — it will be used as-is.' },
         ],
       },
       {

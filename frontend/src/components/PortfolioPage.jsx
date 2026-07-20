@@ -6,6 +6,7 @@ import {
   portfolioWorks,
 } from '../mock';
 import { ArrowUpRight, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const PortfolioPage = () => {
   const [active, setActive] = useState('all');
@@ -174,13 +175,13 @@ const PortfolioPage = () => {
                 A signature Lush Makeovers look &mdash; photographed on her
                 wedding day. Captured in {lightbox.year}.
               </p>
-              <a
-                href="/inquire"
+              <Link
+                to={`/inquire?look=${encodeURIComponent(`${lightbox.title} — ${lightbox.catLabel}${lightbox.location ? `, ${lightbox.location}` : ''}`)}`}
                 className="inline-flex items-center gap-2 mt-6 border border-[#6b6760] text-[#2a2a2a] hover:bg-[#2a2a2a] hover:text-white transition-colors duration-500 px-5 py-2.5 text-[10px] tracking-[0.3em] uppercase font-display w-fit"
               >
                 <span>Book Similar</span>
                 <ArrowUpRight size={13} strokeWidth={1.25} />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

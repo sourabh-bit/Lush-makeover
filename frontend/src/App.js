@@ -18,6 +18,7 @@ import { pageTransition } from './components/motion';
 import { AuthProvider, RequireAuth } from './auth/AuthContext';
 import AdminShell from './admin/AdminShell';
 import AdminLogin from './components/AdminLogin';
+import ResetPassword from './components/ResetPassword';
 import DashboardHome from './admin/pages/DashboardHome';
 import WebsitePages from './admin/pages/WebsitePages';
 import PageSections from './admin/pages/PageSections';
@@ -143,6 +144,7 @@ const AnimatedRoutes = () => {
         <Route path="/inquire" element={<InquireRoute />} />
 
         <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/reset-password" element={<ResetPassword />} />
         <Route
           path="/admin"
           element={
@@ -176,7 +178,27 @@ const AnimatedRoutes = () => {
   );
 };
 
+// Warm every lazy route chunk once the browser is idle so page-to-page
+// navigation is instant instead of showing the loading fallback.
+const prefetchRoutes = () => {
+  import('./components/ServicesPage');
+  import('./components/PortfolioPage');
+  import('./components/AcademyPage');
+  import('./components/AboutPage');
+  import('./components/ContactPage');
+  import('./components/InquirePage');
+};
+
 function App() {
+  React.useEffect(() => {
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(prefetchRoutes, { timeout: 4000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = window.setTimeout(prefetchRoutes, 2500);
+    return () => window.clearTimeout(id);
+  }, []);
+
   return (
     <div className="App">
       <MotionConfig reducedMotion="user">

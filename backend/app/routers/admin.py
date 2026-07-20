@@ -5,7 +5,9 @@ from typing import Any, Dict, List
 from fastapi import APIRouter, Form, HTTPException, Request
 from pydantic import EmailStr
 
+from ..config import FRONTEND_URL
 from ..database import db
+from ..email_service import send_booking_confirmation, send_team_welcome_email
 from ..models import BookingInput, OrderInput, StatusUpdate
 from ..security import hash_password, require_user, safe_user
 from ..utils import new_id, now_utc
@@ -84,6 +86,7 @@ async def create_order(request: Request, payload: OrderInput) -> Dict[str, Any]:
     await require_user(request, ADMIN_ROLES)
     doc = {"id": new_id("order_"), "client_user_id": None, "client_name": payload.client_name, "amount": payload.amount, "package_purchased": payload.package_purchased, "payment_method": payload.payment_method, "status": payload.status, "invoice_number": f"LM-{uuid.uuid4().hex[:6].upper()}", "created_at": now_utc()}
     await db.orders.insert_one(doc)
+    doc.pop("_id", None)  # insert_one injects Mongo's _id into doc; not JSON-serializable
     return doc
 
 
@@ -92,6 +95,8 @@ async def create_booking_admin(request: Request, payload: BookingInput) -> Dict[
     await require_user(request, ADMIN_ROLES)
     doc = {"id": new_id("booking_"), "client_user_id": None, "customer": payload.customer, "phone": payload.phone, "email": payload.email, "service": payload.service, "date": payload.date, "time": payload.time, "amount": payload.amount, "notes": payload.notes, "status": "pending", "created_at": now_utc()}
     await db.bookings.insert_one(doc)
+    doc.pop("_id", None)  # insert_one injects Mongo's _id into doc; not JSON-serializable
+    send_booking_confirmation(payload.email, payload.customer, payload.service, payload.date, payload.time)
     return doc
 
 
@@ -106,4 +111,5 @@ async def create_user(request: Request, email: EmailStr = Form(...), name: str =
     await require_user(request, ["super_admin"])
     doc = {"id": new_id("user_"), "email": str(email).lower(), "name": name, "role": role, "password_hash": hash_password(password), "disabled": False, "created_at": now_utc()}
     await db.users.insert_one(doc)
+    send_team_welcome_email(doc["email"], name, password, role, f"{FRONTEND_URL}/admin/login")
     return safe_user(doc)

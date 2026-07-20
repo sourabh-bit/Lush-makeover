@@ -5,7 +5,7 @@ import { elevatedImage } from '../mock';
 import { sectionReveal, staggerContainer, staggerItem, blurItem, curtainLeft, curtainImage, viewportOnce } from './motion';
 
 const Elevated = () => {
-  const bgImage = encodeURI('/ChatGPT Image Jul 8, 2026, 02_36_18 AM.png');
+  const bgImage = '/floral-bg.png';
 
   return (
     <motion.section
@@ -16,11 +16,10 @@ const Elevated = () => {
       variants={sectionReveal}
     >
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-45"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${bgImage})` }}
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-[#fcfaf7]/80" aria-hidden="true" />
       <div className="relative z-10 max-w-[1180px] mx-auto px-4 md:px-8">
         <div className="divider-line mb-16" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">

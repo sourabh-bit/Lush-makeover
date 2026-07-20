@@ -6,8 +6,9 @@ from typing import Any, Dict
 from fastapi import APIRouter, HTTPException, Request
 from starlette.status import HTTP_401_UNAUTHORIZED
 
-from ..config import ACCESS_TOKEN_MINUTES, REFRESH_TOKEN_DAYS, RESET_TOKEN_MINUTES
+from ..config import ACCESS_TOKEN_MINUTES, FRONTEND_URL, REFRESH_TOKEN_DAYS, RESET_TOKEN_MINUTES
 from ..database import db
+from ..email_service import email_configured, send_password_reset_email
 from ..models import LoginInput, PasswordChange, ResetConfirm, ResetRequest, TokenPair
 from ..security import decode_token, encode_token, hash_password, require_user, safe_user, verify_password
 from ..utils import new_id, now_utc
@@ -78,9 +79,20 @@ async def change_password(request: Request, payload: PasswordChange) -> Dict[str
 async def forgot_password(payload: ResetRequest) -> Dict[str, Any]:
     user = await db.users.find_one({"email": payload.email.lower()})
     if not user:
+        # Same response whether or not the email exists, so this endpoint
+        # can't be used to discover which emails have an account.
         return {"ok": True}
     token = new_id("reset_")
     await db.password_resets.insert_one({"token_hash": hashlib.sha256(token.encode("utf-8")).hexdigest(), "user_id": user["id"], "expires_at": now_utc() + timedelta(minutes=RESET_TOKEN_MINUTES), "used_at": None, "created_at": now_utc()})
+    reset_link = f"{FRONTEND_URL}/admin/reset-password?token={token}"
+    sent = send_password_reset_email(user["email"], reset_link)
+    if sent:
+        return {"ok": True}
+    # No email provider configured (or the send failed) — fall back to
+    # returning the token directly so local development still works without
+    # a Resend API key. Never do this once RESEND_API_KEY is set in production.
+    if email_configured():
+        return {"ok": True}
     return {"ok": True, "reset_token": token}
 
 

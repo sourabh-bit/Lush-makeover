@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import OptimizedImage from './OptimizedImage';
 import { pageTransition as pageVariants } from './motion';
@@ -31,6 +32,15 @@ const initialForm = {
 };
 
 const InquirePage = () => {
+  const [searchParams] = useSearchParams();
+  // Context carried from "Enquire Now" (services) or "Book Similar" (portfolio).
+  const [context, setContext] = useState(() => {
+    const service = searchParams.get('service');
+    if (service) return { kind: 'service', title: 'Enquiring About', label: service };
+    const look = searchParams.get('look');
+    if (look) return { kind: 'look', title: 'Inspired By', label: look };
+    return null;
+  });
   const [form, setForm] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -45,6 +55,9 @@ const InquirePage = () => {
     setError('');
     // Compose every answer into one readable enquiry for the studio.
     const lines = [
+      context && (context.kind === 'service'
+        ? `Service enquired: ${context.label}`
+        : `Reference look (from portfolio): ${context.label}`),
       `Enquiry: ${form.occasion}`,
       form.partner && `Partner: ${form.partner}`,
       form.weddingDate && `Date: ${form.weddingDate}`,
@@ -170,6 +183,28 @@ const InquirePage = () => {
 
         {/* RIGHT — multi-step form */}
         <div className="md:col-span-8">
+          {/* Context carried from Services / Portfolio */}
+          {context && !submitted && (
+            <div className="mb-7 flex items-center justify-between gap-4 border border-[#e4cfb8] bg-[#fbf7ef] px-5 py-4 shadow-[0_18px_38px_-32px_rgba(138,118,86,0.5)]">
+              <div className="flex items-center gap-3.5">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#e4cfb8] bg-white text-[#b8a17a]">
+                  <Sparkles size={15} strokeWidth={1.5} />
+                </span>
+                <div>
+                  <div className="font-display text-[10px] tracking-[0.32em] uppercase text-[#8a7656]">{context.title}</div>
+                  <div className="mt-0.5 font-script italic text-[18px] md:text-[20px] text-[#2a2a2a] leading-snug">{context.label}</div>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setContext(null)}
+                className="shrink-0 font-display text-[10px] tracking-[0.24em] uppercase text-[#8b7f72] transition-colors hover:text-[#2a2a2a]"
+              >
+                Remove
+              </button>
+            </div>
+          )}
+
           {/* Step indicator */}
           <div className="flex items-center justify-between md:justify-start md:gap-4 mb-8">
             {steps.map((s, i) => {
@@ -221,6 +256,11 @@ const InquirePage = () => {
               <div className="font-script italic text-[#3a3a3a] text-[22px] md:text-[26px] mt-1">
                 for writing to us
               </div>
+              {context && (
+                <div className="mt-4 inline-flex items-center gap-2 border border-[#e4cfb8] bg-[#fbf7ef] px-4 py-2 font-serif-body text-[13px] text-[#8a7656]">
+                  <Sparkles size={13} strokeWidth={1.5} /> Regarding: {context.label}
+                </div>
+              )}
               <p className="mt-5 text-[#4a4742] font-serif-body leading-[1.9] max-w-[440px] mx-auto">
                 Your enquiry has reached our admissions desk. A personal note
                 from us will arrive within 24 hours — often much sooner.

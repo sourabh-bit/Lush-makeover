@@ -20,7 +20,7 @@
         "tailwindcss-animate": "1.0.7"
     },
     "scripts": {
-        "start": "craco start",
+        "start": "cross-env NODE_ENV=development craco start",
         "build": "craco build",
         "test": "craco test"
     },
@@ -41,6 +41,7 @@
         "@craco/craco": "^7.1.0",
         "@eslint/js": "8.57.1",
         "autoprefixer": "10.4.20",
+        "cross-env": "^7.0.3",
         "dotenv": "16.4.5",
         "eslint": "8.57.1",
         "eslint-plugin-import": "2.31.0",

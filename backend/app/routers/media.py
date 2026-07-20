@@ -1,12 +1,12 @@
-"""Photo upload, serving and deletion."""
-import uuid
-from pathlib import Path
+"""Photo upload, listing and deletion — backed by Cloudinary so uploads
+survive redeploys (the API's own disk is ephemeral on hosts like Render)."""
 from typing import Any, Dict, List
 
+import cloudinary
+import cloudinary.uploader
 from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
-from fastapi.responses import FileResponse
 
-from ..config import PUBLIC_API_URL, UPLOAD_DIR
+from ..config import CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUD_NAME
 from ..database import db
 from ..security import require_user
 from ..utils import new_id, now_utc
@@ -15,6 +15,13 @@ router = APIRouter(prefix="/api/media", tags=["media"])
 
 EDIT_ROLES = ["super_admin", "admin", "editor"]
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024
+
+cloudinary.config(
+    cloud_name=CLOUDINARY_CLOUD_NAME,
+    api_key=CLOUDINARY_API_KEY,
+    api_secret=CLOUDINARY_API_SECRET,
+    secure=True,
+)
 
 
 @router.get("")
@@ -29,36 +36,31 @@ async def upload_media(request: Request, file: UploadFile = File(...), alt_text:
     if not (file.content_type or "").startswith("image/"):
         raise HTTPException(status_code=400, detail="Only image uploads are allowed")
     safe_folder = folder.replace("..", "").strip() or "general"
-    upload_path = UPLOAD_DIR / safe_folder
-    upload_path.mkdir(parents=True, exist_ok=True)
-    ext = Path(file.filename or "upload").suffix or ".jpg"
-    filename = f"{uuid.uuid4().hex}{ext}"
-    destination = upload_path / filename
-    total = 0
-    with destination.open("wb") as handle:
-        while True:
-            chunk = await file.read(1024 * 1024)
-            if not chunk:
-                break
-            total += len(chunk)
-            if total > MAX_UPLOAD_BYTES:
-                handle.close()
-                destination.unlink(missing_ok=True)
-                raise HTTPException(status_code=400, detail="Image exceeds 10MB")
-            handle.write(chunk)
-    doc = {"id": new_id("media_"), "filename": filename, "original_name": file.filename, "url": f"{PUBLIC_API_URL}/api/media/file/{safe_folder}/{filename}", "size": total, "content_type": file.content_type, "alt_text": alt_text, "folder": safe_folder, "uploaded_by": actor["id"], "uploaded_at": now_utc()}
+
+    contents = await file.read()
+    if len(contents) > MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=400, detail="Image exceeds 10MB")
+
+    try:
+        result = cloudinary.uploader.upload(contents, folder=f"lush-makeovers/{safe_folder}", resource_type="image")
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail="Image upload failed. Please try again.") from exc
+
+    doc = {
+        "id": new_id("media_"),
+        "filename": result.get("public_id"),
+        "original_name": file.filename,
+        "url": result.get("secure_url"),
+        "size": result.get("bytes", len(contents)),
+        "content_type": file.content_type,
+        "alt_text": alt_text,
+        "folder": safe_folder,
+        "uploaded_by": actor["id"],
+        "uploaded_at": now_utc(),
+    }
     await db.media_assets.insert_one(doc)
+    doc.pop("_id", None)  # insert_one injects Mongo's _id into doc; not JSON-serializable
     return doc
-
-
-@router.get("/file/{folder}/{filename}")
-async def media_file(folder: str, filename: str) -> FileResponse:
-    path = (UPLOAD_DIR / folder / filename).resolve()
-    if not str(path).startswith(str(UPLOAD_DIR)):
-        raise HTTPException(status_code=400, detail="Invalid path")
-    if not path.exists():
-        raise HTTPException(status_code=404, detail="File not found")
-    return FileResponse(path)
 
 
 @router.delete("/{media_id}")
@@ -67,8 +69,11 @@ async def delete_media(request: Request, media_id: str) -> Dict[str, bool]:
     media = await db.media_assets.find_one({"id": media_id})
     if not media:
         raise HTTPException(status_code=404, detail="Media not found")
-    path = (UPLOAD_DIR / media["folder"] / media["filename"]).resolve()
-    if path.exists():
-        path.unlink()
+    public_id = media.get("filename")
+    if public_id:
+        try:
+            cloudinary.uploader.destroy(public_id)
+        except Exception:
+            pass  # best-effort — still remove our own record either way
     await db.media_assets.delete_one({"id": media_id})
     return {"ok": True}

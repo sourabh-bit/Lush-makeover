@@ -29,6 +29,7 @@ async def upsert_document(document: CmsUpsert, actor: Optional[Dict[str, Any]] =
     else:
         data["created_at"] = now_utc()
         await db.cms_documents.insert_one(data)
+        data.pop("_id", None)  # insert_one injects Mongo's _id into data; not JSON-serializable
     return data
 
 

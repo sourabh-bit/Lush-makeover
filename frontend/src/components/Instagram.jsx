@@ -87,21 +87,24 @@ const Instagram = () => {
             </a>
           </motion.div>
 
-          {/* feed grid — tight gaps, square tiles, like the app */}
-          <motion.div variants={staggerItem} className="mt-6 grid grid-cols-3 gap-[3px]">
+          {/* feed grid — spaced portrait tiles, IG badge always visible in each corner */}
+          <motion.div variants={staggerItem} className="mt-6 px-5 sm:px-7 pb-6 grid grid-cols-3 gap-2.5 sm:gap-3.5">
             {instagramPosts.map((src, i) => (
               <a
                 key={`${src}-${i}`}
                 href={brandInfo.instagramUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group relative block aspect-square overflow-hidden bg-[#f3ede2]"
+                className="group relative block aspect-[3/4] overflow-hidden bg-[#f3ede2]"
               >
                 <OptimizedImage
                   src={src}
                   alt={`Instagram post ${i + 1}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
                 />
+                <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 rounded-full bg-black/40 p-1.5 backdrop-blur-sm">
+                  <IgIcon size={13} strokeWidth={1.5} className="text-white" />
+                </div>
                 <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/25">
                   <IgIcon size={20} strokeWidth={1.5} className="text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>

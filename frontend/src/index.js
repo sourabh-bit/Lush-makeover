@@ -24,13 +24,57 @@ const Loading = () => (
   </div>
 );
 
-const mountApp = async () => {
-  root.render(<Loading />);
+const CMS_CACHE_KEY = 'lush-cms-cache-v1';
+const CMS_DOWN_KEY = 'lush-cms-down-until';
 
+const mountApp = async () => {
+  let cached = null;
   try {
-    window.__LUSH_CMS__ = await loadCmsBootstrap();
+    cached = JSON.parse(localStorage.getItem(CMS_CACHE_KEY));
   } catch {
-    window.__LUSH_CMS__ = {};
+    cached = null;
+  }
+  let downUntil = 0;
+  try {
+    downUntil = Number(sessionStorage.getItem(CMS_DOWN_KEY) || 0);
+  } catch {
+    downUntil = 0;
+  }
+
+  const fetchAndCache = async (timeoutMs) => {
+    const fresh = await loadCmsBootstrap({ timeoutMs });
+    try {
+      localStorage.setItem(CMS_CACHE_KEY, JSON.stringify(fresh));
+    } catch {
+      /* storage full/unavailable — fine */
+    }
+    return fresh;
+  };
+
+  if (cached || Date.now() < downUntil) {
+    // Start instantly with cached content (or defaults if the backend was
+    // recently unreachable); refresh in the background for the next visit.
+    window.__LUSH_CMS__ = cached || {};
+    fetchAndCache(8000).catch(() => {});
+  } else {
+    root.render(<Loading />);
+    try {
+      window.__LUSH_CMS__ = await fetchAndCache(1500);
+    } catch {
+      window.__LUSH_CMS__ = {};
+      try {
+        // Don't block again for 10 minutes after a failed attempt.
+        sessionStorage.setItem(CMS_DOWN_KEY, String(Date.now() + 10 * 60_000));
+      } catch {
+        /* fine */
+      }
+    }
+  }
+
+  const favicon = window.__LUSH_CMS__?.settings?.favicon;
+  if (favicon) {
+    const link = document.getElementById('site-favicon');
+    if (link) link.href = favicon;
   }
 
   const { default: App } = await import('@/App');

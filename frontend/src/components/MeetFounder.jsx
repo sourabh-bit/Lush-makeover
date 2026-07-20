@@ -5,10 +5,12 @@ import { founderAccordions } from '../mock';
 import { ChevronDown } from 'lucide-react';
 import { sectionReveal, staggerContainer, staggerItem } from './motion';
 
-const founderBg = encodeURI('/ChatGPT Image Jul 8, 2026, 02_36_18 AM.png');
+const founderBg = '/floral-bg.png';
 
 const MeetFounder = () => {
   const [openIdx, setOpenIdx] = useState(null);
+  const welcomeLine = founderAccordions[0]?.content
+    || "Thank you for being here — if you're planning your bridal look, you're in the right hands.";
 
   const renderAccordions = (titleClassName = 'text-[20px] sm:text-[22px]', bodyClassName = 'text-[14px] sm:text-[15px]') => (
     <motion.div className="mt-10 border-t border-[#d9d2c6]" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
@@ -47,8 +49,6 @@ const MeetFounder = () => {
         style={{ backgroundImage: `url(${founderBg})` }}
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-white/80" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/70 to-white/85" aria-hidden="true" />
 
       <div className="relative z-10 max-w-[1180px] mx-auto px-4 md:px-8">
         <div className="md:hidden -mx-4 sm:-mx-6">
@@ -76,7 +76,7 @@ const MeetFounder = () => {
 
           <div className="px-6 sm:px-8 mt-5 text-center">
             <p className="mx-auto max-w-[520px] text-[#4a4742] text-[15px] sm:text-[16px] font-serif-body italic leading-[1.9]">
-              Thank you for being here — if you&apos;re planning your bridal look, you&apos;re in the right hands.
+              {welcomeLine}
             </p>
           </div>
 
@@ -91,7 +91,7 @@ const MeetFounder = () => {
               Meet <span className="font-script italic tracking-normal">Our Founder</span>
             </h3>
             <p className="mt-8 max-w-[520px] text-[#4a4742] text-[15px] md:text-[16px] font-serif-body italic leading-[1.9]">
-              Thank you for being here — if you&apos;re planning your bridal look, you&apos;re in the right hands.
+              {welcomeLine}
             </p>
 
             {renderAccordions('text-[20px] md:text-[22px]', 'text-[14px] md:text-[15px]')}
